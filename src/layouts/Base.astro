@@ -1,0 +1,19 @@
+---
+import 'src/styles/global.css';
+import { metadata } from '../metadata';
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="canonical" href={Astro.site.origin + Astro.url.pathname} />
+        <title>{title}</title>
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>
