@@ -3,7 +3,7 @@ import { metadata } from 'src/metadata';
 
 export function GET(context) {
     return rss({
-        title: metadata.siteTitle,
+        title: metadata.title,
         description: metadata.description,
         site: context.site,
         items: [],

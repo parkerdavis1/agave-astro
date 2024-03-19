@@ -1,4 +1,4 @@
 export const metadata = {
-    siteTitle: 'Parker Davis',
+    title: 'Parker Davis',
     description: 'Arizona-based developer blog and portfolio',
 };

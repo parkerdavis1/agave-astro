@@ -1,0 +1,29 @@
+---
+import { metadata } from 'src/metadata';
+
+const nav = [
+    { text: 'Home', url: '/' },
+    { text: 'About', url: '/about' },
+    { text: 'Projects', url: '/projects' },
+    { text: 'Blog', url: '/blog' },
+];
+---
+
+<header>
+    <a href="/" class="home-link">{metadata.title}</a>
+    <!-- {% include "icons/btsp.svg" %} -->
+    <nav class="nav-container">
+        <h2 class="visually-hidden">Top level navigation menu</h2>
+        <ul class="nav">
+            {
+                nav.map((link) => (
+                    <li class="nav-item">
+                        <a href={link.url} aria-current="page">
+                            {link.text}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+</header>

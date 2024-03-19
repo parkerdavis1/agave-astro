@@ -1,5 +1,40 @@
 ---
 import Base from '@layouts/Base.astro';
+import { metadata } from 'src/metadata';
 ---
 
-<h1>Parker Davis</h1>
+<Base title={metadata.title}>
+    <section class="flow">
+        <h1>Hello, world</h1>
+        <p>I'm an Arizona-based software engineer, birder, and musician.</p>
+        <div class="social-container">
+            <span>Find me on: </span>
+            <!-- {% include "components/social-links.njk" %} -->
+        </div>
+    </section>
+    <section class="flow">
+        <h2>Recent Posts</h2>
+        <!-- {% set postslist = collections.posts| reverse | head(numberOfLatestPostsToShow) %} -->
+        <!-- {% include "components/postslist.njk" %} -->
+    </section>
+    <section class="flow">
+        <h2 id="projects">Featured Projects</h2>
+        <!-- {% css %} -->
+        <!-- {% include "public/css/projects-list.css" %} -->
+        <!-- {% endcss %} -->
+        <ul class="projects-ul">
+            <!-- {% for project in collections.projects | featured %} -->
+            <!-- <li class="projects-li">
+                    <a class="projects-a" href="{{ project.url }}">
+                        {{ project.data.title }}
+                    </a>
+                    <p class="project-description">{{ project.data.description }}</p>
+                </li> -->
+            <!-- {% endfor %} -->
+        </ul>
+        <!-- {% set moreProjects = collections.projects | length - collections.projects | featured | length %} -->
+        <p>
+            <!-- <a href="/projects">View {{ moreProjects }} more project{{ 's' if moreProjects > 1 }}</a> -->
+        </p>
+    </section>
+</Base>
