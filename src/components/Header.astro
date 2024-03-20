@@ -1,24 +1,28 @@
 ---
+import { Image } from 'astro:assets';
+import BTSP from '/src/icons/btsp.svg';
 import { metadata } from 'src/metadata';
 
 const nav = [
-    { text: 'Home', url: '/' },
     { text: 'About', url: '/about' },
     { text: 'Projects', url: '/projects' },
     { text: 'Blog', url: '/blog' },
 ];
 ---
 
-<header>
-    <a href="/" class="home-link">{metadata.title}</a>
+<header class="no-underline">
+    <a href="/" class="home-link text-2xl font-bold mr-8 no-underline"
+        >{metadata.title}</a
+    >
+    <Image src={BTSP} alt="Black-throated Sparrow on agave" class="icon" />
     <!-- {% include "icons/btsp.svg" %} -->
-    <nav class="nav-container">
+    <nav>
         <h2 class="visually-hidden">Top level navigation menu</h2>
-        <ul class="nav">
+        <ul class="flex flex-wrap items-end gap-4">
             {
                 nav.map((link) => (
-                    <li class="nav-item">
-                        <a href={link.url} aria-current="page">
+                    <li class="nav-item inline-block pr-4">
+                        <a href={link.url} class="no-underline">
                             {link.text}
                         </a>
                     </li>
@@ -27,3 +31,44 @@ const nav = [
         </ul>
     </nav>
 </header>
+
+<style>
+    :root {
+        --icon-width: clamp(3rem, 20vw, 5rem);
+        --icon-height: 80px;
+    }
+    header {
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: var(--icon-width) 1fr;
+        grid-template-areas:
+            'icon title'
+            'icon nav';
+        column-gap: 1rem;
+        align-items: end;
+        margin-block: 4rem;
+    }
+    .icon {
+        grid-area: icon;
+        align-self: start;
+        width: var(--icon-width);
+    }
+
+    .home-link {
+        grid-area: title;
+    }
+
+    nav {
+        grid-area: nav;
+        line-height: 1.25rem;
+    }
+    .nav-item {
+        border-right: 1px dotted var(--text-color);
+    }
+    .nav-item:first-of-type {
+        padding-inline-start: 0;
+    }
+    .nav-item:last-of-type {
+        border: none;
+    }
+</style>
