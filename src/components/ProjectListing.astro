@@ -1,0 +1,28 @@
+---
+const { project, showTag } = Astro.props;
+---
+
+<li>
+    <a href={`/projects/${project.slug}`}>
+        {project.data.title}
+    </a>
+    {
+        showTag && (
+            <div class="tags-list">
+                {project.data.tags &&
+                    project.data.tags.map((tag) => <p>{tag}</p>)}
+            </div>
+        )
+    }
+    <p>{project.data.description}</p>
+</li>
+
+<style>
+    .tags-list {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-style: italic;
+        font-size: var(--step--1);
+    }
+</style>

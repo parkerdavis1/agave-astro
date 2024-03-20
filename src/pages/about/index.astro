@@ -1,0 +1,42 @@
+---
+import MainFlow from '@layouts/MainFlow.astro';
+import { metadata } from 'src/metadata.ts';
+import { Image } from 'astro:assets';
+import SaltRiver from './salt-river.jpeg';
+---
+
+<MainFlow>
+    <h1>About Me</h1>
+    <div class="portrait">
+        <Image src={SaltRiver} alt="Parker recording swans on the Salt River" />
+    </div>
+    <p>
+        I'm a web developer from Arizona who loves identifying and solving the
+        many small puzzles that build towards big picture solutions. I
+        specialize in creating lean performant full stack web applications and
+        websites with an eye toward UX.
+    </p>
+    <p>
+        My freelancing company <a href="https://brantaweb.com">Branta Web</a> has
+        helped researchers, artists, and professionals improve their online presence.
+    </p>
+    <p>
+        Get in touch with me at <a href={metadata.email}>{metadata.email}</a>
+    </p>
+</MainFlow>
+
+<style>
+    .portrait {
+        width: 300px;
+        max-width: 100%;
+        float: right;
+        padding: 1rem;
+        margin: auto;
+    }
+
+    @media (max-width: 600px) {
+        .portrait {
+            float: none;
+        }
+    }
+</style>

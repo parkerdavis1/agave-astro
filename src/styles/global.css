@@ -35,6 +35,7 @@
         --background-color-values: 210, 34.38%, 12.55%;
     }
 }
+
 html,
 body {
     font-size: 15px;
@@ -54,6 +55,18 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
+main {
+    width: 100%;
+    max-width: var(--body-width);
+    margin: auto;
+    flex-grow: 1;
+    padding-inline: 1rem;
+}
+main :first-child {
+    margin-top: 0;
+}
+
 /* flow  */
 .flow > * + * {
     margin-block-start: var(--flow-space, 1em);
@@ -70,6 +83,7 @@ body {
 section {
     margin-block-start: 4rem;
 }
+
 h1,
 h2,
 h3 {
@@ -97,6 +111,10 @@ h6 {
     font-size: var(--step-0);
 }
 
+a {
+    text-decoration: underline;
+}
+
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
 .visually-hidden {
     clip: rect(0 0 0 0);
@@ -106,8 +124,4 @@ h6 {
     position: absolute;
     white-space: nowrap;
     width: 1px;
-}
-
-a {
-    text-decoration: underline;
 }

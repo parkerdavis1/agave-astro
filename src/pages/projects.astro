@@ -1,9 +1,30 @@
 ---
-import Base from '@layouts/Base.astro';
+import ProjectListing from '@components/ProjectListing.astro';
+import MainFlow from '@layouts/MainFlow.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const featured = projects.filter((project) => project.data.featured);
+const other = projects.filter((project) => !project.data.featured);
 ---
 
-<Base title="Projects">
+<MainFlow title="Projects">
     <h1>Projects</h1>
     <h2>Featured</h2>
+    <ul class="flex flex-col gap-4">
+        {
+            featured.map((project) => (
+                <ProjectListing project={project} showTag={true} />
+            ))
+        }
+    </ul>
     <h2>Other</h2>
-</Base>
+    <ul class="flex flex-col gap-4">
+        {
+            other.map((project) => (
+                <ProjectListing project={project} showTag={true} />
+            ))
+        }
+    </ul>
+</MainFlow>

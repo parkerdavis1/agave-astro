@@ -1,11 +1,13 @@
 ---
-import Base from '@layouts/Base.astro';
+import MainFlow from '@layouts/MainFlow.astro';
 import PostListing from '@components/PostListing.astro';
 import { getCollection } from 'astro:content';
 const allPosts = await getCollection('blog');
 ---
 
-<Base>
+<MainFlow>
     <h1>Posts</h1>
-    {allPosts.map((post) => <PostListing post={post} />)}
-</Base>
+    <ul>
+        {allPosts.map((post) => <PostListing post={post} />)}
+    </ul>
+</MainFlow>

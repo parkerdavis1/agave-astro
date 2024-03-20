@@ -1,7 +1,28 @@
 ---
+import dayjs from 'dayjs';
 const { post } = Astro.props;
+const readableDate = dayjs(post.data.date).format('DD MMM YYYY');
 ---
 
 <li>
+    <time datetime={post.data.date}>{readableDate}</time>
     <a href=`/blog/${post.slug}`>{post.data.title}</a>
 </li>
+
+<style>
+    li {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        margin-bottom: 1em;
+    }
+    time {
+        font-size: var(--step--1);
+        min-width: 8em;
+    }
+    @media (max-width: 640px) {
+        li {
+            flex-direction: column-reverse;
+        }
+    }
+</style>
