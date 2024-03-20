@@ -1,0 +1,11 @@
+---
+import Base from '@layouts/Base.astro';
+import PostListing from '@components/PostListing.astro';
+import { getCollection } from 'astro:content';
+const allPosts = await getCollection('blog');
+---
+
+<Base>
+    <h1>Posts</h1>
+    {allPosts.map((post) => <PostListing post={post} />)}
+</Base>

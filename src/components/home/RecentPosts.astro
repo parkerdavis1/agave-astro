@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import PostListing from '@components/PostListing.astro';
+import { filterDrafts } from '@utils/filterDrafts';
+
+const allPosts = await getCollection('blog', filterDrafts);
+const recentPosts = allPosts
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, 5);
+---
+
+<section class="flow">
+    <h2>Recent Posts</h2>
+    <ul>
+        {recentPosts.map((post) => <PostListing post={post} />)}
+    </ul>
+</section>

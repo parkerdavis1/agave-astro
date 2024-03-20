@@ -1,0 +1,10 @@
+---
+import Markdown from '@layouts/Markdown.astro';
+const { entry } = Astro.props;
+console.log('entry', entry);
+---
+
+<Markdown>
+    <h1>{entry.data.title}</h1>
+    <slot />
+</Markdown>
