@@ -1,10 +1,27 @@
 ---
 import Markdown from '@layouts/Markdown.astro';
+import TOC from '@components/TOC.astro';
 const { entry } = Astro.props;
 console.log('entry', entry);
+const { headings } = await entry.render();
+console.log('headings', headings);
 ---
 
 <Markdown>
-    <h1>{entry.data.title}</h1>
-    <slot />
+    <div class="toc-container">
+        <TOC headings={headings} />
+        <div class="flow">
+            <h1>{entry.data.title}</h1>
+            <slot />
+        </div>
+    </div>
 </Markdown>
+
+<style>
+    .toc-container {
+        display: flex;
+        align-items: flex-start;
+        column-gap: 1.5rem;
+        flex-grow: 1;
+    }
+</style>
