@@ -1,30 +1,34 @@
 ---
-title: "[Monthly Update] Happy 2024!"
+title: '[Monthly Update] Happy 2024!'
 description: After an eventful holiday season, it's time to resume regular updates
 date: 2024-01-29
-updatedOn: 
+updatedOn:
 tags:
-  - updates
-  - weekly-update
-  - suns
-  - ebird
-  - RainCrow
-  - d3
-  - observable-plot
-  - CCAM
-  - job-hunt
+    - updates
+    - weekly-update
+    - suns
+    - ebird
+    - RainCrow
+    - d3
+    - observable-plot
+    - CCAM
+    - job-hunt
 draft: false
-eleventyExcludeFromCollections: false
 ---
 
 I'm back from a brief blog hiatus. January is quickly coming to a close so I figure I ought to give a brief update on what has been going on for me. Since last time there have been holiday celebrations, several birthdays, quality time with friends and family, work done for CAP-LTER and...
 
 ...I went to my first Suns/NBA game:
-{% image "./suns-game.jpg", "" %}
+
+![At the suns game](./suns-game.jpg)
 
 <button class="confetti" style="cursor: pointer;">...and I got engaged!</button>
 
-{% image "./engaged.jpg", "", "engage" %}
+<div class="engage">
+
+![The happy couple engaged](./engaged.jpg)
+
+</div>
 
 ## Coding
 

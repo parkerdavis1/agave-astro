@@ -1,0 +1,15 @@
+---
+import dayjs from 'dayjs';
+const { date, format } = Astro.props;
+const readableDate = dayjs(date).format(format);
+---
+
+<div>
+    <time datetime={date}>{readableDate}</time>
+</div>
+
+<style>
+    time {
+        font-size: var(--step--1);
+    }
+</style>

@@ -1,21 +1,51 @@
 ---
 import Markdown from '@layouts/Markdown.astro';
+import Base from '@layouts/Base.astro';
 import TOC from '@components/TOC.astro';
-const { entry } = Astro.props;
-console.log('entry', entry);
-const { headings } = await entry.render();
-console.log('headings', headings);
+import DisplayDate from '@components/DisplayDate.astro';
+import DisplayTags from '@components/DisplayTags.astro';
+
+const { post, prevPost, nextPost } = Astro.props;
+const { headings } = await post.render();
 ---
 
-<Markdown>
+<Base>
     <div class="toc-container">
         <TOC headings={headings} />
-        <div class="flow">
-            <h1>{entry.data.title}</h1>
-            <slot />
-        </div>
+        <main>
+            <article class="flow">
+                <h1>{post.data.title}</h1>
+                <div class="mb-8">
+                    <DisplayDate date={post.data.date} format="MMMM DD, YYYY" />
+                    <DisplayTags tags={post.data.tags} />
+                </div>
+                <slot />
+            </article>
+            <div class="border-t border-b border-dashed py-5">
+                {
+                    prevPost && (
+                        <p>
+                            Previous Post:{' '}
+                            <a href={`/blog/${prevPost.slug}`}>
+                                {prevPost.data.title}
+                            </a>
+                        </p>
+                    )
+                }
+                {
+                    nextPost && (
+                        <p>
+                            Next Post:{' '}
+                            <a href={`/blog/${nextPost.slug}`}>
+                                {nextPost.data.title}
+                            </a>
+                        </p>
+                    )
+                }
+            </div>
+        </main>
     </div>
-</Markdown>
+</Base>
 
 <style>
     .toc-container {
@@ -23,5 +53,17 @@ console.log('headings', headings);
         align-items: flex-start;
         column-gap: 1.5rem;
         flex-grow: 1;
+    }
+
+    main {
+        flex-shrink: 0;
+    }
+
+    article {
+        margin-bottom: 2rem;
+    }
+
+    a {
+        color: unset;
     }
 </style>

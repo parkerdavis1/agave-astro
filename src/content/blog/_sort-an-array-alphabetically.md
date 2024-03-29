@@ -4,7 +4,6 @@ description: .sort() won't do it for you
 date: 2024-03-20
 updatedOn:
 draft: true
-eleventyExcludeFromCollections: true
 ---
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#options

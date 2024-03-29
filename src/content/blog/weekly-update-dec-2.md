@@ -1,26 +1,25 @@
 ---
-title: "[Weekly Update] Plausible, droplet, prep, posts"
+title: '[Weekly Update] Plausible, droplet, prep, posts'
 description: Updates for December 2nd, 2023
 date: 2023-12-02
 updatedOn:
 tags:
-  - plausible
-  - droplet
-  - web-audio
-  - updates
-  - weekly-update
-  - freelancing
-  - linux
-  - ssh
-  - vps
-  - nginx
-  - docker
-  - ssl
-  - swap
-  - bug-fixes
-  - christmas
+    - plausible
+    - droplet
+    - web-audio
+    - updates
+    - weekly-update
+    - freelancing
+    - linux
+    - ssh
+    - vps
+    - nginx
+    - docker
+    - ssl
+    - swap
+    - bug-fixes
+    - christmas
 draft: false
-eleventyExcludeFromCollections: false
 ---
 
 Welcome to the inaugural weekly update, which in this case will cover the last few weeks.
@@ -29,13 +28,13 @@ Welcome to the inaugural weekly update, which in this case will cover the last f
 
 I got this blog up and running, wrote four posts, did some birding, enjoyed the weather, and had Thanksgiving with my family.
 
-- [My plans for this blog](/blog/blog-plans/)
+-   [My plans for this blog](/blog/blog-plans/)
 
-- [eBird Compress, my first bookmarklet](/blog/ebird-bookmarklet/)
+-   [eBird Compress, my first bookmarklet](/blog/ebird-bookmarklet/)
 
-- [Responsive dark/light mode with 1 line of CSS](/blog/one-line-light-dark-mode/)
+-   [Responsive dark/light mode with 1 line of CSS](/blog/one-line-light-dark-mode/)
 
-- [I added a scrolling turkey to my links page and you can too](/blog/scrolling-turkey/)
+-   [I added a scrolling turkey to my links page and you can too](/blog/scrolling-turkey/)
 
 ## This week
 

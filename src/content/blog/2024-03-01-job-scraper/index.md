@@ -2,17 +2,17 @@
 title: I made a web scraper and job posting manager
 description: Using Puppeteer and SQLite
 date: 2024-03-01
-updatedOn: 
+updatedOn:
 tags:
-  - javascript
-  - sqlite
-  - puppeteer
-  - job-hunt
-  - automation
-  - CRUD
+    - javascript
+    - sqlite
+    - puppeteer
+    - job-hunt
+    - automation
+    - CRUD
 draft: false
-eleventyExcludeFromCollections: false
 ---
+
 I built a web scraper earlier this week. It uses [Sveltekit](https://kit.svelte.dev/) for the front/back end and [SQLite](https://www.sqlite.org/) for the database. [Puppeteer](https://pptr.dev/) is used to programmatically traverse the sites and extract the desired information. I can then edit the metadata, make notes about each job, and most importantly, check a checkbox to hide the job once I am done with it.
 
 {% animatedImage "./jobscraper3.gif", "Job Scraper Demo" %}
@@ -121,52 +121,52 @@ try {
 }
 ```
 
-The next obvious optimization would be to take the best of both of these approaches and wrap each script in a write_to_database function so the data is saved immediately as it becomes available. Then each script runs in parallel _and_ the data is immediately saved. This also allows the extracted data to be saved even if one of the other scripts throws an error. Maybe I'll go do that right now...
+The next obvious optimization would be to take the best of both of these approaches and wrap each script in a write*to_database function so the data is saved immediately as it becomes available. Then each script runs in parallel \_and* the data is immediately saved. This also allows the extracted data to be saved even if one of the other scripts throws an error. Maybe I'll go do that right now...
 
 ...and here we go:
 
 ```js
 async function getJobsAndWriteToDatabase(jobGetter, dbJobUrls, userid) {
-	try {
-		const jobs = await jobGetter();
-		jobs.forEach(async (job) => {
-			if (!dbJobUrls.includes(job.link)) {
-				console.log('Writing new job to Database!', job);
-				await db.post.create({
-					data: {
-						title: job.title,
-						url: job.link,
-						board: job.board ?? null,
-						authorId: userid,
-						slug: slugify(job.title.trim().toLowerCase()),
-					},
-				});
-			}
-		});
-	} catch (e) {
-		console.log('ERROR!!!', e);
-	}
+    try {
+        const jobs = await jobGetter();
+        jobs.forEach(async (job) => {
+            if (!dbJobUrls.includes(job.link)) {
+                console.log('Writing new job to Database!', job);
+                await db.post.create({
+                    data: {
+                        title: job.title,
+                        url: job.link,
+                        board: job.board ?? null,
+                        authorId: userid,
+                        slug: slugify(job.title.trim().toLowerCase()),
+                    },
+                });
+            }
+        });
+    } catch (e) {
+        console.log('ERROR!!!', e);
+    }
 }
 
 // Sveltekit server action for API endpoint
 export const actions = {
-	default: async ({ locals, request }) => {
-		const dbJobs = await db.post.findMany();
-		const dbJobUrls = dbJobs.map((job) => job.url);
-		const wrappedJobGetters = arrayOfJobGetters.map((getter) =>
-			getJobAndWriteToDatabase(getter, dbJobUrls, locals.user.id)
-		);
-		await Promise.all(wrappedJobGetters);
-		await db.updatedLast.update({
-			where: { id: 1 },
-			data: { updatedAt: new Date() },
-		});
-		console.log('\nFinished Getting Jobs\n');
-		redirect(302, '/');
-	},
-}
+    default: async ({ locals, request }) => {
+        const dbJobs = await db.post.findMany();
+        const dbJobUrls = dbJobs.map((job) => job.url);
+        const wrappedJobGetters = arrayOfJobGetters.map((getter) =>
+            getJobAndWriteToDatabase(getter, dbJobUrls, locals.user.id)
+        );
+        await Promise.all(wrappedJobGetters);
+        await db.updatedLast.update({
+            where: { id: 1 },
+            data: { updatedAt: new Date() },
+        });
+        console.log('\nFinished Getting Jobs\n');
+        redirect(302, '/');
+    },
+};
 ```
 
-Of course I could keep going and adding more features but for now this works great. The tool is built, now I've got to use it. 
+Of course I could keep going and adding more features but for now this works great. The tool is built, now I've got to use it.
 
 If you're curious, you can find the git repo here: [https://github.com/parkerdavis1/jobscraper/](https://github.com/parkerdavis1/jobscraper/)

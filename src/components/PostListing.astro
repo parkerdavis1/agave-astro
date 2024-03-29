@@ -16,13 +16,19 @@ const readableDate = dayjs(post.data.date).format('DD MMM YYYY');
         align-items: baseline;
         margin-bottom: 1em;
     }
+
     time {
         font-size: var(--step--1);
         min-width: 8em;
     }
+
     @media (max-width: 640px) {
         li {
             flex-direction: column-reverse;
         }
+    }
+
+    a {
+        color: unset;
     }
 </style>

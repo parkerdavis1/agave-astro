@@ -4,18 +4,25 @@ import BlogPost from '@layouts/BlogPost.astro';
 import { filterDrafts } from '@utils/filterDrafts';
 
 export async function getStaticPaths() {
-    const blogEntries = await getCollection('blog', filterDrafts);
+    const blogPosts = await getCollection('blog', filterDrafts);
+    const numberOfPosts = blogPosts.length;
 
-    return blogEntries.map((entry) => ({
-        params: { post: entry.slug },
-        props: { entry },
-    }));
+    return blogPosts
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+        .map((post, i) => ({
+            params: { post: post.slug },
+            props: {
+                post,
+                prevPost: i + 1 === numberOfPosts ? null : blogPosts[i + 1],
+                nextPost: i === 0 ? null : blogPosts[i - 1],
+            },
+        }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await post.render();
 ---
 
-<BlogPost entry={entry}>
+<BlogPost post={post} prevPost={prevPost} nextPost={nextPost}>
     <Content />
 </BlogPost>

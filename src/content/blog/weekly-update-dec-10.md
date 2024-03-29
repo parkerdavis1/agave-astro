@@ -1,27 +1,27 @@
 ---
-title: "[Weekly Update] RainCrow, EVS, CCAM, SVGs"
+title: '[Weekly Update] RainCrow, EVS, CCAM, SVGs'
 description: "Weekly roundup of what I've been working on this week: bug fixes, optimizations, new features, rebuilds, and Christmas trees."
 date: 2023-12-10
-updatedOn: 
+updatedOn:
 tags:
-  - weekly-update
-  - updates
-  - dayjs
-  - error-handling
-  - timezones
-  - new-feature
-  - consulting
-  - RainCrow
-  - EVS
-  - CCAM
+    - weekly-update
+    - updates
+    - dayjs
+    - error-handling
+    - timezones
+    - new-feature
+    - consulting
+    - RainCrow
+    - EVS
+    - CCAM
 draft: false
-eleventyExcludeFromCollections: false
 ---
+
 ## RainCrow
 
 ### Error Handling
 
-RainCrow has seen an uptick in use lately, with several days in a row exceeding the 1000 free OpenWeather API requests. This helped me focus on improving the error handling, making sure to show users an appropriate error when OpenWeather runs out of requests for the day. 
+RainCrow has seen an uptick in use lately, with several days in a row exceeding the 1000 free OpenWeather API requests. This helped me focus on improving the error handling, making sure to show users an appropriate error when OpenWeather runs out of requests for the day.
 
 ### Timezone efficiency
 
@@ -32,8 +32,9 @@ However, since moving to Sveltekit and therefore having servers (or more specifi
 I used Day.js to append the timezone name returned from node-geo-tz to all datetimes, which then uses the native Internationalization API to calculate the offset and give you the proper unix time.
 
 ```js
-dayjs(date).tz(timezone, true).unix()
+dayjs(date).tz(timezone, true).unix();
 ```
+
 [https://day.js.org/docs/en/timezone/converting-to-zone](https://day.js.org/docs/en/timezone/converting-to-zone)
 
 I've learned it over and over: datetimes are surprisingly tricky to work with! I initially didn't include the optional `true` parameter to the `tz` method, which when left off doesn't just edit the timezone but converts the time as well. As I was testing data locally, there was no problem because the calculations were happening on a computer in Phoenix with data from Phoenix so the conversion had no effect. Once in production though, times got wonky. Thankfully I caught and fixed that quickly.

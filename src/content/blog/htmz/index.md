@@ -2,13 +2,12 @@
 title: htmz - a low power tool for html
 description: A cool javascript not-framework for loading HTML snippets without full page reloads
 date: 2024-02-23
-updatedOn: 
+updatedOn:
 tags:
-  - html
-  - javascript
-  - htmz
+    - html
+    - javascript
+    - htmz
 draft: false
-eleventyExcludeFromCollections: false
 ---
 
 I came across **`htmz`** this week and after a few chuckles reading through the landing page I was excited to try it out. Its a really fun and clever way to swap HTML fragments without full page reloads using a super minimal script (~166 bytes).
@@ -16,13 +15,16 @@ I came across **`htmz`** this week and after a few chuckles reading through the 
 This is essentially all there is to it:
 
 ```html
-<iframe hidden name="htmz" onload="setTimeout(()=>document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes))"
+<iframe
+    hidden
+    name="htmz"
+    onload="setTimeout(()=>document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes))"
 ></iframe>
 ```
 
-The [htmz website](https://leanrada.com/htmz/) gives a good and engaging overview so I direct your attention there first. The purpose of *this* post is to go through what each piece of the snippet does and explain to myself, in more detail than necessary, exactly how it works. 
-## What does this snippet do?
+The [htmz website](https://leanrada.com/htmz/) gives a good and engaging overview so I direct your attention there first. The purpose of _this_ post is to go through what each piece of the snippet does and explain to myself, in more detail than necessary, exactly how it works.
 
+## What does this snippet do?
 
 <p>I haven't done much with iframes since working on my high school band's website in the early 2000s so I had to remind myself a bit about how they work. I'm surprised they aren't used more in modern web development honestly - <a href="https://superlative-pasca-66882e.netlify.app/" target="fun-frame" onclick="document.getElementById('fun-frame').style.display='inline';document.getElementById('hide-fun').style.display='inline'">they're fun</a>.</p>
 
@@ -76,17 +78,17 @@ Similarly, the question mark allows [optional chaining](https://developer.mozill
 
 [.replaceWith()](https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceWith) – replaces the selected HTML element with the nodes passed in as arguments.
 
-`...frame.contentDocument.body.children` uses [rest parameter syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)  to allow the `replaceWith()` function to accept an indefinite number of arguments as an array – which in this case is all of the children elements of the body loaded within the hidden iframe.
+`...frame.contentDocument.body.children` uses [rest parameter syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) to allow the `replaceWith()` function to accept an indefinite number of arguments as an array – which in this case is all of the children elements of the body loaded within the hidden iframe.
 
 > From MDN: "Spread syntax looks exactly like rest syntax. In a way, spread syntax is the opposite of rest syntax. Spread syntax "expands" an array into its elements, while rest syntax collects multiple elements and "condenses" them into a single element. See [rest parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) and [rest property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#rest_property)."
 
-So, the content is loaded in the hidden iframe then copied wherever you specify.  As the htmz documentation puts it:
+So, the content is loaded in the hidden iframe then copied wherever you specify. As the htmz documentation puts it:
 
 > htmz is essentially a **proxy target**.
 >
 > Like how a proxy server forwards requests to some specified server, proxy target htmz forwards responses into some specified target."
 
-Go check out the examples on [htmz](https://leanrada.com/htmz/). There are some complex UIs that can be created with _very_ little client-side javascript. I probably wouldn't reach for this if my needs were *too* complex but it's a cool technique for loading simple interactive content within a page.
+Go check out the examples on [htmz](https://leanrada.com/htmz/). There are some complex UIs that can be created with _very_ little client-side javascript. I probably wouldn't reach for this if my needs were _too_ complex but it's a cool technique for loading simple interactive content within a page.
 
 <a href="./see/index.html#load-cow" target="htmz">See</a>
 <a href="./what/index.html#load-cow" target="htmz">what</a>

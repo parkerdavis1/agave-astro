@@ -2,18 +2,16 @@
 title: Harmonic Clouds
 description: A small application to play randomly generated chords based on the harmonic series.
 techtags:
-  - Javascript
-  - Web Audio API
+    - Javascript
+    - Web Audio API
 githubUrl: https://github.com/parkerdavis1/harmonic-clouds
 liveUrl: https://parkerdavis1.github.io/harmonic-clouds/
 featured: false
 date: 2023-09-14
-# remove below when a real page
 draft: false
-eleventyExcludeFromCollections: false
 tags:
-  - javascript
-  - web-audio
+    - javascript
+    - web-audio
 ---
 
 ## Links

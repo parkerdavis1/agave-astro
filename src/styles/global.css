@@ -25,13 +25,16 @@
     --body-width: 45rem;
 
     --text-color: hsl(var(--text-color-values));
+    --text-color-link: hsl(var(--text-color-link-values));
     --background-color: hsl(var(--background-color-values));
 
     --text-color-values: 0, 0%, 20%;
+    --text-color-link-values: 10.63, 45.28%, 41.57%;
     --background-color-values: 0, 0%, 96.08%;
 
     @media (prefers-color-scheme: dark) {
         --text-color-values: 0, 2.63%, 85.1%;
+        --text-color-link-values: 209.49, 55.14%, 79.02%;
         --background-color-values: 210, 34.38%, 12.55%;
     }
 }
@@ -59,7 +62,7 @@ body {
 main {
     width: 100%;
     max-width: var(--body-width);
-    margin: auto;
+    margin-inline: auto;
     flex-grow: 1;
     padding-inline: 1rem;
 }
@@ -115,6 +118,10 @@ a {
     text-decoration: underline;
 }
 
+main a {
+    color: var(--text-color-link);
+}
+
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
 .visually-hidden {
     clip: rect(0 0 0 0);
@@ -124,4 +131,16 @@ a {
     position: absolute;
     white-space: nowrap;
     width: 1px;
+}
+
+article img {
+    margin-inline: auto;
+}
+
+article kbd {
+    background: #ddd;
+    border-radius: 4px;
+    padding: 2px 4px;
+    color: black;
+    font-size: var(--step--1);
 }
