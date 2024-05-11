@@ -1,4 +1,4 @@
-class Sprite {
+export class Sprite {
     constructor(settingsObj) {
         this.src = settingsObj.src;
         this.samples = settingsObj.sprite;
@@ -22,7 +22,7 @@ class Sprite {
         }
         const arrayBuffer = await response.arrayBuffer();
         const audioBuffer = await this.ctx.decodeAudioData(arrayBuffer);
-        console.log(audioBuffer);
+        // console.log(audioBuffer);
         return audioBuffer;
     }
 

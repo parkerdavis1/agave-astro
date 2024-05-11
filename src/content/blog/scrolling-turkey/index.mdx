@@ -8,15 +8,17 @@ tags:
     - turkeys
 draft: false
 ---
+import Turkey from '@components/turkey/Turkey.svelte'
+
 ## Introduction
 
 I have a [very simple links page](https://links.parkerdavis.dev) for sharing links on Instagram and other social media. It currently looks like this:
 
-{% image "./links-original.png", "Original links page screenshot", "small-image" %}
+![Original links page screenshot](./links-original.png)
 
 I like to add a little flair throughout the year though and with Thanksgiving being tomorrow, I thought, "why not give thanks to those who visit my links page by showing them one of the most beautiful birds there is, the Wild Turkey?".
 
-{% animatedImage "./scrolling-turkey.gif", "Links page with scrolling turkey", "small-image" %}
+![Links page with scrolling turkey](./scrolling-turkey.gif)
 
 I know, its breathtaking. After you take a moment to recover, let's go through the code.
 
@@ -56,7 +58,7 @@ We start with a basic CSS animation. For the HTML there is a `<div class="turkey
 
 Position the turkey on the bottom of the screen and just out of view on the left side
 
-```diff-css
+```css
 .turkey {
     background-image: url('/assets/turkey/turkey.png');
     height: var(--turkey-width);
@@ -84,7 +86,7 @@ Create a @keyframes animation with an identifier of "trot" to move it from the l
 
 ...and add the trot animation to the .turkey class
 
-```diff-css
+```css
 :root {
     --turkey-width: 75px;
 +   --animation-duration: 30s;
@@ -155,7 +157,7 @@ I wanted it to be completely modular so I could activate and deactivate the turk
 
 Instead of hard coding the turkey `div` into the html, let's add it with the script we're already loading.
 
-```diff-js
+```js
 function adjustTurkeyAnimation() {
     const pixelsPerSecond = 30
     const width = window.innerWidth;
@@ -164,15 +166,15 @@ function adjustTurkeyAnimation() {
     document.documentElement.style.setProperty('--animation-duration', seconds);
 }
 
-+function createTurkeyContainer() {
-+    const turkeyContainer = document.createElement('div');
-+    turkeyContainer.setAttribute('class', 'turkey');
-+    document.body.appendChild(turkeyContainer);
-+    adjustTurkeyAnimation()
-+}
+function createTurkeyContainer() {  // [!code ++]
+    const turkeyContainer = document.createElement('div'); // [!code ++]
+    turkeyContainer.setAttribute('class', 'turkey'); // [!code ++]
+    document.body.appendChild(turkeyContainer); // [!code ++]
+    adjustTurkeyAnimation()// [!code ++]
+} // [!code ++]
 
--window.addEventListener('load', adjustTurkeyAnimation);
-+window.addEventListener('load', createTurkeyContainer);
+window.addEventListener('load', adjustTurkeyAnimation); // [!code --]
+window.addEventListener('load', createTurkeyContainer); // [!code ++]
 window.addEventListener('resize', adjustTurkeyAnimation);
 ```
 
@@ -190,20 +192,12 @@ Now the turkey can be added to the page by loading the turkey CSS and JS files v
 
 My links page is an Eleventy site using the Nunjucks templating language, so to include the code I just add the following code to the `<head>` of my links page:
 
-```html
-{% raw %}{% include "assets/turkey/turkey.html" %}{% endraw %}
+```Nunjucks
+{% include "assets/turkey/turkey.html" %}
 ```
 
 All done!
 
 Happy Thanksgiving!
 
-<div class="turkey-container"><div class="turkey">
-{% image "./turkey/turkey.png", "Don't click me" %}
-</div></div>
-
-{% css %}{% include "./turkey/turkey.css" %} {% endcss %}
-{% js %} 
-{% include "./turkey/sprite.js" %}
-{% include "./turkey/turkey.js" %} 
-{% endjs %}
+<Turkey client:visible />

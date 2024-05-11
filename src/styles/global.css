@@ -118,7 +118,7 @@ a {
     text-decoration: underline;
 }
 
-main a {
+article a {
     color: var(--text-color-link);
 }
 
