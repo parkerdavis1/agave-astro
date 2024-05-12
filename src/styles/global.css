@@ -144,3 +144,18 @@ article kbd {
     color: black;
     font-size: var(--step--1);
 }
+
+.small-image {
+    width: 50%;
+    margin-inline: auto;
+}
+
+code {
+    background: #00000011;
+}
+
+@media (prefers-color-scheme: dark) {
+    code {
+        background: #ffffff22;
+    }
+}

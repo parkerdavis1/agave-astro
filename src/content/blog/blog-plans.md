@@ -3,8 +3,9 @@ title: My plans for this blog
 description: I lay out my plans for this blog
 date: 2023-11-16
 tags:
-  - updates
+    - updates
 ---
+
 ## Hello!
 
 Welcome to my personal/developer blog. You may know that I have a [bird sound blog](https://birdsmakesound.com/){title="Birds Make Sound"} that explores the world of birds, sound, and recording. While it is written for a more general audience, this blog will be for other developers, or really, myself. Of course I hope it is of interest to anyone but a baseline familiarity with coding will be assumed.
@@ -13,9 +14,9 @@ Welcome to my personal/developer blog. You may know that I have a [bird sound bl
 
 One of the things I admire most about the online developer community is the commitment to sharing knowledge. I can't tell you how many times I've had a coding question, [ecosia'd](https://www.ecosia.org) it, and found someone's blog post answering my question. When I figure things out for myself I want to share my findings with others (and remind my future self).
 
-Also, I tend to work in private. Some of my friends and family probably don't even know that I am actively seeking employment as a software engineer. This is a problem – if people don't know I'm looking for work, they won't know to connect me with people who *have* work. This blog is an attempt to counter my private tendencies and take more of a ['Learn In Public'](https://www.swyx.io/learn-in-public) approach.
+Also, I tend to work in private. Some of my friends and family probably don't even know that I am actively seeking employment as a software engineer. This is a problem – if people don't know I'm looking for work, they won't know to connect me with people who _have_ work. This blog is an attempt to counter my private tendencies and take more of a ['Learn In Public'](https://www.swyx.io/learn-in-public) approach.
 
-Up until now I've been focused on walking the walk. Now, I'm also going to practice *talking the talk*.
+Up until now I've been focused on walking the walk. Now, I'm also going to practice _talking the talk_.
 
 ## Topics
 
@@ -23,7 +24,7 @@ Some categories for upcoming posts:
 
 ### Today I Learned (TIL)
 
-No post too short or topic too small. Learning is constant and I'd like to document some of the little *Ah-has* as I encounter them.
+No post too short or topic too small. Learning is constant and I'd like to document some of the little _Ah-has_ as I encounter them.
 
 ### Project Updates
 

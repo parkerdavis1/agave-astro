@@ -21,6 +21,7 @@ tags:
 ## Screenshot
 
 {% image "./harmonic-clouds.png", "Screenshot of harmonic clouds" %}
+![Screenshot of harmonic clouds](./harmonic-clouds.png)
 
 ## Desciption
 

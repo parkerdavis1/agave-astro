@@ -92,9 +92,7 @@ Now you can check the active crons with
 crontab -l
 ```
 
-```output
-# Output
-
+```bash title="Output"
 * * * * * /Users/parkerdavis/scripts/blog-sync.sh
 ```
 

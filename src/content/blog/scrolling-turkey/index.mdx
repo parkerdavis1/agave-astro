@@ -8,17 +8,20 @@ tags:
     - turkeys
 draft: false
 ---
-import Turkey from '@components/turkey/Turkey.svelte'
+import Turkey from '@components/Turkey.svelte'
+import { Image } from 'astro:assets'
+import linksOriginal from './links-original.png'
+import scrollingTurkey from './scrolling-turkey.gif'
 
 ## Introduction
 
 I have a [very simple links page](https://links.parkerdavis.dev) for sharing links on Instagram and other social media. It currently looks like this:
 
-![Original links page screenshot](./links-original.png)
+<Image src={linksOriginal} alt="Original links page screenshot" class="small-image" />
 
 I like to add a little flair throughout the year though and with Thanksgiving being tomorrow, I thought, "why not give thanks to those who visit my links page by showing them one of the most beautiful birds there is, the Wild Turkey?".
 
-![Links page with scrolling turkey](./scrolling-turkey.gif)
+<Image src={scrollingTurkey} alt="Links page with scrolling turkey" class="small-image" />
 
 I know, its breathtaking. After you take a moment to recover, let's go through the code.
 
@@ -58,7 +61,7 @@ We start with a basic CSS animation. For the HTML there is a `<div class="turkey
 
 Position the turkey on the bottom of the screen and just out of view on the left side
 
-```css
+```diff lang=css
 .turkey {
     background-image: url('/assets/turkey/turkey.png');
     height: var(--turkey-width);
@@ -86,7 +89,7 @@ Create a @keyframes animation with an identifier of "trot" to move it from the l
 
 ...and add the trot animation to the .turkey class
 
-```css
+```diff lang=css
 :root {
     --turkey-width: 75px;
 +   --animation-duration: 30s;
@@ -157,7 +160,7 @@ I wanted it to be completely modular so I could activate and deactivate the turk
 
 Instead of hard coding the turkey `div` into the html, let's add it with the script we're already loading.
 
-```js
+```diff lang=js
 function adjustTurkeyAnimation() {
     const pixelsPerSecond = 30
     const width = window.innerWidth;
@@ -166,15 +169,15 @@ function adjustTurkeyAnimation() {
     document.documentElement.style.setProperty('--animation-duration', seconds);
 }
 
-function createTurkeyContainer() {  // [!code ++]
-    const turkeyContainer = document.createElement('div'); // [!code ++]
-    turkeyContainer.setAttribute('class', 'turkey'); // [!code ++]
-    document.body.appendChild(turkeyContainer); // [!code ++]
-    adjustTurkeyAnimation()// [!code ++]
-} // [!code ++]
++ function createTurkeyContainer() {  
++   const turkeyContainer = document.createElement('div');
++   turkeyContainer.setAttribute('class', 'turkey'); 
++   document.body.appendChild(turkeyContainer); 
++   adjustTurkeyAnimation()
++ } 
 
-window.addEventListener('load', adjustTurkeyAnimation); // [!code --]
-window.addEventListener('load', createTurkeyContainer); // [!code ++]
+- window.addEventListener('load', adjustTurkeyAnimation);
++ window.addEventListener('load', createTurkeyContainer);
 window.addEventListener('resize', adjustTurkeyAnimation);
 ```
 
