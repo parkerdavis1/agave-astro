@@ -5,6 +5,10 @@ import { filterDrafts } from '@utils/filterDrafts';
 
 export async function getStaticPaths() {
     const blogPosts = await getCollection('blog', filterDrafts);
+    console.log(
+        'blog posts',
+        blogPosts.map((post) => post.data.title)
+    );
     const numberOfPosts = blogPosts.length;
 
     return blogPosts

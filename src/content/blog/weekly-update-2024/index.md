@@ -40,11 +40,14 @@ I had my first meeting with a tech recruiter recently which went well. The posit
 
 More soon.
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" is:inline></script>
+<script is:inline>
+document.addEventListener('astro:page-load', () => {
 const observer = new IntersectionObserver((entries) => {
+  console.log('HELLOo', entries)
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
+      console.log('TRIGGER CONFETTI')
       // When the target div is in view, trigger confetti
       triggerConfetti();
       // Disconnect the observer after triggering confetti
@@ -66,4 +69,5 @@ confettiButton.addEventListener('click', () => {
     const confettiOffset = confettiButton.getBoundingClientRect();
     triggerConfetti();
 })
+});
 </script>

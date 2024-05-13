@@ -4,11 +4,12 @@ description: I lay out my plans for this blog
 date: 2023-11-16
 tags:
     - updates
+draft: false
 ---
 
 ## Hello!
 
-Welcome to my personal/developer blog. You may know that I have a [bird sound blog](https://birdsmakesound.com/){title="Birds Make Sound"} that explores the world of birds, sound, and recording. While it is written for a more general audience, this blog will be for other developers, or really, myself. Of course I hope it is of interest to anyone but a baseline familiarity with coding will be assumed.
+Welcome to my personal/developer blog. You may know that I have a [bird sound blog](https://birdsmakesound.com/) that explores the world of birds, sound, and recording. While it is written for a more general audience, this blog will be for other developers, or really, myself. Of course I hope it is of interest to anyone but a baseline familiarity with coding will be assumed.
 
 ## Why?
 

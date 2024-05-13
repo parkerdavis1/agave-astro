@@ -12,7 +12,7 @@ import expressiveCode from 'astro-expressive-code';
 export default defineConfig({
     site: 'https://parkerdavis.dev',
     integrations: [
-        db(),
+        // db(),
         sitemap(),
         expressiveCode(),
         mdx(),
@@ -21,9 +21,9 @@ export default defineConfig({
     ],
     output: 'hybrid',
     adapter: netlify(),
-    markdown: {
-        shikiConfig: {
-            transformers: [transformerNotationDiff()],
-        },
-    },
+    // markdown: {
+    //     shikiConfig: {
+    //         transformers: [transformerNotationDiff()],
+    //     },
+    // },
 });

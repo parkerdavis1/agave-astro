@@ -1,16 +1,52 @@
 ---
+import DisplayTags from '@components/DisplayTags.astro';
+import TOC from '@components/TOC.astro';
 import Base from '@layouts/Base.astro';
+
 const { project } = Astro.props;
+const { headings } = await project.render();
 ---
 
 <Base>
     <div class="toc-container">
-        <aside>toc</aside>
+        <TOC headings={headings} />
         <main>
             <article class="flow">
                 <h1>{project.data.title}</h1>
-                <ul>tags</ul>
+                <div class="mb-8">
+                    <DisplayTags tags={project.data.tags} />
+                </div>
+                <slot />
             </article>
+            <nav class="project-nav">
+                <a href="/projects/">Back to Projects</a>
+            </nav>
         </main>
     </div>
 </Base>
+
+<style>
+    .toc-container {
+        display: flex;
+        align-items: flex-start;
+        column-gap: 1.5rem;
+        flex-grow: 1;
+    }
+
+    main {
+        flex-shrink: 0;
+    }
+
+    article {
+        margin-bottom: 2rem;
+    }
+
+    a {
+        color: unset;
+    }
+
+    .project-nav {
+        padding-block: 1rem;
+        border-top: 1px dashed var(--text-color);
+    }
+</style>
