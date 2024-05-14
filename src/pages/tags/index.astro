@@ -8,38 +8,37 @@ const projects = await getCollection('projects');
 const allTags = [
     ...blogPosts.map((blog) => blog.data.tags).flat(),
     ...projects.map((project) => project.data.tags).flat(),
-].sort(new Intl.Collator('en-US', { sensitivity: 'base' }).compare);
+] as string[];
 
-function allTagsWithCount(allTags) {
-    const tags = {};
-    for (let tag of allTags) {
-        if (Object.keys(tags).includes(tag)) {
-            tags[tag] = tags[tag] + 1;
-        } else {
-            tags[tag] = 1;
-        }
-    }
-    return tags;
+interface StringCount {
+    [key: string]: number;
 }
-const tagsWithCount = allTagsWithCount(allTags);
+
+function countAndSortTags(allTags: string[]): [string, number][] {
+    const counts: StringCount = {};
+    allTags.forEach((tag) => {
+        counts[tag] = (counts[tag] || 0) + 1;
+    });
+    const sortedCounts: [string, number][] = Object.entries(counts).sort(
+        (a, b) => a[0].localeCompare(b[0])
+    );
+    return sortedCounts;
+}
+const tagsWithCount = countAndSortTags(allTags);
 const uniqueTags = Array.from(new Set([...allTags]));
 ---
 
 <MainFlow>
     <h1>All Tags</h1>
-    <ul>
+    <ul class="sm:block sm:columns-3 columns-2">
         {
-            uniqueTags.map((tag) => (
+            tagsWithCount.map((tag) => (
                 <li>
-                    <a href={`/tags/${tag}`}>{tag}</a>
+                    <a href={`/tags/${tag[0]}`}>
+                        {tag[0]} ({tag[1]})
+                    </a>
                 </li>
             ))
         }
     </ul>
 </MainFlow>
-
-<style>
-    ul {
-        columns: 3;
-    }
-</style>

@@ -1,0 +1,32 @@
+<div class="confetti-trigger">
+    <slot />
+</div>
+
+<script>
+    import type confetti from '@types/canvas-confetti';
+    import confetti from 'canvas-confetti';
+
+    // document.addEventListener('astro:page-load', () => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // When the target div is in view, trigger confetti
+                    triggerConfetti();
+                    // Disconnect the observer after triggering confetti
+                    observer.disconnect();
+                }
+            });
+        },
+        { threshold: 1.0 }
+    );
+    function triggerConfetti() {
+        confetti({
+            disableForReducedMotion: true,
+            particleCount: 200,
+            spread: 100,
+        });
+    }
+    const trigger = document.querySelector('.confetti-trigger');
+    observer.observe(trigger);
+</script>

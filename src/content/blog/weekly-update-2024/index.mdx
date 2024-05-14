@@ -15,6 +15,7 @@ tags:
     - job-hunt
 draft: false
 ---
+import ConfettiWrapper from '@components/ConfettiWrapper.astro'
 
 I'm back from a brief blog hiatus. January is quickly coming to a close so I figure I ought to give a brief update on what has been going on for me. Since last time there have been holiday celebrations, several birthdays, quality time with friends and family, work done for CAP-LTER and...
 
@@ -22,13 +23,12 @@ I'm back from a brief blog hiatus. January is quickly coming to a close so I fig
 
 ![At the suns game](./suns-game.jpg)
 
-<button class="confetti" style="cursor: pointer;">...and I got engaged!</button>
+...and I got engaged!
 
-<div class="engage">
-
+<ConfettiWrapper>
 ![The happy couple engaged](./engaged.jpg)
+</ConfettiWrapper>
 
-</div>
 
 ## Coding
 
@@ -40,34 +40,4 @@ I had my first meeting with a tech recruiter recently which went well. The posit
 
 More soon.
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" is:inline></script>
-<script is:inline>
-document.addEventListener('astro:page-load', () => {
-const observer = new IntersectionObserver((entries) => {
-  console.log('HELLOo', entries)
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      console.log('TRIGGER CONFETTI')
-      // When the target div is in view, trigger confetti
-      triggerConfetti();
-      // Disconnect the observer after triggering confetti
-      observer.disconnect();
-    }
-  });
-}, { threshold: 1.0 });
-function triggerConfetti() {
-  confetti({
-        disableForReducedMotion: true,
-        particleCount: 200,
-        spread: 100,
-    });
-}
-const engage = document.querySelector('.engage');
-observer.observe(engage);
-const confettiButton = document.querySelector('.confetti');
-confettiButton.addEventListener('click', () => {
-    const confettiOffset = confettiButton.getBoundingClientRect();
-    triggerConfetti();
-})
-});
-</script>
+

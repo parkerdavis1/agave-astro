@@ -1,7 +1,6 @@
 ---
 import ProjectListing from '@components/ProjectListing.astro';
 import MainFlow from '@layouts/MainFlow.astro';
-import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');

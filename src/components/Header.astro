@@ -1,7 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import BTSP from '/src/icons/btsp.svg';
 import { metadata } from 'src/metadata';
+import Icon from './Icon.astro';
 
 const nav = [
     { text: 'About', url: '/about' },
@@ -14,8 +13,11 @@ const nav = [
     <a href="/" class="home-link text-2xl font-bold mr-8 no-underline"
         >{metadata.title}</a
     >
-    <Image src={BTSP} alt="Black-throated Sparrow on agave" class="icon" />
-    <!-- {% include "icons/btsp.svg" %} -->
+
+    <div class="icon">
+        <Icon icon="btsp" />
+    </div>
+
     <nav>
         <h2 class="visually-hidden">Top level navigation menu</h2>
         <ul class="flex flex-wrap items-end gap-4">
