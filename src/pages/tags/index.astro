@@ -1,0 +1,45 @@
+---
+import MainFlow from '@layouts/MainFlow.astro';
+import { getCollection } from 'astro:content';
+
+const blogPosts = await getCollection('blog');
+const projects = await getCollection('projects');
+
+const allTags = [
+    ...blogPosts.map((blog) => blog.data.tags).flat(),
+    ...projects.map((project) => project.data.tags).flat(),
+].sort(new Intl.Collator('en-US', { sensitivity: 'base' }).compare);
+
+function allTagsWithCount(allTags) {
+    const tags = {};
+    for (let tag of allTags) {
+        if (Object.keys(tags).includes(tag)) {
+            tags[tag] = tags[tag] + 1;
+        } else {
+            tags[tag] = 1;
+        }
+    }
+    return tags;
+}
+const tagsWithCount = allTagsWithCount(allTags);
+const uniqueTags = Array.from(new Set([...allTags]));
+---
+
+<MainFlow>
+    <h1>All Tags</h1>
+    <ul>
+        {
+            uniqueTags.map((tag) => (
+                <li>
+                    <a href={`/tags/${tag}`}>{tag}</a>
+                </li>
+            ))
+        }
+    </ul>
+</MainFlow>
+
+<style>
+    ul {
+        columns: 3;
+    }
+</style>

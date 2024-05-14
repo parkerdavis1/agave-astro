@@ -1,0 +1,74 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import MainFlow from '@layouts/MainFlow.astro';
+import PostListing from '@components/PostListing.astro';
+import ProjectListing from '@components/ProjectListing.astro';
+
+export async function getStaticPaths() {
+    const blogPosts = await getCollection('blog');
+    const projects = await getCollection('projects');
+
+    const uniqueTags = Array.from(
+        new Set([
+            ...blogPosts.map((blog) => blog.data.tags).flat(),
+            ...projects.map((project) => project.data.tags).flat(),
+        ])
+    );
+
+    return uniqueTags.map((tag) => {
+        const filteredBlog = blogPosts.filter((post) =>
+            post.data.tags?.includes(tag)
+        );
+        const filteredProjects = projects.filter((project) =>
+            project.data.tags?.includes(tag)
+        );
+
+        return {
+            params: { tag: tag },
+            props: {
+                tag,
+                filteredBlog,
+                filteredProjects,
+            },
+        };
+    });
+}
+
+const { tag } = Astro.params;
+const { filteredBlog, filteredProjects } = Astro.props;
+---
+
+<MainFlow>
+    <h1>Tagged "{tag}"</h1>
+    {
+        filteredBlog.length > 0 && (
+            <>
+                <h2>Blog Posts</h2>
+                <ul>
+                    {filteredBlog.map((post) => (
+                        <PostListing post={post} />
+                    ))}
+                </ul>
+            </>
+        )
+    }
+
+    {
+        filteredProjects.length > 0 && (
+            <>
+                <h2>Projects</h2>
+                <ul class="flex flex-col gap-4">
+                    {filteredProjects.map((project) => (
+                        <ProjectListing project={project} />
+                    ))}
+                </ul>
+            </>
+        )
+    }
+
+    <p>
+        See
+        <a href="/tags">all tags</a>
+    </p>
+</MainFlow>
