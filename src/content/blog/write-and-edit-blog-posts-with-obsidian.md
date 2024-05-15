@@ -1,6 +1,6 @@
 ---
 title: Edit your website's markdown on the go with Obsidian
-description: I lay out my current setup for editing my website content on mobile and desktop
+description: I lay out my current setup for editing my website content on mobile and desktop.
 date: 2024-02-05
 updatedOn:
 tags:

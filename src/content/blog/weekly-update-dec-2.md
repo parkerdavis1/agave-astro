@@ -1,6 +1,6 @@
 ---
 title: '[Weekly Update] Plausible, droplet, prep, posts'
-description: Updates for December 2nd, 2023
+description: Updates for December 2nd, 2023.
 date: 2023-12-02
 updatedOn:
 tags:

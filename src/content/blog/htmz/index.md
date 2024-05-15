@@ -1,6 +1,6 @@
 ---
 title: htmz - a low power tool for html
-description: A cool javascript not-framework for loading HTML snippets without full page reloads
+description: A cool javascript not-framework for loading HTML snippets without full page reloads.
 date: 2024-02-23
 updatedOn:
 tags:

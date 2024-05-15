@@ -1,6 +1,6 @@
 ---
 title: I made a web scraper and job posting manager
-description: Using Puppeteer and SQLite
+description: Using Puppeteer and SQLite.
 date: 2024-03-01
 updatedOn:
 tags:

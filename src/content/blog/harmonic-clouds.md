@@ -1,6 +1,6 @@
 ---
 title: Added Harmonic Clouds to Projects
-description: Added a small music application to my projects list
+description: Added a small music application to my projects list.
 date: 2024-02-07
 updatedOn:
 tags:

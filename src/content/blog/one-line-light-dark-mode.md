@@ -1,21 +1,24 @@
 ---
 title: Responsive dark/light mode with 1 line of CSS
-description: Note to self for next time I make a super simple HTML page
+description: Note to self for next time I make a super simple HTML page.
 date: 2023-11-21
-tags: 
+tags:
     - css
 draft: false
 ---
+
 ## 1 Line
 
 ```css
-:root { color-scheme: light dark; }
+:root {
+    color-scheme: light dark;
+}
 ```
 
 Alternatively, you can use a `<meta>` property in your HTML markup.
 
 ```html
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="dark light" />
 ```
 
 [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme) / [Spec](https://drafts.csswg.org/css-color-adjust/#preferred)

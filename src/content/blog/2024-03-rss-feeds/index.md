@@ -1,6 +1,6 @@
 ---
 title: RSS feeds are nutritious!
-description: Use RSS again, its a good thing to do
+description: Use RSS again, its a good thing to do.
 date: 2024-03-18
 updatedOn:
 tags:
