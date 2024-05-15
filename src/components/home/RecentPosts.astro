@@ -7,11 +7,28 @@ const allPosts = await getCollection('blog', filterDrafts);
 const recentPosts = allPosts
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
     .slice(0, 5);
+
+// Birds make sound
+const response = await fetch('https://birdsmakesound.com/feed/feed.json');
+const { items } = await response.json();
+// console.log(items);
+const formattedBMS = items.map((item) => ({
+    bms: true,
+    data: {
+        date: new Date(item.date_published),
+        title: item.title,
+        slug: item.url,
+    },
+}));
+
+const combinedPosts = [...recentPosts, ...formattedBMS]
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, 5);
 ---
 
 <section class="flow">
     <h2>Recent Posts</h2>
     <ul>
-        {recentPosts.map((post) => <PostListing post={post} />)}
+        {combinedPosts.map((post) => <PostListing post={post} />)}
     </ul>
 </section>
