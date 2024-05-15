@@ -10,7 +10,13 @@ const { project, showTag } = Astro.props;
         showTag && (
             <div class="tags-list">
                 {project.data.tags &&
-                    project.data.tags.map((tag: string) => <p>{tag}</p>)}
+                    project.data.tags.map((tag: string) => (
+                        <p>
+                            <a class="no-underline" href={`/tags/${tag}`}>
+                                {tag}
+                            </a>
+                        </p>
+                    ))}
             </div>
         )
     }

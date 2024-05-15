@@ -1,24 +1,9 @@
 ---
 import MainFlow from '@layouts/MainFlow.astro';
 import PostListing from '@components/PostListing.astro';
-import { getCollection } from 'astro:content';
-const allPosts = await getCollection('blog');
+import getCombinedPosts from '@utils/getCombinedPosts';
 
-// Birds make sound
-const response = await fetch('https://birdsmakesound.com/feed/feed.json');
-const { items } = await response.json();
-// console.log(items);
-const formattedBMS = items.map((item) => ({
-    bms: true,
-    data: {
-        date: new Date(item.date_published),
-        title: item.title,
-        slug: item.url,
-    },
-}));
-const combinedPosts = [...allPosts, ...formattedBMS].sort(
-    (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
+const combinedPosts = await getCombinedPosts();
 ---
 
 <MainFlow>

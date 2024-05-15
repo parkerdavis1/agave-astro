@@ -2,40 +2,32 @@
 import dayjs from 'dayjs';
 const { post } = Astro.props;
 const readableDate = dayjs(post.data.date).format('DD MMM YYYY');
+let link = post.bms ? post.data.slug : `/blog/${post.slug}`;
 ---
 
 <li>
-    <time datetime={post.data.date}>{readableDate}</time>
+    <time class="time" datetime={post.data.date}>{readableDate}</time>
+
+    <a class="title" href={link}>
+        {post.data.title}
+    </a>
+
     {
         post.bms ? (
-            <a class="title" href={post.data.slug}>
-                {post.data.title}
-            </a>
-        ) : (
-            <a class="title" href={`/blog/${post.slug}`}>
-                {post.data.title}
-            </a>
-        )
+            <span class="bms-container">
+                <span>[</span>
+                <span class="bms">Birds Make Sound</span>
+                <span>]</span>
+            </span>
+        ) : null
     }
-    <span
-        >{
-            post.bms ? (
-                <>
-                    <span>[</span>
-                    <span class="bms">Birds Make Sound</span>
-                    <span>]</span>
-                </>
-            ) : null
-        }</span
-    >
 </li>
 
 <style>
     li {
         display: grid;
         grid-template-rows: auto;
-        /* grid-template-columns: [time-start] 8em [time-end] [title-start] auto [title-end] [bms-start] auto [bms-end]; */
-        grid-template-columns: 8em auto auto;
+        grid-template-columns: [time-start] 8em [time-end title-start] auto [title-end bms-start] auto [bms-end];
         justify-content: start;
         column-gap: 1rem;
         align-items: baseline;
@@ -43,31 +35,41 @@ const readableDate = dayjs(post.data.date).format('DD MMM YYYY');
     }
 
     time {
-        grid-area: 0 / 1;
+        grid-column: time;
         font-size: var(--step--1);
         min-width: 8em;
     }
 
     .title {
-        grid-area: 1 / 2;
+        grid-column: title;
     }
 
     .bms {
         font-size: var(--step--1);
         color: #646ead;
-        grid-area: 2 / 3;
+    }
+
+    .bms-container {
+        grid-column: bms;
     }
 
     @media (max-width: 640px) {
         li {
-            grid-template-columns: auto minmax(0, 1fr);
+            grid-template-columns:
+                [title-start time-start] auto [time-end bms-start] minmax(
+                    0,
+                    1fr
+                )
+                [title-end bms-end];
             grid-template-rows: auto auto;
         }
-        .title {
-            grid-row: 0 / 1;
-            grid-column: span 2;
+
+        time {
+            grid-row: 2 / 3;
+            min-width: 0;
         }
     }
+
     @media (prefers-color-scheme: dark) {
         .bms {
             color: hsla(267, 100%, 86%, 1);

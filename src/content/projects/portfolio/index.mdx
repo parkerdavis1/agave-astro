@@ -1,23 +1,24 @@
 ---
 title: This Portfolio Site
-description: Minimal static site with sitemap, feeds, robots.txt, favicons, manifest, image optimization, and more.
+description: Minimal static site with sitemap, rss feed, robots.txt, favicons, manifest, image optimization, and more.
 techtags:
-  - Eleventy
-  - Luxon
-  - Prism
+  - Astro
+  - MDX
+  - TailwindCSS
   - HTML
   - CSS
   - Javascript
 tags:
-  - eleventy
-  - luxon
-  - prism
+  - astro
+  - mdx
+  - tailwindcss
   - html
   - css
   - javascript
-githubUrl: https://github.com/parkerdavis1/agave-portfolio
+githubUrl: https://github.com/parkerdavis1/agave-astro
 liveUrl: https://parkerdavis.dev/
 v1: https://v1.parkerdavis.dev
+v2: https://github.com/parkerdavis1/agave-portfolio
 featured: false
 draft: false
 date: 2023-11-19
@@ -27,18 +28,13 @@ date: 2023-11-19
 
 <ProjectLinks githubUrl={frontmatter.githubUrl} liveUrl={frontmatter.liveUrl} />
 
-I rebuilt this portfolio primarily to add a blog. I thought I'd use [Astro](astro.build) this time and was digging Chris Williams' [Astro Cactus](https://github.com/chrismwilliams/astro-theme-cactus) theme – however, I did not love the [Tailwind Typography plugin](https://tailwindcss.com/docs/typography-plugin) customization workflow. I definitely could have worked around it but I decided to give Eleventy another go. Eleventy for static sites helps me stay rooted in the fundamental web technologies. For example, if I want to use the View Transitions API (which I do!) I'll have to add the code myself – sounds like a great learning experience!
+After rebuilding this site with a blog using Eleventy, I used Astro to build the [CCAM](https://ccam.world) site and really enjoyed its ergonomics, so I ported this site over to Astro too. 
 
-## Starter and Plugins
+[Birds Make Sound](https://birdsmakesound.com) posts are now shown alongside posts here. 
 
-After having built numerous Eleventy sites from scratch, I felt comfortable taking some shortcuts and using code from the community.
 
-I started with the [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog/tree/main) for some sensible defaults, with image optimization, navigation, css & js bundling, feeds, and syntax highlighting configured.
-
-[markdown-it-anchor](https://www.npmjs.com/package/markdown-it-anchor) and [eleventy-plugin-nesting-toc](https://www.npmjs.com/package/eleventy-plugin-nesting-toc) creates a Table of Contents for all posts.
-
-[markdown-it-attrs](https://www.npmjs.com/package/markdown-it-attrs) allows you to add arbitrary attributes to elements within markdown.
 
 ## Previous portfolio versions
 
-[Version 1]({{v1}})
+<p><a href={frontmatter.v1}>Version 1</a></p>
+<p><a href={frontmatter.v2}>Version 2</a></p>
