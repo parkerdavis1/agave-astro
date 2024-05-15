@@ -29,7 +29,6 @@ let link = post.bms ? post.data.slug : `/blog/${post.slug}`;
         grid-template-rows: auto;
         grid-template-columns: [time-start] 8em [time-end title-start] auto [title-end bms-start] auto [bms-end];
         justify-content: start;
-        column-gap: 1rem;
         align-items: baseline;
         margin-bottom: 1em;
     }
@@ -51,6 +50,7 @@ let link = post.bms ? post.data.slug : `/blog/${post.slug}`;
 
     .bms-container {
         grid-column: bms;
+        margin-left: 1rem;
     }
 
     @media (max-width: 640px) {

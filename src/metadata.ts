@@ -1,4 +1,4 @@
-const email = 'hello@parkerdavis.dev';
+const email = 'parkerdavis@duck.com';
 
 export const metadata = {
     title: 'Parker Davis',

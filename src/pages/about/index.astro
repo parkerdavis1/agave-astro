@@ -21,7 +21,10 @@ import SaltRiver from './saltriver.jpg';
         helped researchers, artists, and professionals improve their online presence.
     </p>
     <p>
-        Get in touch with me at <a href={metadata.email}>{metadata.email}</a>
+        Get in touch with me at <a
+            href=`mailto:${metadata.email}?subject=Nice site!`
+            >{metadata.email}</a
+        >
     </p>
 </MainFlow>
 
