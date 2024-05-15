@@ -31,7 +31,7 @@ const title = propsTitle ? propsTitle + ' • Parker Davis' : 'Parker Davis';
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:title" content={title || metadata.title} />
+        <meta property="og:title" content={title} />
         <meta
             property="og:description"
             content={description || metadata.description}
@@ -42,12 +42,18 @@ const title = propsTitle ? propsTitle + ' • Parker Davis' : 'Parker Davis';
         <meta name="twitter:site" content={metadata.twitter} />
         <meta name="twitter:creator" content={metadata.twitter} />
         <meta name="twitter:url" content={url} />
-        <meta name="twitter:title" content={title || metadata.title} />
+        <meta name="twitter:title" content={title} />
         <meta
             name="twitter:description"
             content={description || metadata.description}
         />
         <meta name="twitter:image" content={socialImage} />
+        <!-- plausible analytics -->
+        <script
+            defer
+            src="https://plausible.parkerdavis.dev/js/script.js"
+            onload="this.setAttribute('data-domain',window.location.host)"
+        ></script>
     </head>
     <body>
         <Header />
