@@ -6,9 +6,10 @@ import DisplayTags from '@components/DisplayTags.astro';
 
 const { post, prevPost, nextPost } = Astro.props;
 const { headings } = await post.render();
+const title = post.data.title + ' • Parker Davis';
 ---
 
-<Base>
+<Base title={title}>
     <div class="toc-container">
         <TOC headings={headings} />
         <main>

@@ -38,7 +38,7 @@ const { tag } = Astro.params;
 const { filteredBlog, filteredProjects } = Astro.props;
 ---
 
-<MainFlow>
+<MainFlow title={tag}>
     <h1>Tagged "{tag}"</h1>
     {
         filteredBlog.length > 0 && (

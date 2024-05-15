@@ -1,8 +1,9 @@
 ---
 import Base from '@layouts/Base.astro';
+const { title } = Astro.props;
 ---
 
-<Base>
+<Base title={title}>
     <div class="flow">
         <slot />
     </div>

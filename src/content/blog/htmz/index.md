@@ -90,10 +90,10 @@ So, the content is loaded in the hidden iframe then copied wherever you specify.
 
 Go check out the examples on [htmz](https://leanrada.com/htmz/). There are some complex UIs that can be created with _very_ little client-side javascript. I probably wouldn't reach for this if my needs were _too_ complex but it's a cool technique for loading simple interactive content within a page.
 
-<a href="./see/index.html#load-cow" target="htmz">See</a>
-<a href="./what/index.html#load-cow" target="htmz">what</a>
-<a href="./I/index.html#load-cow" target="htmz">I</a>
-<a href="./mean/index.html#load-cow" target="htmz">mean</a>?
+<a href="/blog/htmz/see.html#load-cow" target="htmz">See</a>
+<a href="/blog/htmz/what.html#load-cow" target="htmz">what</a>
+<a href="/blog/htmz/I.html#load-cow" target="htmz">I</a>
+<a href="/blog/htmz/mean.html#load-cow" target="htmz">mean</a>?
 
 <div id="load-cow"></div>
 

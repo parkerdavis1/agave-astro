@@ -4,6 +4,8 @@ export const metadata = {
     title: 'Parker Davis',
     description: 'Arizona-based developer blog and portfolio',
     email: email,
+    socialImage: '/social.png',
+    twitter: 'https://twitter.com/park_d',
     socials: [
         {
             name: 'GitHub',

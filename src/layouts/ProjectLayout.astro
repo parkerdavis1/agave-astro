@@ -7,7 +7,7 @@ const { project } = Astro.props;
 const { headings } = await project.render();
 ---
 
-<Base>
+<Base title={project.data.title}>
     <div class="toc-container">
         <TOC headings={headings} />
         <main>

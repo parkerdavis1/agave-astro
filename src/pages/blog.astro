@@ -6,7 +6,7 @@ import getCombinedPosts from '@utils/getCombinedPosts';
 const combinedPosts = await getCombinedPosts();
 ---
 
-<MainFlow>
+<MainFlow title="Blog">
     <h1>Posts</h1>
     <ul>
         {combinedPosts.map((post) => <PostListing post={post} />)}
