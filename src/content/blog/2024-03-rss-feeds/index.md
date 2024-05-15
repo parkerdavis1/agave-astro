@@ -29,7 +29,7 @@ Check out this [todepond post](https://www.todepond.com/wikiblogarden/social-med
 
 [Todepond dot com](https://www.todepond.com/wikiblogarden) - my (parasocial) friend's online wikiblogarden
 
-My site has a [feed](/feed/feed.xml) of course.
+My site has a [feed](/rss.xml) of course.
 
 Lots of sites have them, even if they don't advertise that fact. If a site has a feed, your feedreader will find the feed and read!
 
