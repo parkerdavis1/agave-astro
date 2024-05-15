@@ -3,11 +3,12 @@ import 'src/styles/global.css';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { metadata } from 'src/metadata.ts';
-const { title: propsTitle, description } = Astro.props;
+const { title: propsTitle, description: propsDescription } = Astro.props;
 
 const url = Astro.site?.origin + Astro.url.pathname;
 const socialImage = Astro.site?.origin + metadata.socialImage;
 const title = propsTitle ? propsTitle + ' • Parker Davis' : 'Parker Davis';
+const description = propsDescription ? propsDescription : metadata.description;
 ---
 
 <!doctype html>
@@ -20,10 +21,7 @@ const title = propsTitle ? propsTitle + ' • Parker Davis' : 'Parker Davis';
         <link rel="sitemap" href="/sitemap-index.xml" />
         <link rel="alternate" href="/rss.xml" type="application/atom+xml" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <meta
-            name="description"
-            content={description || metadata.description}
-        />
+        <meta name="description" content={description} />
         <title>{title}</title>
         <!-- TODO -->
 
@@ -32,10 +30,7 @@ const title = propsTitle ? propsTitle + ' • Parker Davis' : 'Parker Davis';
         <meta property="og:url" content={url} />
         <meta property="og:locale" content="en_US" />
         <meta property="og:title" content={title} />
-        <meta
-            property="og:description"
-            content={description || metadata.description}
-        />
+        <meta property="og:description" content={description} />
         <meta property="og:image" content={socialImage} />
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image" />
@@ -43,10 +38,7 @@ const title = propsTitle ? propsTitle + ' • Parker Davis' : 'Parker Davis';
         <meta name="twitter:creator" content={metadata.twitter} />
         <meta name="twitter:url" content={url} />
         <meta name="twitter:title" content={title} />
-        <meta
-            name="twitter:description"
-            content={description || metadata.description}
-        />
+        <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={socialImage} />
         <!-- plausible analytics -->
         <script
