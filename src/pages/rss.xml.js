@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 import getCombinedPosts from '@utils/getCombinedPosts';
-import { metadata } from 'src/metadata';
+import { metadata } from 'src/metadata.ts';
 
 export async function GET(context) {
     const posts = await getCombinedPosts();

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { string } from 'astro/zod';
     import { onMount } from 'svelte';
 
     let turkey: HTMLDivElement;
@@ -36,8 +37,22 @@
         gobble.play(randomSprite);
     }
 
+    interface SpriteObj {
+        [key: string]: number[];
+    }
+
+    interface SettingsObj {
+        src: string;
+        sprite: SpriteObj;
+    }
+
     export class Sprite {
-        constructor(settingsObj) {
+        src: string;
+        samples: SpriteObj;
+        ctx: AudioContext | undefined;
+        audioBuffer: AudioBuffer | undefined;
+
+        constructor(settingsObj: SettingsObj) {
             this.src = settingsObj.src;
             this.samples = settingsObj.sprite;
 
@@ -46,12 +61,14 @@
 
         async init() {
             // Set up web audio
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            const AudioCtx = window.AudioContext;
             this.ctx = new AudioCtx();
             // Load file
             this.audioBuffer = await this.getFile();
         }
+
         async getFile() {
+            if (!this.ctx) return;
             // Request file
             const response = await fetch(this.src);
             if (!response.ok) {
@@ -64,7 +81,8 @@
             return audioBuffer;
         }
 
-        play(sampleName) {
+        play(sampleName: string) {
+            if (!this.ctx || !this.audioBuffer) return;
             const startTime = this.samples[sampleName][0] / 1000;
             const duration = this.samples[sampleName][1] / 1000;
             const sampleSource = this.ctx.createBufferSource();

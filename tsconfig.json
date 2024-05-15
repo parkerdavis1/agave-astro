@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "/Users/parkerdavis/projects/agave-astro",
+    "baseUrl": ".",
     "paths": {
       "@layouts/*": [
         "src/layouts/*"
@@ -13,8 +13,6 @@
         "src/utils/*"
       ]
     },
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact",
-    "exclude": ["node_modules"]
+    "skipLibCheck": true
   }
 }

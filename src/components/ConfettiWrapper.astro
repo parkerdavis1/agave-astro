@@ -3,10 +3,8 @@
 </div>
 
 <script>
-    import type confetti from '@types/canvas-confetti';
     import confetti from 'canvas-confetti';
 
-    // document.addEventListener('astro:page-load', () => {
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
@@ -27,6 +25,8 @@
             spread: 100,
         });
     }
-    const trigger = document.querySelector('.confetti-trigger');
+    const trigger = document.querySelector(
+        '.confetti-trigger'
+    ) as HTMLDivElement;
     observer.observe(trigger);
 </script>
