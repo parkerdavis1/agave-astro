@@ -1,6 +1,6 @@
 ---
 import MainFlow from '@layouts/MainFlow.astro';
-import { metadata } from 'src/metadata.ts';
+import { metadata, emailSubject } from 'src/metadata.ts';
 import { Image } from 'astro:assets';
 import SaltRiver from './saltriver.jpg';
 ---
@@ -22,7 +22,7 @@ import SaltRiver from './saltriver.jpg';
     </p>
     <p>
         Get in touch with me at <a
-            href=`mailto:${metadata.email}?subject=Nice site!`
+            href=`mailto:${metadata.email}?subject=${emailSubject}`
             >{metadata.email}</a
         >
     </p>

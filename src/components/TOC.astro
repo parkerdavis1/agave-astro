@@ -3,6 +3,7 @@ import type { MarkdownHeading } from 'astro';
 
 import { generateToc } from 'src/utils/generateToc.ts';
 import TOCHeading from './TOCHeading.astro';
+import LikeButton from './LikeButton.svelte';
 
 interface Props {
     headings: Array<MarkdownHeading>;
@@ -22,6 +23,7 @@ const toc = generateToc(headings);
                     <TOCHeading heading={heading} />
                 ))}
             </ul>
+            <LikeButton client:visible />
         </aside>
     )
 }
@@ -32,7 +34,6 @@ const toc = generateToc(headings);
         position: sticky;
         top: 5rem;
         order: 2;
-        margin-inline-end: -16rem;
         min-width: 10rem;
         font-size: var(--step--2);
     }
