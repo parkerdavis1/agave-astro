@@ -3,7 +3,19 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { LikeCount, db, eq } from 'astro:db';
 
+async function delayDB() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('go');
+        }, 1000);
+    });
+}
+
 export const GET: APIRoute = async ({ request }) => {
+    if (import.meta.env.DEV) {
+        //simulate slow DB network in Dev mode
+        await delayDB();
+    }
     const url = new URL(request.url);
     const params = new URLSearchParams(url.search);
     const path = params.get('path') as string;
@@ -27,6 +39,10 @@ export const GET: APIRoute = async ({ request }) => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
+    if (import.meta.env.DEV) {
+        //simulate slow DB network in Dev mode
+        await delayDB();
+    }
     const url = new URL(request.url);
     const params = new URLSearchParams(url.search);
     const path = params.get('path') as string;
@@ -49,11 +65,15 @@ export const POST: APIRoute = async ({ request }) => {
 
     const count = result.count;
 
-    const response = await db
+    const [response] = await db
         .update(LikeCount)
         .set({ count: count + 1 })
         .where(eq(LikeCount.path, path))
         .returning();
+
+    if (!response) {
+        return new Response('Error', { status: 500 });
+    }
 
     return new Response('Good', { status: 200 });
 };

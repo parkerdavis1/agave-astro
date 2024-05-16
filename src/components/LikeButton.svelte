@@ -1,49 +1,55 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { fade } from 'svelte/transition';
-
     export let url: string;
     const apiPath = '/api/likes?path=';
 
     let likeButton: HTMLElement;
-    let liked = getLocalLiked(url);
+    let liked = getLocalLiked();
     let bounce: boolean;
-    let count = getLikes(url);
+    let count = getLikes();
+    let previousCount: number;
     let currentClickCount = 0;
 
-    async function getLikes(url: string) {
+    async function getLikes() {
         const res = await fetch(apiPath + url);
         return await res.json();
     }
 
-    function setLocalLiked(url: string, liked: boolean) {
+    function setLocalLiked(liked: boolean) {
         localStorage.setItem(url, String(liked));
     }
 
-    function getLocalLiked(url: string) {
+    function getLocalLiked() {
         const liked = localStorage?.getItem(url) ?? false;
         return Boolean(liked);
     }
 
-    async function incrementDBLikes(url: string) {
+    async function incrementDBLikes() {
         await fetch(apiPath + url, {
             method: 'POST',
         });
     }
 
+    async function refreshCount() {
+        const dbCount = await getLikes();
+        if (dbCount > count) {
+            count = dbCount;
+        }
+    }
+
     async function click() {
-        incrementDBLikes(url); // increment likes on DB
+        incrementDBLikes(); // increment likes on DB
         bounce = false; // reset animation
         count = (await count) + 1; // update DOM optimistically
-        setLocalLiked(url, true); // set liked color in local storage
+        previousCount = await count;
+        setLocalLiked(true); // set liked color in local storage
         liked = true; // update DOM liked color
         currentClickCount++; // update session count (for changing pitch)
-        count = getLikes(url); // Update visible count with DB value
         bounce = true;
         setTimeout(() => {
             bounce = false;
         }, 200);
         playSound();
+        refreshCount(); // if DB count is higher than local count, update visible count to that number
     }
 
     // AUDIO
@@ -97,7 +103,9 @@
             /></svg
         >
     </button>
-    {#await count then count}
+    {#await count}
+        <div>{previousCount || ''}</div>
+    {:then count}
         <div>{count}</div>
     {/await}
 </div>
