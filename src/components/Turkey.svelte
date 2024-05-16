@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { string } from 'astro/zod';
     import { onMount } from 'svelte';
 
     let turkey: HTMLDivElement;

@@ -12,21 +12,24 @@ interface Props {
 const { headings } = Astro.props;
 
 const toc = generateToc(headings);
+const url = Astro.url.pathname;
 ---
 
-{
-    toc.length > 0 && (
-        <aside>
-            <h2 class="text-sm">Table of Contents</h2>
-            <ul>
-                {toc.map((heading) => (
-                    <TOCHeading heading={heading} />
-                ))}
-            </ul>
-            <LikeButton client:visible />
-        </aside>
-    )
-}
+<aside>
+    {
+        toc.length > 0 && (
+            <>
+                <h2 class="text-sm">Table of Contents</h2>
+                <ul>
+                    {toc.map((heading) => (
+                        <TOCHeading heading={heading} />
+                    ))}
+                </ul>
+            </>
+        )
+    }
+    <LikeButton client:only="svelte" url={url} />
+</aside>
 
 <style>
     aside {

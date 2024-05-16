@@ -1,25 +1,55 @@
-<script>
-    let animationDuration = 300;
-    let likeButton;
-    let liked;
-    let bounce;
-    let count = 0;
-    let clickCount = 0;
-    function click() {
+<script lang="ts">
+    import { onMount } from 'svelte';
+    import { fade } from 'svelte/transition';
+
+    export let url: string;
+    const apiPath = '/api/likes?path=';
+
+    let likeButton: HTMLElement;
+    let liked = getLocalLiked(url);
+    let bounce: boolean;
+    let count = getLikes(url);
+    let currentClickCount = 0;
+
+    async function getLikes(url: string) {
+        const res = await fetch(apiPath + url);
+        return await res.json();
+    }
+
+    function setLocalLiked(url: string, liked: boolean) {
+        localStorage.setItem(url, String(liked));
+    }
+
+    function getLocalLiked(url: string) {
+        const liked = localStorage?.getItem(url) ?? false;
+        return Boolean(liked);
+    }
+
+    async function setDBLikes(url: string) {
+        const res = await fetch(apiPath + url, {
+            method: 'POST',
+        });
+    }
+
+    async function click() {
         bounce = false;
-        console.log('LIKED!');
-        count++;
-        clickCount++;
+        count = (await count) + 1;
+        setLocalLiked(url, true);
         liked = true;
+        currentClickCount++;
+        await setDBLikes(url);
+        count = getLikes(url);
+        // liked = true;
         bounce = true;
         setTimeout(() => {
             bounce = false;
-        }, animationDuration);
+        }, 200);
         playSound();
     }
 
-    let audioCtx;
-    function randomNumber(min, max) {
+    // AUDIO
+    let audioCtx: AudioContext;
+    function randomNumber(min: number, max: number) {
         return min + Math.floor(Math.random() * max);
     }
 
@@ -29,14 +59,14 @@
         }
 
         let gain = 0.1;
-        let oscType = 'triangle';
+        let oscType = 'triangle' as OscillatorType;
 
         const osc = new OscillatorNode(audioCtx, {
             type: oscType,
         });
         osc.frequency.setValueAtTime(200, audioCtx.currentTime);
         osc.frequency.linearRampToValueAtTime(
-            300 + clickCount * 20,
+            300 + currentClickCount * 20,
             audioCtx.currentTime + 0.1
         );
 
@@ -68,7 +98,9 @@
             /></svg
         >
     </button>
-    <div>{count}</div>
+    {#await count then count}
+        <div>{count}</div>
+    {/await}
 </div>
 
 <style>
@@ -79,7 +111,7 @@
         color: red;
     }
     .heart.bounce {
-        animation: bounce 300ms cubic-bezier(0.17, 0.67, 0.74, 1.92);
+        animation: bounce 200ms cubic-bezier(0.17, 0.67, 0.74, 1.92);
     }
 
     @keyframes bounce {
@@ -88,7 +120,7 @@
             transform: translateY(0);
         }
         50% {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
     }
 </style>
