@@ -74,7 +74,7 @@
         });
         osc.frequency.setValueAtTime(400, audioCtx.currentTime);
         osc.frequency.linearRampToValueAtTime(
-            1100 + randomNumber(0, 50),
+            1100 + randomNumber(0, 100),
             audioCtx.currentTime + length / 2
         );
         osc.frequency.linearRampToValueAtTime(

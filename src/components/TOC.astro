@@ -3,7 +3,6 @@ import type { MarkdownHeading } from 'astro';
 
 import { generateToc } from 'src/utils/generateToc.ts';
 import TOCHeading from './TOCHeading.astro';
-import LikeButton from './LikeButton.svelte';
 
 interface Props {
     headings: Array<MarkdownHeading>;
@@ -12,7 +11,6 @@ interface Props {
 const { headings } = Astro.props;
 
 const toc = generateToc(headings);
-const url = Astro.url.pathname;
 ---
 
 <aside>
