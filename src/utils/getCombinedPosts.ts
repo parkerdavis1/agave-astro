@@ -10,8 +10,19 @@ interface BMSItem {
     description: string;
 }
 
+interface Bmsdata {
+    bms: boolean;
+    data: {
+        date: Date;
+        title: string;
+        slug: string;
+        description: string;
+    };
+}
+
 export default async function getCombinedPosts() {
     const allPosts = await getCollection('blog', filterDrafts);
+    const allTitles = allPosts.map((post) => post.data.title);
 
     // Birds make sound
     const response = await fetch('https://birdsmakesound.com/feed/feed.json');
@@ -26,7 +37,11 @@ export default async function getCombinedPosts() {
         },
     }));
 
-    const combinedPosts = [...allPosts, ...formattedBMS].sort(
+    const filteredBMS = formattedBMS.filter(
+        ({ data }: Bmsdata) => !allTitles.includes(data.title)
+    );
+
+    const combinedPosts = [...allPosts, ...filteredBMS].sort(
         (a, b) => b.data.date.getTime() - a.data.date.getTime()
     );
     return combinedPosts;

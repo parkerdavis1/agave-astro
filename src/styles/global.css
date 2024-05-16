@@ -123,6 +123,19 @@ img {
     font-style: italic;
 }
 
+blockquote {
+    padding-left: 1rem;
+    border-left: 2px var(--text-color-link) solid;
+}
+
+cite {
+    font-size: var(--step--1);
+}
+
+code {
+    background: #00000011;
+}
+
 article a {
     color: var(--text-color-link);
 }
@@ -156,10 +169,6 @@ article li li {
 .small-image {
     width: 50%;
     margin-inline: auto;
-}
-
-code {
-    background: #00000011;
 }
 
 @media (prefers-color-scheme: dark) {
