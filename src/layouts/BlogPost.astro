@@ -3,10 +3,13 @@ import Base from '@layouts/Base.astro';
 import TOC from '@components/TOC.astro';
 import DisplayDate from '@components/DisplayDate.astro';
 import DisplayTags from '@components/DisplayTags.astro';
+import LikeButton from '@components/LikeButton.svelte';
+import Icon from '@components/Icon.astro';
 
 const { post, prevPost, nextPost } = Astro.props;
 const { headings } = await post.render();
 const title = post.data.title + ' • Parker Davis';
+const url = Astro.url.pathname;
 ---
 
 <Base title={title}>
@@ -21,6 +24,8 @@ const title = post.data.title + ' • Parker Davis';
                 </div>
                 <slot />
             </article>
+            <LikeButton client:only="svelte" url={url} />
+
             <div class="border-t border-b border-dashed border-textColor py-5">
                 {
                     prevPost && (
