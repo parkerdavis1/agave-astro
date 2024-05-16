@@ -34,8 +34,11 @@ const tagsWithCount = countAndSortTags(allTags);
         {
             tagsWithCount.map((tag) => (
                 <li>
-                    <a href={`/tags/${tag[0]}`}>
-                        {tag[0]} ({tag[1]})
+                    <a
+                        class="no-underline hover:underline"
+                        href={`/tags/${tag[0]}`}
+                    >
+                        {tag[0]} – {tag[1]}
                     </a>
                 </li>
             ))
