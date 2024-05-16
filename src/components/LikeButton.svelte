@@ -25,21 +25,20 @@
         return Boolean(liked);
     }
 
-    async function setDBLikes(url: string) {
-        const res = await fetch(apiPath + url, {
+    async function incrementDBLikes(url: string) {
+        await fetch(apiPath + url, {
             method: 'POST',
         });
     }
 
     async function click() {
-        bounce = false;
-        count = (await count) + 1;
-        setLocalLiked(url, true);
-        liked = true;
-        currentClickCount++;
-        await setDBLikes(url);
-        count = getLikes(url);
-        // liked = true;
+        incrementDBLikes(url); // increment likes on DB
+        bounce = false; // reset animation
+        count = (await count) + 1; // update DOM optimistically
+        setLocalLiked(url, true); // set liked color in local storage
+        liked = true; // update DOM liked color
+        currentClickCount++; // update session count (for changing pitch)
+        count = getLikes(url); // Update visible count with DB value
         bounce = true;
         setTimeout(() => {
             bounce = false;
