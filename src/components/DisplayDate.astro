@@ -1,7 +1,11 @@
 ---
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+
 const { date, format } = Astro.props;
-const readableDate = dayjs(date).format(format);
+const readableDate = dayjs(date).utc().format(format);
 ---
 
 <div>

@@ -2,8 +2,10 @@
 import getCombinedPosts from '@utils/getCombinedPosts';
 import PostListing from '@components/PostListing.astro';
 
+const numOfPosts = 5;
 const allPosts = await getCombinedPosts();
-const recentPosts = allPosts.slice(0, 5);
+const recentPosts = allPosts.slice(0, numOfPosts);
+const remainingPosts = allPosts.length - numOfPosts;
 ---
 
 <section class="flow">
@@ -11,4 +13,5 @@ const recentPosts = allPosts.slice(0, 5);
     <ul>
         {recentPosts.map((post) => <PostListing post={post} />)}
     </ul>
+    <p><a href="/blog">View {remainingPosts} more posts</a></p>
 </section>
