@@ -14,8 +14,4 @@ export default async function seed() {
             parallelism: 1,
         }),
     });
-
-    await db
-        .insert(LikeCount)
-        .values([{ path: 'test', count: 14, date_updated: new Date() }]);
 }
