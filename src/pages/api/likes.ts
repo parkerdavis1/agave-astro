@@ -67,9 +67,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     const [response] = await db
         .update(LikeCount)
-        .set({ count: count + 1 })
+        .set({ count: count + 1, date_updated: new Date() })
         .where(eq(LikeCount.path, path))
         .returning();
+
+    console.log('response', response);
 
     if (!response) {
         return new Response('Error', { status: 500 });

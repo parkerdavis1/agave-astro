@@ -1,0 +1,43 @@
+---
+export const prerender = false;
+import { LikeCount } from 'astro:db';
+import { db } from 'astro:db';
+import MainFlow from '@layouts/MainFlow.astro';
+
+const allLikes = await db.select().from(LikeCount);
+const sorted = allLikes.sort(
+    (a, b) => b.date_updated.getTime() - a.date_updated.getTime()
+);
+
+const user = Astro.locals.user;
+if (!user) {
+    return Astro.redirect('/login');
+}
+
+const username = user.username;
+---
+
+<MainFlow>
+    <h2>Welcome, {username.toLocaleUpperCase()}!</h2>
+
+    <table>
+        {
+            sorted.map((data) => (
+                <tr>
+                    <td>{data.path}</td>
+                    <td>{data.count}</td>
+                    <td>{data.date_updated.toLocaleString()}</td>
+                </tr>
+            ))
+        }
+    </table>
+    <form action="/api/logout" method="POST">
+        <button>Sign Out</button>
+    </form>
+</MainFlow>
+
+<style>
+    td {
+        padding: 1rem;
+    }
+</style>

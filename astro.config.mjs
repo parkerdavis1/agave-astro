@@ -20,4 +20,9 @@ export default defineConfig({
     ],
     output: 'hybrid',
     adapter: netlify(),
+    vite: {
+        optimizeDeps: {
+            exclude: ['astro:db'],
+        },
+    },
 });
