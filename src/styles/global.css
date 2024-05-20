@@ -188,7 +188,7 @@ article li li {
     width: 1px;
 }
 
-button {
+.button {
     background: black;
     color: white;
     border-radius: 0.25rem;
@@ -196,7 +196,7 @@ button {
 }
 
 @media (prefers-color-scheme: dark) {
-    button {
+    .button {
         background: white;
         color: black;
     }

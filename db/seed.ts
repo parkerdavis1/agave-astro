@@ -6,8 +6,8 @@ import { generateIdFromEntropySize } from 'lucia';
 export default async function seed() {
     await db.insert(User).values({
         id: generateIdFromEntropySize(10),
-        username: 'parker',
-        password_hash: await hash('letmein', {
+        username: import.meta.env.ADMIN_USERNAME,
+        password_hash: await hash(import.meta.env.ADMIN_PASSWORD, {
             memoryCost: 19456,
             timeCost: 2,
             outputLen: 32,

@@ -3,6 +3,7 @@ export const prerender = false;
 import { LikeCount } from 'astro:db';
 import { db } from 'astro:db';
 import MainFlow from '@layouts/MainFlow.astro';
+import dayjs from '@utils/dayjs';
 
 const allLikes = await db.select().from(LikeCount);
 const sorted = allLikes.sort(
@@ -22,19 +23,30 @@ const username = user.username;
 
     <table>
         {
-            sorted.map((data) => (
-                <tr>
-                    <td>{data.path}</td>
-                    <td>{data.count}</td>
-                    <td>{data.date_updated.toLocaleString()}</td>
-                </tr>
-            ))
+            sorted.map((data) => {
+                const time = dayjs.utc(data.date_updated).format();
+                return (
+                    <tr>
+                        <td>{data.path}</td>
+                        <td>{data.count}</td>
+                        <td>
+                            <time datetime={time}>{time}</time>
+                        </td>
+                    </tr>
+                );
+            })
         }
     </table>
     <form action="/api/logout" method="POST">
         <button class="button">Sign Out</button>
     </form>
 </MainFlow>
+<script>
+    const times = document.querySelectorAll('time');
+    for (let time of times) {
+        time.innerHTML = new Date(time.dateTime).toLocaleString();
+    }
+</script>
 
 <style>
     td {
