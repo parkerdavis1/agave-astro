@@ -8,7 +8,6 @@ import LikeButton from '@components/LikeButton.svelte';
 const { post, prevPost, nextPost } = Astro.props;
 const { headings } = await post.render();
 const title = post.data.title + ' • Parker Davis';
-const url = Astro.url.pathname;
 ---
 
 <Base title={title}>
@@ -23,7 +22,7 @@ const url = Astro.url.pathname;
                 </div>
                 <slot />
             </article>
-            <LikeButton client:only="svelte" url={url} />
+            <LikeButton client:only="svelte" url={Astro.url.pathname} />
 
             <div class="border-t border-b border-dashed border-textColor py-5">
                 {

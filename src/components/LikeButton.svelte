@@ -2,17 +2,16 @@
     import { fade } from 'svelte/transition';
 
     export let url: string;
-    const apiPath = '/api/likes?path=';
+    const apiPath = `/api/likes?path=${url}`;
 
     let likeButton: HTMLElement;
     let liked = getLocalLiked();
     let bounce: boolean;
     let count = getLikes();
     let previousCount: number;
-    let currentClickCount = 0;
 
     async function getLikes() {
-        const res = await fetch(apiPath + url);
+        const res = await fetch(apiPath);
         return await res.json();
     }
 
@@ -26,7 +25,7 @@
     }
 
     async function incrementDBLikes() {
-        await fetch(apiPath + url, {
+        await fetch(apiPath, {
             method: 'POST',
         });
     }
@@ -45,7 +44,6 @@
         previousCount = await count;
         setLocalLiked(true); // set liked color in local storage
         liked = true; // update DOM liked color
-        currentClickCount++; // update session count (for changing pitch)
         bounce = true;
         setTimeout(() => {
             bounce = false;
@@ -98,7 +96,7 @@
 
         osc.connect(gainNode).connect(filterNode).connect(audioCtx.destination);
         osc.start();
-        setTimeout(() => osc.stop(), 1000);
+        osc.stop(audioCtx.currentTime + length);
     }
 </script>
 
@@ -395,8 +393,8 @@
 
 <style>
     button {
-        --size: 2.75rem;
-        /* --size: 10rem; */
+        --size: 3rem;
+        /* --size: 4rem; */
     }
     svg {
         height: var(--size);

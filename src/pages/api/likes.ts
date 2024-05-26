@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { LikeCount, db, eq } from 'astro:db';
+import { LikeCount, db, eq, count } from 'astro:db';
 
 async function delayDB() {
     return new Promise((resolve) => {
@@ -20,22 +20,19 @@ export const GET: APIRoute = async ({ request }) => {
     const params = new URLSearchParams(url.search);
     const path = params.get('path') as string;
 
-    let [countRow] = await db
-        .select()
+    let [result] = await db
+        .select({ count: count() })
         .from(LikeCount)
-        .where(eq(LikeCount.path, String(path)))
-        .limit(1);
+        .where(eq(LikeCount.path, String(path)));
 
-    if (!countRow) {
-        [countRow] = await db
-            .insert(LikeCount)
-            .values({ path: path, count: 0 })
-            .returning();
+    if (!result) {
+        result = await db.insert(LikeCount).values({ path: path }).returning();
+        if (!result) {
+            return new Response('Error', { status: 500 });
+        }
     }
 
-    const count = countRow.count;
-
-    return new Response(String(count));
+    return new Response(String(result.count));
 };
 
 export const POST: APIRoute = async ({ request }) => {
@@ -47,35 +44,13 @@ export const POST: APIRoute = async ({ request }) => {
     const params = new URLSearchParams(url.search);
     const path = params.get('path') as string;
 
-    let [result] = await db
-        .select()
-        .from(LikeCount)
-        .where(eq(LikeCount.path, path))
-        .limit(1);
-
-    if (!result) {
-        [result] = await db
-            .insert(LikeCount)
-            .values({ path: path, count: 1 })
-            .returning();
-        if (!result) {
-            return new Response('Error', { status: 500 });
-        }
-    }
-
-    const count = result.count;
-
-    const [response] = await db
-        .update(LikeCount)
-        .set({ count: count + 1, date_updated: new Date() })
-        .where(eq(LikeCount.path, path))
+    const [result] = await db
+        .insert(LikeCount)
+        .values({ path: path })
         .returning();
-
-    console.log('response', response);
-
-    if (!response) {
+    if (!result) {
         return new Response('Error', { status: 500 });
     }
 
-    return new Response('Good', { status: 200 });
+    return new Response(null, { status: 200 });
 };

@@ -1,15 +1,19 @@
 ---
 export const prerender = false;
 import { LikeCount } from 'astro:db';
-import { db } from 'astro:db';
+import { db, sql, count } from 'astro:db';
 import MainFlow from '@layouts/MainFlow.astro';
 import dayjs from '@utils/dayjs';
 
-const allLikes = await db.select().from(LikeCount);
-const sorted = allLikes.sort(
-    (a, b) => b.date_updated.getTime() - a.date_updated.getTime()
-);
+const allLikes = await db
+    .select({ path: LikeCount.path, count: count() })
+    .from(LikeCount)
+    .groupBy(sql`${LikeCount.path}`);
+const sortedAndFiltered = allLikes
+    .sort((a, b) => b.count - a.count)
+    .filter((like) => like.count > 0);
 
+// Check if authenticated
 const user = Astro.locals.user;
 if (!user) {
     return Astro.redirect('/login');
@@ -19,11 +23,11 @@ const username = user.username;
 ---
 
 <MainFlow>
-    <h2>Welcome, {username.toLocaleUpperCase()}!</h2>
+    <h2 class="capitalize">Welcome, {username}!</h2>
 
     <table>
         {
-            sorted.map((data) => {
+            sortedAndFiltered.map((data) => {
                 const time = dayjs.utc(data.date_updated).format();
                 return (
                     <tr>

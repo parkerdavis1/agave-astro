@@ -3,7 +3,6 @@ import { defineDb, defineTable, column, sql } from 'astro:db';
 const LikeCount = defineTable({
     columns: {
         path: column.text(),
-        count: column.number({ default: 10 }),
         date_updated: column.date({ default: sql`(CURRENT_TIMESTAMP)` }),
     },
 });

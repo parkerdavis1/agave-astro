@@ -1,0 +1,94 @@
+---
+title: Click on a quail counter
+description: Now you can show your appreciate for my posts by clicking on a quail.
+date: 2024-06-26
+tags:
+    - svg
+    - html
+    - css
+    - javascript
+    - svelte
+draft: true
+---
+import LikeButton from '@components/LikeButton.svelte'
+
+## Quail Counter
+
+Quails are wonderful creatures. Here's one for you to click. 
+<div class="w-fit">
+    <LikeButton url="quail-post" client:only />
+</div>
+
+Here is the SVG at a larger scale. I created this SVG, loading in a photo and tracing geometric shapes on top of it using Pixelmator Pro, then exporting the shapes to SVG.
+<div class="max-w-sm mx-auto">
+
+![Quail](src/icons/gaqu.svg)
+
+</div>
+
+I spent some time synthesizing a sound that approximates a Gambel's Quail song.
+
+```typescript
+function playSound() {
+
+    // Create the audio context
+    if (!audioCtx) {
+        audioCtx = new AudioContext();
+    }
+
+    // Options variables
+    let gain = 0.1;
+    let oscType = 'sawtooth' as OscillatorType;
+    let length = 0.35;
+    let freqs = {
+        start: 400,
+        mid: 1100 + randomNumber(0, 100),
+        end: 650
+    }
+
+    // Create a sawtooth oscilattor node
+    const osc = new OscillatorNode(audioCtx, {
+        type: oscType,
+    });
+
+    // The starting frequency is 400Hz, 
+    // it linearly slides up to 1100-1120Hz, 
+    // then back down to 650Hz
+    osc.frequency.setValueAtTime(freqs.start, audioCtx.currentTime);
+    osc.frequency.linearRampToValueAtTime(
+        freqs.mid,
+        audioCtx.currentTime + length / 2
+    );
+    osc.frequency.linearRampToValueAtTime(
+        freqs.end,
+        audioCtx.currentTime + length
+    );
+
+    // Create a gain node which linearly slides to the gain set in the options from 0 and back. 
+    const gainNode = new GainNode(audioCtx);
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(
+        gain,
+        audioCtx.currentTime + length / 2
+    );
+    gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + length);
+
+    // Create a bandbass filter node at the peak frequency with a Q value of 2
+    const filterNode = new BiquadFilterNode(audioCtx, {
+        frequency: 1150,
+        type: 'bandpass',
+        Q: 2,
+    });
+
+    // Patch all the nodes together
+    osc.connect(gainNode).connect(filterNode).connect(audioCtx.destination);
+
+    // Start the oscilator and stop it after the length of the sound
+    osc.start();
+    osc.stop(audioCtx.currentTime + length);
+}
+```
+
+## Ported Portfolio to Astro
+
+Part of why I can do this more easily is I ported my portfolio to Astro. I can drop a Quail svelte component in, call a dynamic API route that lives within my project structure that interacts with a database, I'm using Astro DB.
