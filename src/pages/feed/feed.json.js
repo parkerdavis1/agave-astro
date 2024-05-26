@@ -1,5 +1,6 @@
 import getCombinedPosts from '@utils/getCombinedPosts';
 import { metadata } from 'src/metadata';
+import { filterDrafts } from '@utils/filterDrafts';
 
 function formatPostMetadataForJsonFeed(post) {
     const url = post.bms
@@ -16,7 +17,7 @@ function formatPostMetadataForJsonFeed(post) {
 }
 
 export async function GET(context) {
-    const posts = await getCombinedPosts();
+    const posts = (await getCombinedPosts()).filter(filterDrafts);
     const formattedPosts = posts.map((post) =>
         formatPostMetadataForJsonFeed(post)
     );
