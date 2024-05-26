@@ -19,7 +19,11 @@ const description = propsDescription ? propsDescription : metadata.description;
         <meta name="generator" content={Astro.generator} />
         <link rel="canonical" href={Astro.site?.origin + Astro.url.pathname} />
         <link rel="sitemap" href="/sitemap-index.xml" />
-        <link rel="alternate" href="/rss.xml" type="application/atom+xml" />
+        <link
+            rel="alternate"
+            href="/feed/rss.xml"
+            type="application/atom+xml"
+        />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <meta name="description" content={description} />
         <title>{title}</title>
