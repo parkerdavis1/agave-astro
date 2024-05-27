@@ -1,5 +1,6 @@
 <script lang="ts">
     import { fade } from 'svelte/transition';
+    import { onMount, onDestroy } from 'svelte';
 
     export let url: string;
     const apiPath = `/api/likes?path=${url}`;
@@ -9,16 +10,15 @@
     let bounce: boolean;
     let count = getLikes();
     let previousCount: number;
-    let intervalId: number;
+    let intervalId: ReturnType<typeof setInterval>;
 
     async function getLikes() {
         const res = await fetch(apiPath);
         return await res.json();
     }
 
-    function setLocalLiked(bool: boolean) {
-        localStorage.setItem(url, String(bool));
-        liked = bool;
+    function setLocalLiked(liked: boolean) {
+        localStorage.setItem(url, String(liked));
     }
 
     function getLocalLiked() {
@@ -34,8 +34,10 @@
 
     async function refreshCount() {
         const dbCount = await getLikes();
-        if (dbCount > count) {
+        if (dbCount > (await count)) {
             count = dbCount;
+        } else {
+            count = await count;
         }
     }
 
@@ -44,7 +46,8 @@
         bounce = false; // reset animation
         count = (await count) + 1; // update DOM optimistically
         previousCount = await count;
-        setLocalLiked(true); // set liked color in local storage and update DOM
+        setLocalLiked(true); // set liked color in local storage
+        liked = true; // update DOM liked color
         bounce = true;
         setTimeout(() => {
             bounce = false;
@@ -52,6 +55,14 @@
         playSound();
         refreshCount(); // if DB count is higher than local count, update visible count to that number
     }
+
+    onMount(() => {
+        intervalId = setInterval(refreshCount, 10000);
+    });
+
+    onDestroy(() => {
+        clearInterval(intervalId);
+    });
 
     // AUDIO
     let audioCtx: AudioContext;
@@ -67,11 +78,9 @@
         let gain = 0.1;
         let oscType = 'sawtooth' as OscillatorType;
         let length = 0.35;
-        // 350,980,840
-
         let freqs = {
             start: 350,
-            mid: 980 + randomNumber(0, 100),
+            mid: 1000 + randomNumber(0, 100),
             end: 840,
         };
 
@@ -121,7 +130,10 @@
     }
 </script>
 
-<div class="flex items-center justify-end mt-8 gap-4">
+<div
+    class="flex items-center mt-8 gap-4 max-w-full justify-center"
+    id="container"
+>
     <button
         class="quail {liked ? 'liked' : ''} {bounce ? 'bounce' : ''} "
         on:click={click}
@@ -406,17 +418,23 @@
         </svg>
     </button>
     {#await count}
-        <div>{previousCount || ''}</div>
+        <div class="count">{previousCount || ''}</div>
     {:then count}
-        <div in:fade>{count}</div>
+        <div in:fade class="count">{count}</div>
     {/await}
 </div>
 
 <style>
-    button {
-        --size: 3rem;
+    #container {
+        --size: 45cqw;
         /* --size: 4rem; */
+        container-type: inline-size;
     }
+
+    .count {
+        font-size: calc(var(--size) / 2);
+    }
+
     svg {
         height: var(--size);
         width: var(--size);

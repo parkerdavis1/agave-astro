@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { LikeCount, db, eq, count } from 'astro:db';
+import { Likes, db, eq, count } from 'astro:db';
 
 async function delayDB() {
     return new Promise((resolve) => {
@@ -21,18 +21,23 @@ export const GET: APIRoute = async ({ request }) => {
     const path = params.get('path') as string;
 
     let [result] = await db
-        .select({ count: count() })
-        .from(LikeCount)
-        .where(eq(LikeCount.path, String(path)));
+        .select({ value: count() })
+        .from(Likes)
+        .where(eq(Likes.path, String(path)));
 
     if (!result) {
-        result = await db.insert(LikeCount).values({ path: path }).returning();
-        if (!result) {
+        const init = await db
+            .insert(Likes)
+            .values({
+                path: path,
+            })
+            .returning();
+        if (!init) {
             return new Response('Error', { status: 500 });
         }
     }
 
-    return new Response(String(result.count));
+    return new Response(String(result.value));
 };
 
 export const POST: APIRoute = async ({ request }) => {
@@ -44,10 +49,7 @@ export const POST: APIRoute = async ({ request }) => {
     const params = new URLSearchParams(url.search);
     const path = params.get('path') as string;
 
-    const [result] = await db
-        .insert(LikeCount)
-        .values({ path: path })
-        .returning();
+    const [result] = await db.insert(Likes).values({ path: path }).returning();
     if (!result) {
         return new Response('Error', { status: 500 });
     }

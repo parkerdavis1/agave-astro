@@ -7,10 +7,9 @@ import LikeButton from '@components/LikeButton.svelte';
 
 const { post, prevPost, nextPost } = Astro.props;
 const { headings } = await post.render();
-const title = post.data.title + ' • Parker Davis';
 ---
 
-<Base title={title}>
+<Base title={post.data.title}>
     <div class="toc-container">
         <TOC headings={headings} />
         <main>

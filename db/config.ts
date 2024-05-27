@@ -1,6 +1,6 @@
 import { defineDb, defineTable, column, sql } from 'astro:db';
 
-const LikeCount = defineTable({
+const Likes = defineTable({
     columns: {
         path: column.text(),
         date_updated: column.date({ default: sql`(CURRENT_TIMESTAMP)` }),
@@ -29,5 +29,5 @@ const Session = defineTable({
 
 // https://astro.build/db/config
 export default defineDb({
-    tables: { LikeCount, User, Session },
+    tables: { Likes, User, Session },
 });

@@ -1,14 +1,14 @@
 ---
 export const prerender = false;
-import { LikeCount } from 'astro:db';
+import { Likes } from 'astro:db';
 import { db, sql, count } from 'astro:db';
 import MainFlow from '@layouts/MainFlow.astro';
 import dayjs from '@utils/dayjs';
 
 const allLikes = await db
-    .select({ path: LikeCount.path, count: count() })
-    .from(LikeCount)
-    .groupBy(sql`${LikeCount.path}`);
+    .select({ path: Likes.path, count: count() })
+    .from(Likes)
+    .groupBy(sql`${Likes.path}`);
 const sortedAndFiltered = allLikes
     .sort((a, b) => b.count - a.count)
     .filter((like) => like.count > 0);

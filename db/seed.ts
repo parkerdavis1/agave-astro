@@ -1,4 +1,4 @@
-import { db, User, LikeCount } from 'astro:db';
+import { db, User, Likes } from 'astro:db';
 import { hash } from '@node-rs/argon2';
 import { generateIdFromEntropySize } from 'lucia';
 

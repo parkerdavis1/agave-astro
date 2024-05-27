@@ -1,94 +1,84 @@
 ---
-title: Click on a quail counter
+title: Quail Counter
 description: Now you can show your appreciate for my posts by clicking on a quail.
 date: 2024-06-26
 tags:
     - svg
-    - html
-    - css
-    - javascript
+    - web-audio
+    - astro
+    - astro-db
     - svelte
+    - javascript
+    - css
+    - html
 draft: true
 ---
-import LikeButton from '@components/LikeButton.svelte'
+import BigQuail from './BigQuail.svelte';
 
-## Quail Counter
+I made a Gambel's Quail counter. 
 
-Quails are wonderful creatures. Here's one for you to click. 
-<div class="w-fit">
-    <LikeButton url="inline-quail-post" client:only />
-</div>
+Its like a "Like" button but better. 
 
-Here is the SVG for the quail at a larger scale. I created it by loading photo into Pixelmator Pro and tracing geometric shapes on top of it. I can then export the shapes to SVG, and there you have it. Vector graphics.
-<div class="max-w-sm mx-auto">
+They normally live in the bottom-right corner of posts but here's a big one for you to click:
 
-![Quail](src/icons/gaqu.svg)
+<BigQuail url="/blog/2024-06-26-quail" client:only="svelte" />
 
-</div>
+It is a custom SVG that I made by drawing geometric vector shapes on top of a photo. When I export the shapes to SVG I've got a beautiful scalable male Gambel's Quail. 
 
-I spent some time synthesizing a sound that approximates a Gambel's Quail song.
+![Composite image of Gambel's Quail with geometric shapes layered on](./gaqu_composite.png)
+
+When you click the quail not only does it do a little jump, it triggers a function that synthesizes an approximation of a [Gambel's Quail song](https://macaulaylibrary.org/asset/223146831).
 
 ```typescript
 function playSound() {
-
     // Create the audio context
     if (!audioCtx) {
         audioCtx = new AudioContext();
     }
 
-    // Options variables
+    // Set options variables
     let gain = 0.1;
     let oscType = 'sawtooth' as OscillatorType;
     let length = 0.35;
     let freqs = {
-        start: 400,
-        mid: 1100 + randomNumber(0, 100),
-        end: 650
-    }
+        start: 350,
+        mid: 980 + randomNumber(0, 100),
+        end: 840,
+    };
 
-    // Create a sawtooth oscilattor node
-    const osc = new OscillatorNode(audioCtx, {
-        type: oscType,
-    });
+    // Create a sawtooth oscillator node
+    const osc = new OscillatorNode(audioCtx, { type: oscType });
 
-    // The starting frequency is 400Hz, 
-    // it linearly slides up to 1100-1120Hz, 
-    // then back down to 650Hz
+    // The starting frequency is 350Hz, 
+    // it linearly slides up to 1000-1100Hz, 
+    // then back down to 840Hz
     osc.frequency.setValueAtTime(freqs.start, audioCtx.currentTime);
-    osc.frequency.linearRampToValueAtTime(
-        freqs.mid,
-        audioCtx.currentTime + length / 2
-    );
-    osc.frequency.linearRampToValueAtTime(
-        freqs.end,
-        audioCtx.currentTime + length
-    );
+    osc.frequency.linearRampToValueAtTime(freqs.mid, audioCtx.currentTime + length / 2);
+    osc.frequency.linearRampToValueAtTime(freqs.end, audioCtx.currentTime + length);
 
-    // Create a gain node which linearly slides to the gain set in the options from 0 and back. 
+    // Create a gain node which slides linearly 
+    // to the gain set in the options from 0 and back. 
     const gainNode = new GainNode(audioCtx);
     gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(
-        gain,
-        audioCtx.currentTime + length / 2
-    );
+    gainNode.gain.linearRampToValueAtTime(gain, audioCtx.currentTime + length / 2);
     gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + length);
 
-    // Create a bandbass filter node at the peak frequency with a Q value of 2
-    const filterNode = new BiquadFilterNode(audioCtx, {
-        frequency: 1150,
-        type: 'bandpass',
-        Q: 2,
-    });
+    // Create a bandpass filter node that moves with the oscillator frequency
+    // but doubled, emphasizing the second harmonic and creating a more nasal sound.
+    const filterNode = new BiquadFilterNode(audioCtx, { type: 'bandpass', Q: 1 });
+    filterNode.frequency.setValueAtTime(freqs.start * 2, audioCtx.currentTime);
+    filterNode.frequency.linearRampToValueAtTime(freqs.mid * 2, audioCtx.currentTime + length / 2);
+    filterNode.frequency.linearRampToValueAtTime(freqs.end * 2, audioCtx.currentTime + length);
 
     // Patch all the nodes together
     osc.connect(gainNode).connect(filterNode).connect(audioCtx.destination);
-
-    // Start the oscilator and stop it after the length of the sound
+    
+    // Start the oscillator and stop it after the length of the sound
     osc.start();
     osc.stop(audioCtx.currentTime + length);
 }
 ```
 
-## Ported Portfolio to Astro
+Part of why I can do this more easily is I ported my portfolio to [Astro](https://astro.build/). I can drop a Quail svelte component in, which calls a dynamic API route that lives within my project, which interacts with a database to persist the count. Every bit of code is in one git repo instead of spread out across multiple platforms. [Astro DB](https://astro.build/db/) adds some nice features that make working with a database in development and production more seamless. 
 
-Part of why I can do this more easily is I ported my portfolio to Astro. I can drop a Quail svelte component in, call a dynamic API route that lives within my project structure that interacts with a database, I'm using Astro DB. In working on the CCAM website, I came to appreciate how Astro will default to static and performant, but when I need something more dynamic, I can pepper that in.
+I expect to add more whimsy and interactive bits soon. 
