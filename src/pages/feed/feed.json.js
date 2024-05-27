@@ -16,7 +16,7 @@ function formatPostMetadataForJsonFeed(post) {
     return formattedObject;
 }
 
-export async function GET(context) {
+export async function GET() {
     const posts = (await getCombinedPosts()).filter(filterDrafts);
     const formattedPosts = posts.map((post) =>
         formatPostMetadataForJsonFeed(post)

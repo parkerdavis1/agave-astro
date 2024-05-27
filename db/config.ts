@@ -1,6 +1,6 @@
 import { defineDb, defineTable, column, sql } from 'astro:db';
 
-const Likes = defineTable({
+const QuailLikes = defineTable({
     columns: {
         path: column.text(),
         date_updated: column.date({ default: sql`(CURRENT_TIMESTAMP)` }),
@@ -29,5 +29,5 @@ const Session = defineTable({
 
 // https://astro.build/db/config
 export default defineDb({
-    tables: { Likes, User, Session },
+    tables: { QuailLikes, User, Session },
 });

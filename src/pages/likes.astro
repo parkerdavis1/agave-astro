@@ -1,14 +1,14 @@
 ---
 export const prerender = false;
-import { Likes } from 'astro:db';
-import { db, sql, count } from 'astro:db';
+import { db, sql, count, QuailLikes } from 'astro:db';
 import MainFlow from '@layouts/MainFlow.astro';
-import dayjs from '@utils/dayjs';
+// import dayjs from '@utils/dayjs';
 
 const allLikes = await db
-    .select({ path: Likes.path, count: count() })
-    .from(Likes)
-    .groupBy(sql`${Likes.path}`);
+    .select({ path: QuailLikes.path, count: count() })
+    .from(QuailLikes)
+    .groupBy(sql`${QuailLikes.path}`);
+
 const sortedAndFiltered = allLikes
     .sort((a, b) => b.count - a.count)
     .filter((like) => like.count > 0);
@@ -28,14 +28,12 @@ const username = user.username;
     <table>
         {
             sortedAndFiltered.map((data) => {
-                const time = dayjs.utc(data.date_updated).format();
+                // const time = dayjs.utc(data.date_updated).format();
                 return (
                     <tr>
                         <td>{data.path}</td>
                         <td>{data.count}</td>
-                        <td>
-                            <time datetime={time}>{time}</time>
-                        </td>
+                        <td>{/* <time datetime={time}>{time}</time> */}</td>
                     </tr>
                 );
             })

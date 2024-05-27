@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { Likes, db, eq, count } from 'astro:db';
+import { QuailLikes, db, eq, count } from 'astro:db';
 
 async function delayDB() {
     return new Promise((resolve) => {
@@ -22,12 +22,12 @@ export const GET: APIRoute = async ({ request }) => {
 
     let [result] = await db
         .select({ value: count() })
-        .from(Likes)
-        .where(eq(Likes.path, String(path)));
+        .from(QuailLikes)
+        .where(eq(QuailLikes.path, String(path)));
 
     if (!result) {
         const init = await db
-            .insert(Likes)
+            .insert(QuailLikes)
             .values({
                 path: path,
             })
@@ -49,7 +49,10 @@ export const POST: APIRoute = async ({ request }) => {
     const params = new URLSearchParams(url.search);
     const path = params.get('path') as string;
 
-    const [result] = await db.insert(Likes).values({ path: path }).returning();
+    const [result] = await db
+        .insert(QuailLikes)
+        .values({ path: path })
+        .returning();
     if (!result) {
         return new Response('Error', { status: 500 });
     }
