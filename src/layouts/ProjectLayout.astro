@@ -4,6 +4,8 @@ import LikeButton from '@components/LikeButton.svelte';
 import TOC from '@components/TOC.astro';
 import Base from '@layouts/Base.astro';
 
+import { trimUrlPathname } from '@utils/trimUrlPathname';
+
 const { project } = Astro.props;
 const { headings } = await project.render();
 ---
@@ -19,7 +21,10 @@ const { headings } = await project.render();
                 </div>
                 <slot />
             </article>
-            <LikeButton client:only="svelte" url={Astro.url.pathname} />
+            <LikeButton
+                client:only="svelte"
+                url={trimUrlPathname(Astro.url.pathname)}
+            />
             <nav class="project-nav">
                 <a href="/projects/">Back to Projects</a>
             </nav>

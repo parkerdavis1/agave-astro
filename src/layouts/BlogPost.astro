@@ -4,6 +4,7 @@ import TOC from '@components/TOC.astro';
 import DisplayDate from '@components/DisplayDate.astro';
 import DisplayTags from '@components/DisplayTags.astro';
 import LikeButton from '@components/LikeButton.svelte';
+import { trimUrlPathname } from '@utils/trimUrlPathname';
 
 const { post, prevPost, nextPost } = Astro.props;
 const { headings } = await post.render();
@@ -21,7 +22,10 @@ const { headings } = await post.render();
                 </div>
                 <slot />
             </article>
-            <LikeButton client:only="svelte" url={Astro.url.pathname} />
+            <LikeButton
+                client:only="svelte"
+                url={trimUrlPathname(Astro.url.pathname)}
+            />
 
             <div class="border-t border-b border-dashed border-textColor py-5">
                 {
