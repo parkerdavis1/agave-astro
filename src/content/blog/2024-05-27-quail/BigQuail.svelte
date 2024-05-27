@@ -426,9 +426,14 @@
 
 <style>
     #container {
-        --size: 45cqw;
-        /* --size: 4rem; */
-        container-type: inline-size;
+        --size: 10rem;
+    }
+
+    @supports (container-type: inline-size) {
+        #container {
+            --size: 45cqw;
+            container-type: inline-size;
+        }
     }
 
     .count {
