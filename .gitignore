@@ -23,5 +23,8 @@ pnpm-debug.log*
 # netlify
 .netlify
 
-# DB production seed file
+# db production seed file
 db/deploySeed.ts
+
+# obsidian
+.obsidian

@@ -16,6 +16,7 @@ import { metadata } from 'src/metadata.ts';
                             target="_blank"
                             title={social.name}
                         >
+                            <p class="visually-hidden">{social.name}</p>
                             <Fragment set:html={social.svg} />
                         </a>
                     </li>
