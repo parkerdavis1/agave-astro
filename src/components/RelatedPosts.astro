@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+const { tag } = Astro.props;
+const relatedPosts = (await getCollection('blog')).filter((post) =>
+    post.data.tags?.includes(tag)
+);
+---
+
+<ul>
+    {
+        relatedPosts.map((post) => (
+            <li>
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+            </li>
+        ))
+    }
+</ul>

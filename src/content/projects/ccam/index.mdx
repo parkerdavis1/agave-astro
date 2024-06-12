@@ -1,0 +1,45 @@
+---
+title: CCAM Site
+description: Custom site for Chicago Arts non-profit.
+techtags:
+    - html
+    - css
+githubUrl:
+liveUrl: https://ccam.world
+featured: false
+date: 2024-06-05
+draft: true
+tags:
+    - html
+    - css
+    - javascript
+    - astro
+    - p5
+---
+import RelatedPosts from '@components/RelatedPosts.astro'
+
+## Links
+
+<ProjectLinks githubUrl={frontmatter.githubUrl} liveUrl={frontmatter.liveUrl} />
+
+## Screenshot
+
+![Screenshot of CCAM Home page](./ccam-splash.gif)
+
+## Overview
+
+I was brought on to consult on the site rebuild for CCAM but ended up building the entire site. 
+
+## Cool Stuff
+
+- Gallery template script
+- Rewrote CCAM sketch to vanilla JS
+- First time using container queries
+- Intersection observer on loading p5 library
+- 301 redirects
+- Using HTMZ to load galleries and load lightbox script
+- Slow mode for slower devices
+
+## Posts related to CCAM
+
+<RelatedPosts tag="CCAM" />
