@@ -14,6 +14,8 @@ const Comments = defineTable({
         author: column.text(),
         body: column.text(),
         date: column.date({ default: sql`(CURRENT_TIMESTAMP)` }),
+        reported: column.boolean({ default: false }),
+        deleted: column.boolean({ default: false }),
     },
 });
 

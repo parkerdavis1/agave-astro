@@ -9,6 +9,12 @@
     let activeForm = false;
     let result;
     let comments;
+    let commentsHeading;
+
+    // Load comments on initialization
+    onMount(async () => {
+        comments = await actions.getComments(url);
+    });
 
     // form values
     let author = localStorage.getItem('author') || '';
@@ -19,6 +25,7 @@
         activeForm = false;
     }
 
+    // Submit comment
     async function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -28,16 +35,21 @@
         resetForm();
     }
 
-    onMount(async () => {
-        comments = await actions.getComments(url);
-    });
+    function handleSummaryClick() {
+        setTimeout(() => {
+            commentsHeading.scrollIntoView({
+                block: 'start',
+                inline: 'nearest',
+            });
+        }, 100);
+    }
 </script>
 
 <section>
-    <h2 class="py-4">Comments</h2>
+    <h2 class="py-4" bind:this={commentsHeading}>Comments</h2>
 
     <details class="cursor-pointer" bind:open={activeForm}>
-        <summary>Leave a comment</summary>
+        <summary on:click={handleSummaryClick}>Leave a comment</summary>
         <form
             action=""
             class="py-5 flex flex-col gap-2"
@@ -71,8 +83,8 @@
     <div class="my-5">
         {#if comments}
             {#each comments as comment (comment.id)}
-                <!-- <div in:fly={{ x: -200, duration: 400 }}> -->
-                <div in:scale>
+                <div in:fly={{ x: -200, duration: 200 }}>
+                    <!-- <div in:scale> -->
                     <CommentCard {comment} />
                 </div>
             {/each}
@@ -92,6 +104,7 @@
         padding: 0.5rem;
         border-radius: 6px;
         background: #fff;
+        border: 1px solid #aaa;
     }
 
     input:focus,

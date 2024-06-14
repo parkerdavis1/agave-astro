@@ -1,5 +1,5 @@
 import { defineAction, z } from 'astro:actions';
-import { db, Comments, desc, eq } from 'astro:db';
+import { db, Comments, desc, eq, and } from 'astro:db';
 import { v4 as uuid } from 'uuid';
 import DOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
@@ -44,12 +44,19 @@ export const server = {
             return await db
                 .select()
                 .from(Comments)
-                .where(eq(Comments.path, path))
+                .where(
+                    and(eq(Comments.path, path), eq(Comments.deleted, false))
+                )
                 .orderBy(desc(Comments.date));
         },
     }),
 
     reportComment: defineAction({
-        handler: async ({ id }) => {},
+        handler: async ({ id }) => {
+            await db
+                .update(Comments)
+                .set({ reported: true })
+                .where(eq(Comments.id, id));
+        },
     }),
 };
