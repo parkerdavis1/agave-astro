@@ -2,6 +2,7 @@
     import { actions } from 'astro:actions';
     import { onMount } from 'svelte';
     import CommentCard from './CommentCard.svelte';
+    import Spinner from './Spinner.svelte';
     import { fade, fly, slide, scale } from 'svelte/transition';
 
     export let url;
@@ -10,6 +11,7 @@
     let result;
     let comments;
     let commentsHeading;
+    let submitting = false;
 
     // Load comments on initialization
     onMount(async () => {
@@ -28,14 +30,16 @@
     // Submit comment
     async function handleSubmit(e) {
         e.preventDefault();
+        submitting = true;
         const formData = new FormData(e.target);
         localStorage.setItem('author', formData.get('author'));
-        result = await actions.comment(formData);
+        result = await actions.postComment(formData);
         comments = await actions.getComments(url);
         resetForm();
+        submitting = false;
     }
 
-    function handleSummaryClick() {
+    function scrollIntoView() {
         setTimeout(() => {
             commentsHeading.scrollIntoView({
                 block: 'start',
@@ -49,7 +53,7 @@
     <h2 class="py-4" bind:this={commentsHeading}>Comments</h2>
 
     <details class="cursor-pointer" bind:open={activeForm}>
-        <summary on:click={handleSummaryClick}>Leave a comment</summary>
+        <summary on:click={scrollIntoView}>Leave a comment</summary>
         <form
             action=""
             class="py-5 flex flex-col gap-2"
@@ -76,8 +80,16 @@
             <button
                 type="submit"
                 class="dark:bg-[#0c151c] dark:hover:bg-[#040a0f] p-2"
-                >Post</button
+                disabled={submitting}
             >
+                {#if submitting}
+                    <p class="flex items-center justify-center gap-4">
+                        Post <Spinner />
+                    </p>
+                {:else}
+                    Post
+                {/if}
+            </button>
         </form>
     </details>
     <div class="my-5">

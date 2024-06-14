@@ -2,14 +2,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { QuailLikes, db, eq, count } from 'astro:db';
-
-async function delayDB() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('go');
-        }, 1000);
-    });
-}
+import { delayDB } from '@utils/delayDB';
 
 export const GET: APIRoute = async ({ request }) => {
     if (import.meta.env.DEV) {

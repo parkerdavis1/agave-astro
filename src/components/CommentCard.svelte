@@ -14,16 +14,27 @@
 
     async function handleReport(e) {
         e.preventDefault();
-        actions.reportComment(comment.id);
+
+        // set localstorage state
         localStorage.setItem(LOCAL_REPORTED_KEY, 'TRUE');
         reported = Boolean(localStorage.getItem(LOCAL_REPORTED_KEY));
         localStorage.setItem(LOCAL_HIDDEN_KEY, 'TRUE');
         hidden = Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY));
 
-        await fetch('https://parkerdavis-reportcomment.web.val.run', {
-            method: 'POST',
-            body: JSON.stringify(comment),
-        });
+        // do server action
+        const updatedComment = await actions.reportComment(comment.id);
+        console.log('Comment reported', updatedComment);
+
+        // trigger notification email (in production)
+        if (import.meta.env.PROD) {
+            await fetch('https://parkerdavis-reportcomment.web.val.run', {
+                method: 'POST',
+                body: JSON.stringify(updatedComment),
+            });
+        }
+
+        // ok
+        return new Response('OK', { status: 200 });
     }
 
     function handleShow() {
