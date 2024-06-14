@@ -7,7 +7,10 @@ import { delayDB } from '@utils/delayDB';
 const window = new JSDOM('').window;
 const purify = DOMPurify(window);
 
+// EXPERIMENTAL, DOESN'T WORK ON NETLIFY YET
+
 export const server = {
+    // ported to API route ✅
     postComment: defineAction({
         accept: 'form',
         input: z.object({
@@ -43,6 +46,7 @@ export const server = {
         },
     }),
 
+    // ported to API route ✅
     getComments: defineAction({
         handler: async (path) => {
             if (import.meta.env.DEV) {
@@ -59,6 +63,7 @@ export const server = {
         },
     }),
 
+    // ported to API route ✅
     reportComment: defineAction({
         input: z.string(),
         handler: async (id) => {
@@ -71,7 +76,7 @@ export const server = {
                 .set({ reported: true })
                 .where(eq(Comments.id, id))
                 .returning();
-            console.log('commentfromserver', comment);
+
             return comment;
         },
     }),

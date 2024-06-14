@@ -8,14 +8,27 @@
     export let url;
 
     let activeForm = false;
-    let result;
+    // let result;
     let comments;
     let commentsHeading;
     let submitting = false;
 
+    async function getComments() {
+        // const data = await fetch(`/api/comments/getComments`, {
+        //     method: 'POST',
+        //     body: JSON.stringify(url),
+        // });
+        // const data = await fetch(`/api/comments/${encodeURIComponent(url)}`);
+        const data = await fetch(
+            `/api/comments/getComments?path=${encodeURIComponent(url)}`
+        );
+        return await data.json();
+    }
+
     // Load comments on initialization
     onMount(async () => {
-        comments = await actions.getComments(url);
+        // comments = await actions.getComments(url);
+        comments = await getComments();
     });
 
     // form values
@@ -31,10 +44,31 @@
     async function handleSubmit(e) {
         e.preventDefault();
         submitting = true;
+        // capture form data to pass to action
         const formData = new FormData(e.target);
-        localStorage.setItem('author', formData.get('author'));
-        result = await actions.postComment(formData);
-        comments = await actions.getComments(url);
+        const comment = {
+            author: formData.get('author'),
+            body: formData.get('body'),
+            path: formData.get('path'),
+        };
+
+        // update name store
+        localStorage.setItem('author', comment.author);
+
+        // post comment
+        // result = await actions.postComment(formData);
+        const result = await fetch(`/api/comments/postComment`, {
+            method: 'POST',
+            body: JSON.stringify(comment),
+        });
+        if (!result.ok) {
+            console.error('Error posting comment');
+        }
+        // reload comments
+        // comments = await actions.getComments(url);
+        comments = await getComments();
+
+        // reset state
         resetForm();
         submitting = false;
     }
