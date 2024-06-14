@@ -4,14 +4,19 @@ import { db, sql, count, QuailLikes } from 'astro:db';
 import MainFlow from '@layouts/MainFlow.astro';
 // import dayjs from '@utils/dayjs';
 
+interface LikesCount {
+    path: string;
+    count: number;
+}
+
 const allLikes = await db
     .select({ path: QuailLikes.path, count: count() })
     .from(QuailLikes)
     .groupBy(sql`${QuailLikes.path}`);
 
 const sortedAndFiltered = allLikes
-    .sort((a, b) => b.count - a.count)
-    .filter((like) => like.count > 0);
+    .sort((a: LikesCount, b: LikesCount) => b.count - a.count)
+    .filter((like: LikesCount) => like.count > 0);
 
 // Check if authenticated
 const user = Astro.locals.user;
@@ -27,7 +32,7 @@ const username = user.username;
 
     <table>
         {
-            sortedAndFiltered.map((data) => {
+            sortedAndFiltered.map((data: LikesCount) => {
                 // const time = dayjs.utc(data.date_updated).format();
                 return (
                     <tr>
