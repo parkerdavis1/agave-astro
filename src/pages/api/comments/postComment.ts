@@ -35,21 +35,24 @@ export const POST: APIRoute = async ({ request }) => {
     };
 
     // insert comment in DB
-    const postedComment = await db.insert(Comments).values({
-        ...data,
-        ...purifiedInput,
-        id: uuid(),
-    });
+    const [postedComment] = await db
+        .insert(Comments)
+        .values({
+            ...data,
+            ...purifiedInput,
+            id: uuid(),
+        })
+        .returning();
 
     console.log('postedComment', postedComment);
 
     // if in production, poke val.town to send an email notification
-    if (import.meta.env.PROD) {
-        fetch('https://parkerdavis-newcomment.web.val.run', {
-            method: 'POST',
-            body: JSON.stringify(postedComment),
-        });
-    }
+    // if (import.meta.env.PROD) {
+    fetch('https://parkerdavis-newcomment.web.val.run', {
+        method: 'POST',
+        body: JSON.stringify(postedComment),
+    });
+    // }
 
     return new Response('OK', { status: 200 });
 };
