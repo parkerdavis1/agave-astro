@@ -33,16 +33,18 @@
     function handleShow() {
         localStorage.setItem(LOCAL_HIDDEN_KEY, '');
         hidden = Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY));
-        console.log('hidden', hidden);
-        console.log(
-            'local storage hidden',
-            localStorage.getItem(LOCAL_HIDDEN_KEY)
-        );
     }
 
     function handleHide() {
         localStorage.setItem(LOCAL_HIDDEN_KEY, 'TRUE');
         hidden = Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY));
+    }
+
+    async function handleDelete() {
+        await fetch(
+            `/api/comments/deleteComment?secret=ipBPPkb3D9-Yv6&commentId=${comment.id}`,
+            { method: 'POST' }
+        );
     }
 </script>
 
@@ -66,7 +68,7 @@
         >
         <p class="break-words">{comment.body}</p>
         <div class="flex gap-4 text-xs mt-2">
-            <form action="" on:submit={handleReport}>
+            <form on:submit={handleReport}>
                 {#if reported}
                     <button disabled>Reported</button>
                 {:else}
@@ -74,6 +76,7 @@
                 {/if}
             </form>
             <button on:click={handleHide}>Hide</button>
+            <button on:click={handleDelete}>Delete</button>
         </div>
     </div>
 {/if}
