@@ -5,13 +5,14 @@ import { db, Comments, eq } from 'astro:db';
 
 export const POST: APIRoute = async ({ request }) => {
     const data = await request.formData();
-    const commentId = data.get('commentId');
-    const secret = data.get('secret');
+    const commentId = data.get('commentId') as string;
+    const secret = data.get('secret') as string;
 
-    if (!commentId || !secret) return new Response('Error', { status: 500 });
+    if (!commentId || !secret)
+        return new Response('Missing query params', { status: 400 });
 
     if (secret !== import.meta.env.DELETE_COMMENT_SECRET) {
-        return new Response('Wrong secret', { status: 400 });
+        return new Response('Error', { status: 400 });
     }
 
     await db
