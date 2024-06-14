@@ -40,12 +40,12 @@
         hidden = Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY));
     }
 
-    async function handleDelete() {
-        await fetch(
-            `/api/comments/deleteComment?secret=ipBPPkb3D9-Yv6&commentId=${comment.id}`,
-            { method: 'POST' }
-        );
-    }
+    // async function handleDelete() {
+    //     await fetch(
+    //         `/api/comments/deleteComment?secret=ipBPPkb3D9-Yv6&commentId=${comment.id}`,
+    //         { method: 'POST' }
+    //     );
+    // }
 </script>
 
 {#if hidden}
@@ -76,7 +76,9 @@
                 {/if}
             </form>
             <button on:click={handleHide}>Hide</button>
-            <button on:click={handleDelete}>Delete</button>
+            <!-- <button on:click={handleDelete}
+                >Delete (remove this button before deploying to prod)</button
+            > -->
         </div>
     </div>
 {/if}

@@ -1,0 +1,32 @@
+---
+export const prerender = false;
+
+const searchParams = new URL(Astro.request.url).searchParams;
+const commentId = searchParams.get('commentId');
+const secret = searchParams.get('secret');
+---
+
+<p>Comment: {commentId}</p>
+<form action=`/api/comments/deleteComment` method="POST">
+    <input type="hidden" name="commentId" value={commentId} />
+    <input type="hidden" name="secret" value={secret} />
+    <button type="submit">Delete Comment</button>
+</form>
+
+<style>
+    body {
+        background: #222;
+        color: white;
+    }
+    button {
+        border-radius: 0.5rem;
+        background: red;
+        padding: 0.5rem 1rem;
+    }
+    form {
+        width: 100%;
+        height: 100svh;
+        display: grid;
+        place-items: center;
+    }
+</style>

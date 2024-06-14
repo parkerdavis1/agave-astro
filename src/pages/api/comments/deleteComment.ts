@@ -4,10 +4,9 @@ import type { APIRoute } from 'astro';
 import { db, Comments, eq } from 'astro:db';
 
 export const POST: APIRoute = async ({ request }) => {
-    const url = new URL(request.url);
-    const params = new URLSearchParams(url.search);
-    const commentId = params.get('commentId');
-    const secret = params.get('secret');
+    const data = await request.formData();
+    const commentId = data.get('commentId');
+    const secret = data.get('secret');
 
     if (!commentId || !secret) return new Response('Error', { status: 500 });
 
@@ -20,5 +19,5 @@ export const POST: APIRoute = async ({ request }) => {
         .set({ deleted: true })
         .where(eq(Comments.id, commentId));
 
-    return new Response('Success', { status: 200 });
+    return new Response('Successfully deleted comment', { status: 200 });
 };
