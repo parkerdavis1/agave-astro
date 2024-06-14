@@ -47,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (import.meta.env.PROD) {
         fetch('https://parkerdavis-newcomment.web.val.run', {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(postedComment),
         });
     }
 
