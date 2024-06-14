@@ -15,10 +15,17 @@ export const POST: APIRoute = async ({ request }) => {
         return new Response('Error', { status: 400 });
     }
 
-    await db
+    const [comment] = await db
         .update(Comments)
         .set({ deleted: true })
-        .where(eq(Comments.id, commentId));
+        .where(eq(Comments.id, commentId))
+        .returning();
+    if (!comment) {
+        return new Response(`Comment not found`, { status: 404 });
+    }
 
-    return new Response('Successfully deleted comment', { status: 200 });
+    return new Response(
+        'Successfully deleted comment ' + JSON.stringify(comment),
+        { status: 200 }
+    );
 };

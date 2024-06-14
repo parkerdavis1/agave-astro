@@ -12,6 +12,7 @@
     let comments;
     let commentsHeading;
     let submitting = false;
+    let errorMessage;
 
     async function getComments() {
         // const data = await fetch(`/api/comments/getComments`, {
@@ -38,11 +39,18 @@
     function resetForm() {
         body = '';
         activeForm = false;
+        submitting = false;
+        errorMessage = '';
     }
 
     // Submit comment
     async function handleSubmit(e) {
         e.preventDefault();
+        const timeoutId = setTimeout(() => {
+            errorMessage = 'Error. Try again later.';
+            throw new Error('Server timed out');
+        }, 20000);
+
         submitting = true;
         // capture form data to pass to action
         const formData = new FormData(e.target);
@@ -64,13 +72,14 @@
         if (!result.ok) {
             console.error('Error posting comment', result);
         }
+
+        clearInterval(timeoutId);
         // reload comments
         // comments = await actions.getComments(url);
         comments = await getComments();
 
         // reset state
         resetForm();
-        submitting = false;
     }
 
     function scrollIntoView() {
@@ -114,9 +123,11 @@
             <button
                 type="submit"
                 class="dark:bg-[#0c151c] dark:hover:bg-[#040a0f] p-2"
-                disabled={submitting}
+                disabled={submitting || errorMessage}
             >
-                {#if submitting}
+                {#if errorMessage}
+                    {errorMessage}
+                {:else if submitting}
                     <p class="flex items-center justify-center gap-4">
                         Post <Spinner />
                     </p>
