@@ -3,9 +3,9 @@
     import { getContrastingColor } from '@utils/getContrastingColor';
     export let comment;
 
-    const fontColor = comment.fontColor;
-    console.log('fontColor', fontColor);
-    const fontType = comment.fontType;
+    // const fontColor = comment.fontColor;
+    // console.log('fontColor', fontColor);
+    // const fontType = comment.fontType;
 
     const LOCAL_REPORTED_KEY = `reported-${comment.id}`;
     const LOCAL_HIDDEN_KEY = `hidden-${comment.id}`;
@@ -44,22 +44,22 @@
         hidden = Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY));
     }
 
-    function returnTailwindFont(fontType) {
-        console.log('fonttype', fontType, typeof fontType);
-        if (fontType === 'mono') {
-            return 'font-mono';
-        } else if (fontType === 'serif') {
-            return 'font-serif';
-        } else {
-            return 'font-sans';
-        }
-    }
+    // function returnTailwindFont(fontType) {
+    //     console.log('fonttype', fontType, typeof fontType);
+    //     if (fontType === 'mono') {
+    //         return 'font-mono';
+    //     } else if (fontType === 'serif') {
+    //         return 'font-serif';
+    //     } else {
+    //         return 'font-sans';
+    //     }
+    // }
 
-    function returnTailwindColor(color) {
-        return `text-[${color}]`;
-    }
+    // function returnTailwindColor(color) {
+    //     return `text-[${color}]`;
+    // }
 
-    const contrastingColor = getContrastingColor(fontColor);
+    // const contrastingColor = getContrastingColor(fontColor);
 </script>
 
 <div class="comment-container">
@@ -86,8 +86,7 @@
                 })}</time
             >
             <p
-                class={`my-4 break-words whitespace-pre-wrap ${returnTailwindFont(fontType)} p-4 rounded`}
-                style="color: {fontColor}; background: {contrastingColor}"
+                class={`my-4 break-words whitespace-pre-wrap p-4 rounded font-mono`}
             >
                 {comment.body}
             </p>

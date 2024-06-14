@@ -14,13 +14,13 @@
     let commentsHeading;
     let submitting = false;
     let errorMessage;
-    let fontType = 'sans';
-    let fontColor = '#336600';
-    let backgroundColor = 'red';
-    $: {
-        backgroundColor = getContrastingColor(fontColor);
-        fontColor = fontColor;
-    }
+    // let fontType = 'sans';
+    // let fontColor = '#336600';
+    // let backgroundColor = 'red';
+    // $: {
+    // backgroundColor = getContrastingColor(fontColor);
+    // fontColor = fontColor;
+    // }
     let textArea;
 
     async function getComments() {
@@ -33,9 +33,9 @@
     // Load comments on initialization
     onMount(async () => {
         comments = await getComments();
-        fontColor = convertColor(getComputedStyle(commentsHeading).color);
-        console.log('color', getComputedStyle(commentsHeading).color);
-        backgroundColor = getContrastingColor(fontColor);
+        // fontColor = convertColor(getComputedStyle(commentsHeading).color);
+        // console.log('color', getComputedStyle(commentsHeading).color);
+        // backgroundColor = getContrastingColor(fontColor);
     });
 
     // form values
@@ -102,16 +102,16 @@
         }, 100);
     }
 
-    function returnTailwindFont(fontType) {
-        console.log('fonttype', fontType, typeof fontType);
-        if (fontType === 'mono') {
-            return 'font-mono';
-        } else if (fontType === 'serif') {
-            return 'font-serif';
-        } else {
-            return 'font-sans';
-        }
-    }
+    // function returnTailwindFont(fontType) {
+    //     console.log('fonttype', fontType, typeof fontType);
+    //     if (fontType === 'mono') {
+    //         return 'font-mono';
+    //     } else if (fontType === 'serif') {
+    //         return 'font-serif';
+    //     } else {
+    //         return 'font-sans';
+    //     }
+    // }
 </script>
 
 <section>
@@ -141,19 +141,17 @@
                 <textarea
                     name="body"
                     id="body"
+                    class="font-mono"
                     bind:value={body}
-                    style:color={fontColor}
-                    style:background-color={backgroundColor}
-                    class={returnTailwindFont(fontType)}
                     bind:this={textArea}
                     required
                 ></textarea>
             </label>
             <input type="text" hidden name="path" value={url} />
-            <pre>Font color: {fontColor}</pre>
-            <pre>Font type: {fontType}</pre>
+            <!-- <pre>Font color: {fontColor}</pre> -->
+            <!-- <pre>Font type: {fontType}</pre> -->
 
-            <details>
+            <!-- <details>
                 <summary>Options</summary>
                 <div class="flex gap-4 items-center pb-6">
                     <label for="fontColor" class="flex gap-2 items-center"
@@ -180,7 +178,7 @@
                         </select>
                     </label>
                 </div>
-            </details>
+            </details> -->
 
             <button
                 type="submit"
@@ -212,6 +210,10 @@
 </section>
 
 <style>
+    .faded {
+        color: var(--text-color-faded);
+        font-size: 0.75em;
+    }
     button {
         background: #d0cfcf;
         padding: 0.5rem;

@@ -25,15 +25,16 @@
     --body-width: 45rem;
 
     --text-color: hsl(var(--text-color-values));
+    --text-color-faded: hsl(var(--text-color-values) / 0.5);
     --text-color-link: hsl(var(--text-color-link-values));
     --background-color: hsl(var(--background-color-values));
 
-    --text-color-values: 0, 0%, 20%;
+    --text-color-values: 0 0% 20%;
     --text-color-link-values: 10.63, 45.28%, 41.57%;
     --background-color-values: 0, 0%, 96.08%;
 
     @media (prefers-color-scheme: dark) {
-        --text-color-values: 0, 2.63%, 85.1%;
+        --text-color-values: 0 2.63% 85.1%;
         --text-color-link-values: 209.49, 55.14%, 79.02%;
         --background-color-values: 210, 34.38%, 12.55%;
     }
