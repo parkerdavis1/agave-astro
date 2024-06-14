@@ -73,7 +73,7 @@
             class="my-4 py-2 max-w-full {reported ? 'opacity-30' : ''}"
             in:fade
         >
-            <pre>{JSON.stringify(comment, null, 2)}</pre>
+            <!-- <pre>{JSON.stringify(comment, null, 2)}</pre> -->
             <p class="font-bold">{comment.author}</p>
             <time datetime={comment.date} class="text-sm"
                 >{new Date(comment.date).toLocaleString('us-en', {

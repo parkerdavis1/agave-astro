@@ -35,3 +35,29 @@ export function getContrastingColor(color: string): string {
     const luminance = calculateLuminance(r, g, b);
     return luminance > 0.5 ? '#202b38' : '#ffffff';
 }
+
+export function convertColor(color: string): string | null {
+    if (color.startsWith('#')) {
+        // If it's already a hex color, return it directly
+        return color;
+    } else if (color.startsWith('rgb(')) {
+        // Convert RGB to hex
+        const match = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        if (!match) {
+            return null; // Invalid format
+        }
+        const [, rStr, gStr, bStr] = match;
+        const r = parseInt(rStr, 10);
+        const g = parseInt(gStr, 10);
+        const b = parseInt(bStr, 10);
+
+        const toHex = (c: number) => {
+            const hex = c.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        };
+
+        return '#' + toHex(r) + toHex(g) + toHex(b);
+    } else {
+        return null; // Unsupported format
+    }
+}

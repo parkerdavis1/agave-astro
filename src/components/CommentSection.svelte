@@ -4,6 +4,7 @@
     import Spinner from './Spinner.svelte';
     import { fly } from 'svelte/transition';
     import { getContrastingColor } from '@utils/getContrastingColor.js';
+    import { convertColor } from '@utils/getContrastingColor.ts';
 
     export let url;
 
@@ -14,7 +15,7 @@
     let submitting = false;
     let errorMessage;
     let fontType = 'sans';
-    let fontColor = 'blue';
+    let fontColor = '#336600';
     let backgroundColor = 'red';
     $: {
         backgroundColor = getContrastingColor(fontColor);
@@ -32,7 +33,7 @@
     // Load comments on initialization
     onMount(async () => {
         comments = await getComments();
-        fontColor = getComputedStyle(commentsHeading).color;
+        fontColor = convertColor(getComputedStyle(commentsHeading).color);
         console.log('color', getComputedStyle(commentsHeading).color);
         backgroundColor = getContrastingColor(fontColor);
     });
@@ -52,8 +53,6 @@
     async function postComment(e) {
         e.preventDefault();
 
-        console.log('body', body);
-
         const timeoutId = setTimeout(() => {
             errorMessage = 'Error. Try again later.';
             throw new Error('Server timed out');
@@ -69,6 +68,8 @@
             fontColor: formData.get('fontColor'),
             fontType: formData.get('fontType'),
         };
+
+        console.log('comment', comment);
 
         // update name store
         localStorage.setItem('author', comment.author);
@@ -173,9 +174,9 @@
                             id="fontType"
                             bind:value={fontType}
                         >
-                            <option value="sans">Sans</option>
-                            <option value="mono">Mono</option>
+                            <option value="sans">Sans Serif</option>
                             <option value="serif">Serif</option>
+                            <option value="mono">Mono</option>
                         </select>
                     </label>
                 </div>
