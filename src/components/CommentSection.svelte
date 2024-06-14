@@ -62,7 +62,7 @@
             body: JSON.stringify(comment),
         });
         if (!result.ok) {
-            console.error('Error posting comment');
+            console.error('Error posting comment', result);
         }
         // reload comments
         // comments = await actions.getComments(url);

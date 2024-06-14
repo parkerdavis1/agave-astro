@@ -20,14 +20,14 @@ export const POST: APIRoute = async ({ request }) => {
     const data = await request.json();
     console.log('post comment data', data);
 
-    const path = data.path;
-    console.log('path', path);
-    const author = data.author;
-    console.log('author', author);
-    const body = data.body;
-    console.log('body', body);
+    const { path, author, body } = data;
+    // console.log('path', path);
+    // console.log('author', author);
+    // console.log('body', body);
     if (!path || !author || !body) {
-        return new Response('Error!!!', { status: 400 });
+        return new Response('Missing path, author, and/or body', {
+            status: 420,
+        });
     }
     const purifiedInput = {
         author: purify.sanitize(author),
@@ -47,12 +47,12 @@ export const POST: APIRoute = async ({ request }) => {
     console.log('postedComment', postedComment);
 
     // if in production, poke val.town to send an email notification
-    // if (import.meta.env.PROD) {
-    fetch('https://parkerdavis-newcomment.web.val.run', {
-        method: 'POST',
-        body: JSON.stringify(postedComment),
-    });
-    // }
+    if (import.meta.env.PROD) {
+        fetch('https://parkerdavis-newcomment.web.val.run', {
+            method: 'POST',
+            body: JSON.stringify(postedComment),
+        });
+    }
 
     return new Response('OK', { status: 200 });
 };
