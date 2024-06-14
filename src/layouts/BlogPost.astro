@@ -5,9 +5,12 @@ import DisplayDate from '@components/DisplayDate.astro';
 import DisplayTags from '@components/DisplayTags.astro';
 import LikeButton from '@components/LikeButton.svelte';
 import { trimUrlPathname } from '@utils/trimUrlPathname';
+import CommentSection from '@components/CommentSection.svelte';
 
 const { post, prevPost, nextPost } = Astro.props;
 const { headings } = await post.render();
+
+const urlPathName = trimUrlPathname(Astro.url.pathname);
 ---
 
 <Base title={post.data.title}>
@@ -22,10 +25,7 @@ const { headings } = await post.render();
                 </div>
                 <slot />
             </article>
-            <LikeButton
-                client:only="svelte"
-                url={trimUrlPathname(Astro.url.pathname)}
-            />
+            <LikeButton client:only="svelte" url={urlPathName} />
 
             <div class="border-t border-b border-dashed border-textColor py-5">
                 {
@@ -49,6 +49,7 @@ const { headings } = await post.render();
                     )
                 }
             </div>
+            <CommentSection url={urlPathName} client:only="svelte" />
         </main>
     </div>
 </Base>

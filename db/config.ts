@@ -7,6 +7,16 @@ const QuailLikes = defineTable({
     },
 });
 
+const Comments = defineTable({
+    columns: {
+        id: column.text({ primaryKey: true }),
+        path: column.text(),
+        author: column.text(),
+        body: column.text(),
+        date: column.date({ default: sql`(CURRENT_TIMESTAMP)` }),
+    },
+});
+
 const User = defineTable({
     columns: {
         id: column.text({ primaryKey: true }),
@@ -29,5 +39,5 @@ const Session = defineTable({
 
 // https://astro.build/db/config
 export default defineDb({
-    tables: { QuailLikes, User, Session },
+    tables: { QuailLikes, User, Session, Comments },
 });

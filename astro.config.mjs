@@ -25,4 +25,7 @@ export default defineConfig({
             exclude: ['astro:db'],
         },
     },
+    experimental: {
+        actions: true,
+    },
 });
