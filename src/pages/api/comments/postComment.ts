@@ -1,15 +1,9 @@
 export const prerender = false;
 
-import { db, Comments, desc, eq, and } from 'astro:db';
+import { db, Comments } from 'astro:db';
 import type { APIRoute } from 'astro';
 import { delayDB } from '@utils/delayDB';
 import { v4 as uuid } from 'uuid';
-
-// DOM Purify
-import DOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
-const window = new JSDOM('').window;
-const purify = DOMPurify(window);
 
 export const POST: APIRoute = async ({ request }) => {
     if (import.meta.env.DEV) {
@@ -20,30 +14,21 @@ export const POST: APIRoute = async ({ request }) => {
     const data = await request.json();
 
     const { path, author, body } = data;
-    // console.log('path', path);
-    // console.log('author', author);
-    // console.log('body', body);
     if (!path || !author || !body) {
         return new Response('Missing path, author, and/or body', {
             status: 420,
         });
     }
-    const purifiedInput = {
-        author: purify.sanitize(author),
-        body: purify.sanitize(body),
-    };
 
     // insert comment in DB
     const [postedComment] = await db
         .insert(Comments)
         .values({
             ...data,
-            ...purifiedInput,
+            // ...purifiedInput,
             id: uuid(),
         })
         .returning();
-
-    console.log('postedComment', postedComment);
 
     // if in production, poke val.town to send an email notification
     if (import.meta.env.PROD) {
