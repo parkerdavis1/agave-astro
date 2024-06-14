@@ -1,9 +1,9 @@
 <script>
-    import { actions } from 'astro:actions';
     import { onMount } from 'svelte';
     import CommentCard from './CommentCard.svelte';
     import Spinner from './Spinner.svelte';
-    import { fade, fly, slide, scale } from 'svelte/transition';
+    import { fly } from 'svelte/transition';
+    import { getContrastingColor } from '@utils/getContrastingColor.js';
 
     export let url;
 
@@ -13,13 +13,16 @@
     let commentsHeading;
     let submitting = false;
     let errorMessage;
+    let fontType = 'sans';
+    let fontColor = 'blue';
+    let backgroundColor = 'red';
+    $: {
+        backgroundColor = getContrastingColor(fontColor);
+        fontColor = fontColor;
+    }
+    let textArea;
 
     async function getComments() {
-        // const data = await fetch(`/api/comments/getComments`, {
-        //     method: 'POST',
-        //     body: JSON.stringify(url),
-        // });
-        // const data = await fetch(`/api/comments/${encodeURIComponent(url)}`);
         const data = await fetch(
             `/api/comments/getComments?path=${encodeURIComponent(url)}`
         );
@@ -28,8 +31,10 @@
 
     // Load comments on initialization
     onMount(async () => {
-        // comments = await actions.getComments(url);
         comments = await getComments();
+        fontColor = getComputedStyle(commentsHeading).color;
+        console.log('color', getComputedStyle(commentsHeading).color);
+        backgroundColor = getContrastingColor(fontColor);
     });
 
     // form values
@@ -44,8 +49,11 @@
     }
 
     // Submit comment
-    async function handleSubmit(e) {
+    async function postComment(e) {
         e.preventDefault();
+
+        console.log('body', body);
+
         const timeoutId = setTimeout(() => {
             errorMessage = 'Error. Try again later.';
             throw new Error('Server timed out');
@@ -58,6 +66,8 @@
             author: formData.get('author'),
             body: formData.get('body'),
             path: formData.get('path'),
+            fontColor: formData.get('fontColor'),
+            fontType: formData.get('fontType'),
         };
 
         // update name store
@@ -90,6 +100,17 @@
             });
         }, 100);
     }
+
+    function returnTailwindFont(fontType) {
+        console.log('fonttype', fontType, typeof fontType);
+        if (fontType === 'mono') {
+            return 'font-mono';
+        } else if (fontType === 'serif') {
+            return 'font-serif';
+        } else {
+            return 'font-sans';
+        }
+    }
 </script>
 
 <section>
@@ -100,7 +121,7 @@
         <form
             action=""
             class="py-5 flex flex-col gap-2"
-            on:submit={handleSubmit}
+            on:submit={postComment}
         >
             <label for="author" class="flex flex-col"
                 >Name
@@ -116,13 +137,53 @@
             <label for="body" class="flex flex-col"
                 >Comment
 
-                <textarea name="body" id="body" bind:value={body} required
+                <textarea
+                    name="body"
+                    id="body"
+                    bind:value={body}
+                    style:color={fontColor}
+                    style:background-color={backgroundColor}
+                    class={returnTailwindFont(fontType)}
+                    bind:this={textArea}
+                    required
                 ></textarea>
             </label>
             <input type="text" hidden name="path" value={url} />
+            <pre>Font color: {fontColor}</pre>
+            <pre>Font type: {fontType}</pre>
+
+            <details>
+                <summary>Options</summary>
+                <div class="flex gap-4 items-center pb-6">
+                    <label for="fontColor" class="flex gap-2 items-center"
+                        >Font Color
+
+                        <input
+                            type="color"
+                            name="fontColor"
+                            id="fontColor"
+                            bind:value={fontColor}
+                        />
+                    </label>
+
+                    <label for="font" class="flex gap-2 items-center"
+                        >Font Type
+                        <select
+                            name="fontType"
+                            id="fontType"
+                            bind:value={fontType}
+                        >
+                            <option value="sans">Sans</option>
+                            <option value="mono">Mono</option>
+                            <option value="serif">Serif</option>
+                        </select>
+                    </label>
+                </div>
+            </details>
+
             <button
                 type="submit"
-                class="dark:bg-[#0c151c] dark:hover:bg-[#040a0f] p-2"
+                class="p-2"
                 disabled={submitting || errorMessage}
             >
                 {#if errorMessage}
@@ -156,8 +217,18 @@
         border-radius: 6px;
     }
 
+    button:hover {
+        background: #9b9b9b;
+    }
+
+    input[type='color'] {
+        min-height: 40px;
+        min-width: 40px;
+    }
+
     input,
-    textarea {
+    textarea,
+    select {
         padding: 0.5rem;
         border-radius: 6px;
         background: #fff;
@@ -165,7 +236,8 @@
     }
 
     input:focus,
-    textarea:focus {
+    textarea:focus,
+    select {
         outline: solid #0096bfab 2px;
     }
 
@@ -178,7 +250,8 @@
         }
 
         input,
-        textarea {
+        textarea,
+        select {
             background: #202b38;
         }
     }

@@ -1,7 +1,11 @@
 <script>
-    import { actions } from 'astro:actions';
-    import { fade, crossfade } from 'svelte/transition';
+    import { fade } from 'svelte/transition';
+    import { getContrastingColor } from '@utils/getContrastingColor';
     export let comment;
+
+    const fontColor = comment.fontColor;
+    console.log('fontColor', fontColor);
+    const fontType = comment.fontType;
 
     const LOCAL_REPORTED_KEY = `reported-${comment.id}`;
     const LOCAL_HIDDEN_KEY = `hidden-${comment.id}`;
@@ -40,45 +44,77 @@
         hidden = Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY));
     }
 
-    // async function handleDelete() {
-    //     await fetch(
-    //         `/api/comments/deleteComment?secret=ipBPPkb3D9-Yv6&commentId=${comment.id}`,
-    //         { method: 'POST' }
-    //     );
-    // }
+    function returnTailwindFont(fontType) {
+        console.log('fonttype', fontType, typeof fontType);
+        if (fontType === 'mono') {
+            return 'font-mono';
+        } else if (fontType === 'serif') {
+            return 'font-serif';
+        } else {
+            return 'font-sans';
+        }
+    }
+
+    function returnTailwindColor(color) {
+        return `text-[${color}]`;
+    }
+
+    const contrastingColor = getContrastingColor(fontColor);
 </script>
 
-{#if hidden}
-    <div>
-        <p class="opacity-50">Comment hidden</p>
-        <button class="text-xs" on:click={handleShow}>Show</button>
-    </div>
-{:else}
-    <div class="my-4 py-2 max-w-full {reported ? 'opacity-30' : ''}" in:fade>
-        <p class="font-bold">{comment.author}</p>
-        <time datetime={comment.date} class="text-sm"
-            >{new Date(comment.date).toLocaleString('us-en', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true,
-            })}</time
-        >
-        <p class="break-words">{comment.body}</p>
-        <div class="flex gap-4 text-xs mt-2">
-            <form on:submit={handleReport}>
-                {#if reported}
-                    <button disabled>Reported</button>
-                {:else}
-                    <button>Report</button>
-                {/if}
-            </form>
-            <button on:click={handleHide}>Hide</button>
-            <!-- <button on:click={handleDelete}
-                >Delete (remove this button before deploying to prod)</button
-            > -->
+<div class="comment-container">
+    {#if hidden}
+        <div>
+            <p class="opacity-50">Comment hidden</p>
+            <button class="text-xs" on:click={handleShow}>Show</button>
         </div>
-    </div>
-{/if}
+    {:else}
+        <div
+            class="my-4 py-2 max-w-full {reported ? 'opacity-30' : ''}"
+            in:fade
+        >
+            <pre>{JSON.stringify(comment, null, 2)}</pre>
+            <p class="font-bold">{comment.author}</p>
+            <time datetime={comment.date} class="text-sm"
+                >{new Date(comment.date).toLocaleString('us-en', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                })}</time
+            >
+            <p
+                class={`my-4 break-words whitespace-pre-wrap ${returnTailwindFont(fontType)} p-4 rounded`}
+                style="color: {fontColor}; background: {contrastingColor}"
+            >
+                {comment.body}
+            </p>
+
+            <div class="flex gap-4 text-xs mt-2">
+                <form on:submit={handleReport}>
+                    {#if reported}
+                        <button disabled>Reported</button>
+                    {:else}
+                        <button>Report</button>
+                    {/if}
+                </form>
+                <button on:click={handleHide}>Hide</button>
+            </div>
+        </div>
+    {/if}
+</div>
+
+<style>
+    .comment-container {
+        background: #fff;
+        padding: 1rem;
+        margin-block: 0.5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+        .comment-container {
+            background: #202b38;
+        }
+    }
+</style>

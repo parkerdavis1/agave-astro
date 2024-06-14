@@ -18,7 +18,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const data = await request.json();
-    console.log('post comment data', data);
 
     const { path, author, body } = data;
     // console.log('path', path);

@@ -13,6 +13,8 @@ const Comments = defineTable({
         path: column.text(),
         author: column.text(),
         body: column.text(),
+        fontColor: column.text({ default: 'currentColor' }),
+        fontType: column.text({ default: 'sans' }),
         date: column.date({ default: sql`(CURRENT_TIMESTAMP)` }),
         reported: column.boolean({ default: false }),
         deleted: column.boolean({ default: false }),
