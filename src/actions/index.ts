@@ -44,8 +44,8 @@ export const server = {
                     body: JSON.stringify(input),
                 });
             }
-            return { ok: true, status: 200 };
-            return new Response('OK', { status: 200 });
+            return { ok: true, status: 200, message: 'OK FROM SERVER ACTION' };
+            // return new Response('OK FROM SERVER ACTION', { status: 200 });
         },
     }),
 

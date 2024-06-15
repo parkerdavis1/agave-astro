@@ -61,29 +61,11 @@
             //     path: formData.get('path'),
             // };
 
-            // console.log('comment', comment);
-
             // update name store
             // localStorage.setItem('author', comment.author);
             localStorage.setItem('author', formData.get('author'));
 
             // post comment
-
-            // Form encoded endpoint (progressive enhancement)
-            // const result = await fetch(POST_COMMENT_ENDPOINT, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded',
-            //     },
-            //     body: new URLSearchParams({ ...comment }),
-            // });
-
-            // JSON endpoint
-            // const result = await fetch(POST_COMMENT_ENDPOINT, {
-            //     method: 'POST',
-            //     body: JSON.stringify(formData),
-            // });
-
             const result = await actions.postComment(formData);
 
             console.log('result', result);
@@ -125,9 +107,6 @@
             localStorage.setItem('author', formData.get('author'));
 
             // POST COMMENT
-
-            // astro action
-            const result = await actions.postComment(formData);
 
             // Form encoded endpoint (progressive enhancement)
 
@@ -180,7 +159,7 @@
             action={POST_COMMENT_ENDPOINT}
             method="POST"
             class="py-5 flex flex-col gap-2"
-            on:submit={postCommentAPI}
+            on:submit={postCommentAction}
         >
             <label for="author" class="flex flex-col"
                 >Name
