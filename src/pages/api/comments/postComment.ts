@@ -25,7 +25,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     // const data = await request.json();
 
     console.log('data', data);
-    console.log('decode uri', decodeURIComponent(data.path));
+    // console.log('decode uri', decodeURIComponent(data.path));
 
     const { path, author, body } = data;
     if (!path || !author || !body) {
@@ -35,26 +35,26 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     }
 
     // insert comment in DB
-    const [postedComment] = await db
-        .insert(Comments)
-        .values({
-            ...data,
-            path: decodeURIComponent(data.path),
-            // ...purifiedInput,
-            id: uuid(),
-        })
-        .returning();
+    // const [postedComment] = await db
+    //     .insert(Comments)
+    //     .values({
+    //         ...data,
+    //         path: decodeURIComponent(data.path),
+    //         // ...purifiedInput,
+    //         id: uuid(),
+    //     })
+    //     .returning();
 
     // if in production, poke val.town to send an email notification
-    if (import.meta.env.PROD) {
-        fetch('https://parkerdavis-newcomment.web.val.run', {
-            method: 'POST',
-            body: JSON.stringify(postedComment),
-        });
-    }
+    // if (import.meta.env.PROD) {
+    //     fetch('https://parkerdavis-newcomment.web.val.run', {
+    //         method: 'POST',
+    //         body: JSON.stringify(postedComment),
+    //     });
+    // }
 
-    // return new Response('OK', { status: 200 });
-    return redirect(decodeURIComponent(data.path), 301);
+    return new Response('OK', { status: 200 });
+    // return redirect(decodeURIComponent(data.path), 301);
 };
 
 export const GET: APIRoute = async ({ request }) => {
