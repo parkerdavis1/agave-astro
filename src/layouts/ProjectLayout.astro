@@ -5,9 +5,19 @@ import TOC from '@components/TOC.astro';
 import Base from '@layouts/Base.astro';
 
 import { trimUrlPathname } from '@utils/trimUrlPathname';
+import { db, QuailLikes, eq, count } from 'astro:db';
 
 const { project } = Astro.props;
 const { headings } = await project.render();
+
+const urlPathName = trimUrlPathname(Astro.url.pathname);
+
+const [likes] = await db
+    .select({ count: count() })
+    .from(QuailLikes)
+    .where(eq(QuailLikes.path, urlPathName));
+
+const initCount = likes.count;
 ---
 
 <Base title={project.data.title}>
@@ -22,8 +32,9 @@ const { headings } = await project.render();
                 <slot />
             </article>
             <LikeButton
-                client:only="svelte"
+                client:load
                 url={trimUrlPathname(Astro.url.pathname)}
+                initCount={initCount}
             />
             <nav class="project-nav">
                 <a href="/projects/">Back to Projects</a>

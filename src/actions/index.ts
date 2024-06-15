@@ -1,11 +1,11 @@
 import { defineAction, z } from 'astro:actions';
 import { db, Comments, desc, eq, and } from 'astro:db';
 import { v4 as uuid } from 'uuid';
-import DOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
 import { delayDB } from '@utils/delayDB';
-const window = new JSDOM('').window;
-const purify = DOMPurify(window);
+// import DOMPurify from 'dompurify';
+// import { JSDOM } from 'jsdom';
+// const window = new JSDOM('').window;
+// const purify = DOMPurify(window);
 
 // EXPERIMENTAL, DOESN'T WORK ON NETLIFY YET
 

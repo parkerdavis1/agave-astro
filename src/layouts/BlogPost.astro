@@ -6,9 +6,7 @@ import DisplayTags from '@components/DisplayTags.astro';
 import LikeButton from '@components/LikeButton.svelte';
 import { trimUrlPathname } from '@utils/trimUrlPathname';
 import CommentSection from '@components/CommentSection.svelte';
-import { db, Comments, desc } from 'astro:db';
-import { eq } from 'astro:db';
-import { QuailLikes, count } from 'astro:db';
+import { db, Comments, desc, eq, QuailLikes, count, and } from 'astro:db';
 
 const { post, prevPost, nextPost } = Astro.props;
 const { headings } = await post.render();
@@ -17,13 +15,14 @@ const urlPathName = trimUrlPathname(Astro.url.pathname);
 const comments = await db
     .select()
     .from(Comments)
-    .where(eq(Comments.path, urlPathName))
+    .where(and(eq(Comments.path, urlPathName), eq(Comments.deleted, false)))
     .orderBy(desc(Comments.date));
 
 const [likes] = await db
     .select({ count: count() })
     .from(QuailLikes)
     .where(eq(QuailLikes.path, urlPathName));
+const initCount = likes.count;
 ---
 
 <Base title={post.data.title}>
@@ -38,7 +37,7 @@ const [likes] = await db
                 </div>
                 <slot />
             </article>
-            <LikeButton client:load url={urlPathName} initCount={likes.count} />
+            <LikeButton client:load url={urlPathName} initCount={initCount} />
 
             <div class="border-t border-b border-dashed border-textColor py-5">
                 {
