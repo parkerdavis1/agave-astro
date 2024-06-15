@@ -1,3 +1,4 @@
+export const prerender = false;
 import { defineAction, z } from 'astro:actions';
 import { db, Comments, desc, eq, and } from 'astro:db';
 import { v4 as uuid } from 'uuid';

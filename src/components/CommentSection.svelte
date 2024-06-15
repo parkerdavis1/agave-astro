@@ -125,16 +125,22 @@
             localStorage.setItem('author', formData.get('author'));
 
             // POST COMMENT
+
+            // astro action
+            const result = await actions.postComment(formData);
+
             // Form encoded endpoint (progressive enhancement)
-            const result = await fetch(POST_COMMENT_ENDPOINT, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({ ...comment }),
-            });
+
+            // const result = await fetch(POST_COMMENT_ENDPOINT, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded',
+            //     },
+            //     body: new URLSearchParams({ ...comment }),
+            // });
 
             // JSON endpoint
+
             // const result = await fetch(POST_COMMENT_ENDPOINT, {
             //     method: 'POST',
             //     body: JSON.stringify(formData),
