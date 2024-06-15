@@ -38,7 +38,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
         .insert(Comments)
         .values({
             ...data,
-            path: decodeURIComponent(data.path),
+            path: decodeURIComponent(String(path)),
             id: uuid(),
         })
         .returning();
@@ -52,7 +52,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     }
 
     // return new Response('OK', { status: 200 });
-    return redirect(decodeURIComponent(data.path), 301);
+    return redirect(decodeURIComponent(String(path)), 301);
 };
 
 export const GET: APIRoute = async ({ request }) => {
