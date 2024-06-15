@@ -241,7 +241,8 @@
 
     input:focus,
     textarea:focus,
-    select {
+    select:focus,
+    button:focus {
         outline: solid #0096bfab 2px;
     }
 
