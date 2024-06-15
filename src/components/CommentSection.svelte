@@ -110,13 +110,13 @@
 
             // Form encoded endpoint (progressive enhancement)
 
-            // const result = await fetch(POST_COMMENT_ENDPOINT, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded',
-            //     },
-            //     body: new URLSearchParams({ ...comment }),
-            // });
+            const result = await fetch(POST_COMMENT_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ ...comment }),
+            });
 
             // JSON endpoint
 
@@ -159,7 +159,7 @@
             action={POST_COMMENT_ENDPOINT}
             method="POST"
             class="py-5 flex flex-col gap-2"
-            on:submit={postCommentAction}
+            on:submit={postCommentAPI}
         >
             <label for="author" class="flex flex-col"
                 >Name
