@@ -7,12 +7,15 @@
     export let url;
     export let initComments;
 
+    console.log(encodeURIComponent(url));
+
+    const POST_COMMENT_ENDPOINT = '/api/comments/postComment';
+
     let comments = initComments;
     let activeForm = false;
     let commentsHeading;
     let submitting = false;
     let errorMessage;
-    let textArea;
 
     async function getComments() {
         const data = await fetch(
@@ -54,8 +57,6 @@
             author: formData.get('author'),
             body: formData.get('body'),
             path: formData.get('path'),
-            fontColor: formData.get('fontColor'),
-            fontType: formData.get('fontType'),
         };
 
         console.log('comment', comment);
@@ -63,11 +64,20 @@
         // update name store
         localStorage.setItem('author', comment.author);
 
+        console.log('urlencoded', new URLSearchParams({ ...comment }));
         // post comment
-        const result = await fetch(`/api/comments/postComment`, {
+        const result = await fetch(POST_COMMENT_ENDPOINT, {
             method: 'POST',
-            body: JSON.stringify(comment),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({ ...comment }),
         });
+        // const result = await fetch(POST_COMMENT_ENDPOINT, {
+        //     method: 'POST',
+        //     body: JSON.stringify(comment),
+        // });
+
         if (!result.ok) {
             console.error('Error posting comment', result);
         }
@@ -96,7 +106,8 @@
     <details class="cursor-pointer" bind:open={activeForm}>
         <summary on:click={scrollIntoView}>Leave a comment</summary>
         <form
-            action=""
+            action={POST_COMMENT_ENDPOINT}
+            method="POST"
             class="py-5 flex flex-col gap-2"
             on:submit={postComment}
         >
@@ -119,42 +130,15 @@
                     id="body"
                     class="font-mono"
                     bind:value={body}
-                    bind:this={textArea}
                     required
                 ></textarea>
             </label>
-            <input type="text" hidden name="path" value={url} />
-            <!-- <pre>Font color: {fontColor}</pre> -->
-            <!-- <pre>Font type: {fontType}</pre> -->
-
-            <!-- <details>
-                <summary>Options</summary>
-                <div class="flex gap-4 items-center pb-6">
-                    <label for="fontColor" class="flex gap-2 items-center"
-                        >Font Color
-
-                        <input
-                            type="color"
-                            name="fontColor"
-                            id="fontColor"
-                            bind:value={fontColor}
-                        />
-                    </label>
-
-                    <label for="font" class="flex gap-2 items-center"
-                        >Font Type
-                        <select
-                            name="fontType"
-                            id="fontType"
-                            bind:value={fontType}
-                        >
-                            <option value="sans">Sans Serif</option>
-                            <option value="serif">Serif</option>
-                            <option value="mono">Mono</option>
-                        </select>
-                    </label>
-                </div>
-            </details> -->
+            <input
+                type="text"
+                hidden
+                name="path"
+                value={encodeURIComponent(url)}
+            />
 
             <button
                 type="submit"
@@ -177,7 +161,6 @@
         {#if comments}
             {#each comments as comment (comment.id)}
                 <div in:fly={{ x: -200, duration: 200 }}>
-                    <!-- <div in:scale> -->
                     <CommentCard {comment} />
                 </div>
             {/each}
@@ -186,10 +169,6 @@
 </section>
 
 <style>
-    .faded {
-        color: var(--text-color-faded);
-        font-size: 0.75em;
-    }
     button {
         background: #d0cfcf;
         padding: 0.5rem;

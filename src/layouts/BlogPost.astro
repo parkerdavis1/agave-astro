@@ -24,7 +24,6 @@ const [likes] = await db
     .select({ count: count() })
     .from(QuailLikes)
     .where(eq(QuailLikes.path, urlPathName));
-console.log('likes', likes);
 ---
 
 <Base title={post.data.title}>
@@ -65,7 +64,7 @@ console.log('likes', likes);
             </div>
             <CommentSection
                 url={urlPathName}
-                serverComments={comments}
+                initComments={comments}
                 client:load
             />
         </main>

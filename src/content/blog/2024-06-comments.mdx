@@ -1,0 +1,61 @@
+---
+title: The comments section is open
+description: I added a comments section to this blog. Please leave me some ASCII art.
+date: 2024-06-14
+tags:
+    - ascii
+    - svelte
+    - astro
+    - ssr
+    - rest
+    - valtown
+    - deno
+draft: true
+---
+
+This blog now has a comment section.
+
+It is rendered statically first, then hydrated with the magic of Astro Islands. 
+
+There are some comment services out there, but they are pretty horrid. Things like disqus harvest data from anyone who visits the site. 
+
+Again, this is difficult to do with a purely static site without javascript jank. 
+
+Most of the functionality is within my Astro project. API routes, Astro DB. Its pretty nice. I roped in val.town to handle the email notification functionality. 
+
+I started using experimental Astro actions, which was quite nice at cutting down on form related boilerplate. It is an experimental feature, so it is not completed yet, but I thought YOLO. It worked great on my local dev server but surprise surprise, it didn't work in production (Netlify). 
+
+More than MVP features:
+- ability to hide comments
+- ability to report comments, I get notified via email and I can quickly click a link to delete the comment if needed
+
+
+## Progressive Enhancement:
+
+### When to Use request.formData()
+
+request.formData() is used to handle form submissions where the form's enctype is application/x-www-form-urlencoded or multipart/form-data. This is the default encoding type when you use a standard HTML form without specifying the enctype.
+
+### When to Use request.json()
+
+await request.json() is used to handle JSON data sent in the body of a POST request. This is common in API requests where the client sends data as JSON, typically using fetch with a Content-Type of application/json.
+
+Normal javascript way:
+
+```js
+const result = await fetch(POST_COMMENT_ENDPOINT, {
+    method: 'POST',
+    body: JSON.stringify(comment),
+});
+```
+
+Javascript but just like a standard HTML form:
+```js
+const result = await fetch(POST_COMMENT_ENDPOINT, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({ ...comment }),
+});
+```
