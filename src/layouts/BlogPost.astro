@@ -6,11 +6,25 @@ import DisplayTags from '@components/DisplayTags.astro';
 import LikeButton from '@components/LikeButton.svelte';
 import { trimUrlPathname } from '@utils/trimUrlPathname';
 import CommentSection from '@components/CommentSection.svelte';
+import { db, Comments, desc } from 'astro:db';
+import { eq } from 'astro:db';
+import { QuailLikes, count } from 'astro:db';
 
 const { post, prevPost, nextPost } = Astro.props;
 const { headings } = await post.render();
 
 const urlPathName = trimUrlPathname(Astro.url.pathname);
+const comments = await db
+    .select()
+    .from(Comments)
+    .where(eq(Comments.path, urlPathName))
+    .orderBy(desc(Comments.date));
+
+const [likes] = await db
+    .select({ count: count() })
+    .from(QuailLikes)
+    .where(eq(QuailLikes.path, urlPathName));
+console.log('likes', likes);
 ---
 
 <Base title={post.data.title}>
@@ -25,7 +39,7 @@ const urlPathName = trimUrlPathname(Astro.url.pathname);
                 </div>
                 <slot />
             </article>
-            <LikeButton client:only="svelte" url={urlPathName} />
+            <LikeButton client:load url={urlPathName} initCount={likes.count} />
 
             <div class="border-t border-b border-dashed border-textColor py-5">
                 {
@@ -49,7 +63,11 @@ const urlPathName = trimUrlPathname(Astro.url.pathname);
                     )
                 }
             </div>
-            <CommentSection url={urlPathName} client:only="svelte" />
+            <CommentSection
+                url={urlPathName}
+                serverComments={comments}
+                client:load
+            />
         </main>
     </div>
 </Base>

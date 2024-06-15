@@ -1,6 +1,6 @@
 <script>
     import { fade } from 'svelte/transition';
-    import { getContrastingColor } from '@utils/getContrastingColor';
+    import { onMount } from 'svelte';
     export let comment;
 
     // const fontColor = comment.fontColor;
@@ -10,11 +10,15 @@
     const LOCAL_REPORTED_KEY = `reported-${comment.id}`;
     const LOCAL_HIDDEN_KEY = `hidden-${comment.id}`;
 
-    let reported = Boolean(localStorage.getItem(LOCAL_REPORTED_KEY));
-    let hidden =
-        Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY)) ||
-        Boolean(localStorage.getItem(LOCAL_REPORTED_KEY)) ||
-        false;
+    let reported = comment.reported;
+    let hidden = false;
+    onMount(() => {
+        hidden =
+            Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY)) ||
+            Boolean(localStorage.getItem(LOCAL_REPORTED_KEY)) ||
+            false;
+        reported = Boolean(localStorage.getItem(LOCAL_REPORTED_KEY));
+    });
 
     async function handleReport(e) {
         e.preventDefault();
@@ -43,23 +47,6 @@
         localStorage.setItem(LOCAL_HIDDEN_KEY, 'TRUE');
         hidden = Boolean(localStorage.getItem(LOCAL_HIDDEN_KEY));
     }
-
-    // function returnTailwindFont(fontType) {
-    //     console.log('fonttype', fontType, typeof fontType);
-    //     if (fontType === 'mono') {
-    //         return 'font-mono';
-    //     } else if (fontType === 'serif') {
-    //         return 'font-serif';
-    //     } else {
-    //         return 'font-sans';
-    //     }
-    // }
-
-    // function returnTailwindColor(color) {
-    //     return `text-[${color}]`;
-    // }
-
-    // const contrastingColor = getContrastingColor(fontColor);
 </script>
 
 <div class="comment-container">

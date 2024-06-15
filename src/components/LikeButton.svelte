@@ -1,15 +1,22 @@
 <script lang="ts">
     import { fade } from 'svelte/transition';
+    import { onMount } from 'svelte';
 
     export let url: string;
+    export let initCount: number;
+
     const apiPath = `/api/likes?path=${url}`;
 
     let likeButton: HTMLElement;
-    let liked = getLocalLiked();
+    let liked = false;
     let bounce: boolean;
-    let count = getLikes();
+    let count = initCount;
     let previousCount: number;
-    let intervalId: number;
+
+    onMount(async () => {
+        liked = getLocalLiked();
+        count = await getLikes();
+    });
 
     async function getLikes() {
         const res = await fetch(apiPath);
