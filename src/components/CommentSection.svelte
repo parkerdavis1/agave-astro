@@ -45,58 +45,61 @@
     // Submit comment
     async function postComment(e) {
         e.preventDefault();
+        try {
+            const timeoutId = setTimeout(() => {
+                errorMessage = 'Error. Try again later.';
+                throw new Error('Server timed out');
+            }, 20000);
 
-        const timeoutId = setTimeout(() => {
-            errorMessage = 'Error. Try again later.';
-            throw new Error('Server timed out');
-        }, 20000);
+            submitting = true;
+            // capture form data to pass to action
+            const formData = new FormData(e.target);
 
-        submitting = true;
-        // capture form data to pass to action
-        const formData = new FormData(e.target);
+            // const comment = {
+            //     author: formData.get('author'),
+            //     body: formData.get('body'),
+            //     path: formData.get('path'),
+            // };
 
-        // const comment = {
-        //     author: formData.get('author'),
-        //     body: formData.get('body'),
-        //     path: formData.get('path'),
-        // };
+            // console.log('comment', comment);
 
-        // console.log('comment', comment);
+            // update name store
+            // localStorage.setItem('author', comment.author);
+            localStorage.setItem('author', formData.get(author));
 
-        // update name store
-        // localStorage.setItem('author', comment.author);
-        localStorage.setItem('author', formData.get(author));
+            // post comment
 
-        // post comment
+            // Form encoded endpoint (progressive enhancement)
+            // const result = await fetch(POST_COMMENT_ENDPOINT, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded',
+            //     },
+            //     body: new URLSearchParams({ ...comment }),
+            // });
 
-        // Form encoded endpoint (progressive enhancement)
-        // const result = await fetch(POST_COMMENT_ENDPOINT, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded',
-        //     },
-        //     body: new URLSearchParams({ ...comment }),
-        // });
+            // JSON endpoint
+            // const result = await fetch(POST_COMMENT_ENDPOINT, {
+            //     method: 'POST',
+            //     body: JSON.stringify(formData),
+            // });
 
-        // JSON endpoint
-        // const result = await fetch(POST_COMMENT_ENDPOINT, {
-        //     method: 'POST',
-        //     body: JSON.stringify(formData),
-        // });
+            const result = await actions.postComment(formData);
 
-        const result = await actions.postComment(formData);
+            console.log('result', result);
+            if (!result.ok) {
+                console.error('Error posting comment', result);
+            }
 
-        console.log('result', result);
-        if (!result.ok) {
-            console.error('Error posting comment', result);
+            clearInterval(timeoutId);
+            // reload comments
+            comments = await getComments();
+
+            // reset state
+            resetForm();
+        } catch (e) {
+            console.error('Error posting comment', e);
         }
-
-        clearInterval(timeoutId);
-        // reload comments
-        comments = await getComments();
-
-        // reset state
-        resetForm();
     }
 
     function scrollIntoView() {
