@@ -42,8 +42,8 @@
         errorMessage = '';
     }
 
-    // Submit comment
-    async function postComment(e) {
+    // USE ASTRO ACTION
+    async function postCommentAction(e) {
         e.preventDefault();
         try {
             const timeoutId = setTimeout(() => {
@@ -65,7 +65,7 @@
 
             // update name store
             // localStorage.setItem('author', comment.author);
-            localStorage.setItem('author', formData.get(author));
+            localStorage.setItem('author', formData.get('author'));
 
             // post comment
 
@@ -102,6 +102,59 @@
         }
     }
 
+    // USE API ENDPOINT
+    async function postCommentAPI(e) {
+        e.preventDefault();
+        try {
+            const timeoutId = setTimeout(() => {
+                errorMessage = 'Error. Try again later.';
+                throw new Error('Server timed out');
+            }, 20000);
+
+            submitting = true;
+            // capture form data to pass to action
+            const formData = new FormData(e.target);
+
+            const comment = {
+                author: formData.get('author'),
+                body: formData.get('body'),
+                path: formData.get('path'),
+            };
+
+            // update name store
+            localStorage.setItem('author', formData.get('author'));
+
+            // POST COMMENT
+            // Form encoded endpoint (progressive enhancement)
+            const result = await fetch(POST_COMMENT_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ ...comment }),
+            });
+
+            // JSON endpoint
+            // const result = await fetch(POST_COMMENT_ENDPOINT, {
+            //     method: 'POST',
+            //     body: JSON.stringify(formData),
+            // });
+
+            console.log('result', result);
+            if (!result.ok) {
+                console.error('Error posting comment', result);
+            }
+
+            clearInterval(timeoutId);
+            // reload comments
+            comments = await getComments();
+
+            // reset state
+            resetForm();
+        } catch (e) {
+            console.error('Error posting comment', e);
+        }
+    }
     function scrollIntoView() {
         setTimeout(() => {
             commentsHeading.scrollIntoView({
@@ -121,7 +174,7 @@
             action={POST_COMMENT_ENDPOINT}
             method="POST"
             class="py-5 flex flex-col gap-2"
-            on:submit={postComment}
+            on:submit={postCommentAPI}
         >
             <label for="author" class="flex flex-col"
                 >Name

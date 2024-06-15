@@ -1,6 +1,6 @@
 [build]
-command = "npm run build --remote"
+command = "pnpm run build --remote"
 publish = "dist"
 
 [dev]
-command = "npm run build --remote"
+command = "pnpm run build --remote"
