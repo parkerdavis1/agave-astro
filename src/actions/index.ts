@@ -23,15 +23,16 @@ export const server = {
                 //simulate slow DB network in Dev mode
                 await delayDB();
             }
-            const purifiedInput = {
-                author: purify.sanitize(input.author),
-                body: purify.sanitize(input.body),
-            };
+            // const purifiedInput = {
+            //     author: purify.sanitize(input.author),
+            //     body: purify.sanitize(input.body),
+            // };
+
+            console.log('INPUT FROM ACTION', input);
 
             // insert comment in DB
             await db.insert(Comments).values({
                 ...input,
-                ...purifiedInput,
                 id: uuid(),
             });
 
@@ -42,6 +43,7 @@ export const server = {
                     body: JSON.stringify(input),
                 });
             }
+            return { ok: true, status: 200 };
             return new Response('OK', { status: 200 });
         },
     }),

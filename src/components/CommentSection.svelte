@@ -3,6 +3,7 @@
     import CommentCard from './CommentCard.svelte';
     import Spinner from './Spinner.svelte';
     import { fly } from 'svelte/transition';
+    import { actions } from 'astro:actions';
 
     export let url;
     export let initComments;
@@ -53,31 +54,39 @@
         submitting = true;
         // capture form data to pass to action
         const formData = new FormData(e.target);
-        const comment = {
-            author: formData.get('author'),
-            body: formData.get('body'),
-            path: formData.get('path'),
-        };
 
-        console.log('comment', comment);
+        // const comment = {
+        //     author: formData.get('author'),
+        //     body: formData.get('body'),
+        //     path: formData.get('path'),
+        // };
+
+        // console.log('comment', comment);
 
         // update name store
-        localStorage.setItem('author', comment.author);
+        // localStorage.setItem('author', comment.author);
+        localStorage.setItem('author', formData.get(author));
 
-        console.log('urlencoded', new URLSearchParams({ ...comment }));
         // post comment
-        const result = await fetch(POST_COMMENT_ENDPOINT, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({ ...comment }),
-        });
+
+        // Form encoded endpoint (progressive enhancement)
         // const result = await fetch(POST_COMMENT_ENDPOINT, {
         //     method: 'POST',
-        //     body: JSON.stringify(comment),
+        //     headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded',
+        //     },
+        //     body: new URLSearchParams({ ...comment }),
         // });
 
+        // JSON endpoint
+        // const result = await fetch(POST_COMMENT_ENDPOINT, {
+        //     method: 'POST',
+        //     body: JSON.stringify(formData),
+        // });
+
+        const result = await actions.postComment(formData);
+
+        console.log('result', result);
         if (!result.ok) {
             console.error('Error posting comment', result);
         }
@@ -133,12 +142,8 @@
                     required
                 ></textarea>
             </label>
-            <input
-                type="text"
-                hidden
-                name="path"
-                value={encodeURIComponent(url)}
-            />
+            <input type="text" hidden name="path" value={url} />
+            <!-- value={encodeURIComponent(url)} -->
 
             <button
                 type="submit"
