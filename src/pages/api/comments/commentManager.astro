@@ -6,12 +6,23 @@ const commentId = searchParams.get('commentId');
 const secret = searchParams.get('secret');
 ---
 
-<p>Comment: {commentId}</p>
-<form action=`/api/comments/deleteComment` method="POST">
-    <input type="hidden" name="commentId" value={commentId} />
-    <input type="hidden" name="secret" value={secret} />
-    <button type="submit">Delete Comment</button>
-</form>
+<div class="container">
+    <div class="flex gap-8 flex-col">
+        <p>Comment: {commentId}</p>
+        <form action=`/api/comments/deleteComment` method="POST">
+            <input type="hidden" name="commentId" value={commentId} />
+            <input type="hidden" name="secret" value={secret} />
+            <button type="submit">Delete Comment</button>
+        </form>
+
+        <form
+            action="https://api.netlify.com/build_hooks/666dbd21a47b0a07b3485739"
+            method="POST"
+        >
+            <button type="submit"> Trigger Site Rebuild </button>
+        </form>
+    </div>
+</div>
 
 <style>
     body {
@@ -23,10 +34,12 @@ const secret = searchParams.get('secret');
         background: red;
         padding: 0.5rem 1rem;
     }
-    form {
+    .container {
         width: 100%;
         height: 100svh;
         display: grid;
-        place-items: center;
+        justify-content: center;
+        align-items: center;
+        /* place-items: center; */
     }
 </style>
