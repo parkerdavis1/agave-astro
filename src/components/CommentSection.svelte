@@ -3,24 +3,15 @@
     import CommentCard from './CommentCard.svelte';
     import Spinner from './Spinner.svelte';
     import { fly } from 'svelte/transition';
-    import { getContrastingColor } from '@utils/getContrastingColor.js';
-    import { convertColor } from '@utils/getContrastingColor.ts';
 
     export let url;
+    export let initComments;
 
+    let comments = initComments;
     let activeForm = false;
-    // let result;
-    let comments;
     let commentsHeading;
     let submitting = false;
     let errorMessage;
-    // let fontType = 'sans';
-    // let fontColor = '#336600';
-    // let backgroundColor = 'red';
-    // $: {
-    // backgroundColor = getContrastingColor(fontColor);
-    // fontColor = fontColor;
-    // }
     let textArea;
 
     async function getComments() {
@@ -33,13 +24,11 @@
     // Load comments on initialization
     onMount(async () => {
         comments = await getComments();
-        // fontColor = convertColor(getComputedStyle(commentsHeading).color);
-        // console.log('color', getComputedStyle(commentsHeading).color);
-        // backgroundColor = getContrastingColor(fontColor);
+        author = localStorage.getItem('author') || '';
     });
 
     // form values
-    let author = localStorage.getItem('author') || '';
+    let author = '';
     let body = '';
 
     function resetForm() {
@@ -75,7 +64,6 @@
         localStorage.setItem('author', comment.author);
 
         // post comment
-        // result = await actions.postComment(formData);
         const result = await fetch(`/api/comments/postComment`, {
             method: 'POST',
             body: JSON.stringify(comment),
@@ -86,7 +74,6 @@
 
         clearInterval(timeoutId);
         // reload comments
-        // comments = await actions.getComments(url);
         comments = await getComments();
 
         // reset state
@@ -101,17 +88,6 @@
             });
         }, 100);
     }
-
-    // function returnTailwindFont(fontType) {
-    //     console.log('fonttype', fontType, typeof fontType);
-    //     if (fontType === 'mono') {
-    //         return 'font-mono';
-    //     } else if (fontType === 'serif') {
-    //         return 'font-serif';
-    //     } else {
-    //         return 'font-sans';
-    //     }
-    // }
 </script>
 
 <section>

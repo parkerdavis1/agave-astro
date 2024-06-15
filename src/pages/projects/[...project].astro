@@ -2,9 +2,10 @@
 import { getCollection } from 'astro:content';
 import ProjectLayout from '@layouts/ProjectLayout.astro';
 import ProjectLinks from '@components/ProjectLinks.astro';
+import { filterDrafts } from '@utils/filterDrafts';
 
 export async function getStaticPaths() {
-    const projects = await getCollection('projects');
+    const projects = await getCollection('projects', filterDrafts);
 
     return projects.map((project) => ({
         params: { project: project.slug },
