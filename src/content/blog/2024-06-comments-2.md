@@ -1,5 +1,5 @@
 ---
-title: 'Comments, the nitty gritty'
+title: 'Comments 2: the nitty gritty'
 description: How I added a comments section to an Astro site.
 date: 2024-06-16T00:00:01
 tags:
@@ -41,13 +41,9 @@ Aside from taking name and message inputs, storing them, and displaying them, I 
 -   Anyone can hide comments for themselves.
 -   Anyone can report comments, which makes them hidden by default for everyone. I also get an email notification where I can review the comment and click a link to delete the comment if needed.
 
-## Astro Server Actions
-
-First I tried out the new experimental [Astro server actions](https://astro.build/blog/astro-480/#experimental-astro-actions), which were quite nice for cutting down on form processing boilerplate. It worked great on my local dev server but I couldn't get it to work in production. Something about using AstroDB and Actions together in a serverless environment isn't quite there. For the time being, writing API endpoints within a single Astro repo is still pretty nice.
-
 ## Email Notifications (Val.town)
 
-[Val.town](https://www.val.town/about) is a social code platform with stellar vibes. The team behind it seem like stand up folks and it has a small and active community. It is so easy to create quick backend projects with features that would otherwise be a pain to setup like email, databases, CRON jobs, HTTP handlers, etc.
+[Val.town](https://www.val.town/about) is a social code platform with stellar vibes. The team behind it seem like stand up folks and it has a small active community. It is so easy to create quick backend projects with features that would otherwise be a pain to setup like email, databases, CRON jobs, HTTP handlers, etc.
 
 When I want to trigger an email to myself, say, when someone leaves a comment, I just hit one of my Val's endpoints with a POST request.
 
@@ -55,6 +51,10 @@ When I want to trigger an email to myself, say, when someone leaves a comment, I
 -   [Val handling report notifications](https://www.val.town/v/parkerdavis/reportCommentNotification)
 
 Pretty simple.
+
+## Astro Server Actions
+
+For the bulk of the backend code I tried out the new experimental [Astro server actions](https://astro.build/blog/astro-480/#experimental-astro-actions), which were quite nice for cutting down on form processing boilerplate. It worked great on my local dev server but I couldn't get it to work in production. Something about using AstroDB and Actions together in a serverless environment isn't quite there. For the time being, writing API endpoints within a single Astro repo is still pretty nice.
 
 ## Progressive Enhancement
 
@@ -135,7 +135,7 @@ const data = Object.fromEntries(url.searchParams.entries());
 const { author, body, path } = data;
 ```
 
-So POST vs GET, which one is better for this use case? They both work. POST though, probably. Or maybe the normal javascript functionality could hit the POST handler, and the GET handler could handle the progressive enhancement case as a backup...but then it's not DRY... but the repeating chunks could be abstracted out into their own functions. Let's just go with POSTing form data for now.
+So POST vs GET, which one is better for this use case? They both work. POST though, probably. Or maybe the normal javascript functionality could hit the POST handler, and the GET handler could handle the progressive enhancement case as a backup...but then it's not DRY... but the repeating chunks could be abstracted out into their own functions. Let's just go with POSTing URL-encoded form data for now.
 
 After that we carry on to validate the data, check it exists, coerce it into the correct types.
 

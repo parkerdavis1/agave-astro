@@ -86,7 +86,8 @@ A leopard:
 
 This one really does it for me. It appears to be a plump quail-like bird but sans-beak and fused with a monolith. I love it.
 
-Most of the time ChatGPT and its ilk are all-time bullshitters, which is sort of still the case here, but in these ASCII drawings I find a weird mix of admiration & pity. This ASCII art feels different than GPT's typical sophomoric confidence. Good job lil bud.
+Most of the time ChatGPT and its ilk are all-time bullshitters, which is sort of still the case here, but
+with these ASCII drawings I find in myself a weird mix of admiration & pity. The art has a different feel than GPT's typical sophomoric confidence. Good job lil bud.
 
 ## Comments
 
