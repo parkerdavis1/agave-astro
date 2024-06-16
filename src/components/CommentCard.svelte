@@ -61,7 +61,7 @@
             in:fade
         >
             <!-- <pre>{JSON.stringify(comment, null, 2)}</pre> -->
-            <p class="font-bold">{comment.author}</p>
+            <p class="font-bold break-words">{comment.author}</p>
             <time datetime={comment.date} class="text-sm"
                 >{new Date(comment.date).toLocaleString('us-en', {
                     year: 'numeric',

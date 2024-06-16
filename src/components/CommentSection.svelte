@@ -107,27 +107,36 @@
             localStorage.setItem('author', formData.get('author'));
 
             // POST COMMENT
+            // GET request to endpoint (progressive enhancement)
+            const query = new URLSearchParams(comment);
+            const newUrl = `${POST_COMMENT_ENDPOINT}?${query}`;
+            console.log('newUrl', newUrl);
+            const result = await fetch(newUrl);
 
-            // Form encoded endpoint (progressive enhancement)
-
-            const result = await fetch(POST_COMMENT_ENDPOINT, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({ ...comment }),
-            });
+            // Form encoded POST request to endpoint (progressive enhancement)
+            // const result = await fetch(POST_COMMENT_ENDPOINT, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded',
+            //     },
+            //     body: new URLSearchParams(comment),
+            // });
 
             // JSON endpoint
-
             // const result = await fetch(POST_COMMENT_ENDPOINT, {
             //     method: 'POST',
             //     body: JSON.stringify(formData),
             // });
 
-            console.log('result', result);
+            // Error handling
             if (!result.ok) {
                 console.error('Error posting comment', result);
+                const { message, errorField } = await result.json();
+                errorMessage = message;
+                submitting = false;
+                activeForm = false;
+                clearInterval(timeoutId);
+                return;
             }
 
             clearInterval(timeoutId);
@@ -186,14 +195,8 @@
             <input type="text" hidden name="path" value={url} />
             <!-- value={encodeURIComponent(url)} -->
 
-            <button
-                type="submit"
-                class="p-2"
-                disabled={submitting || errorMessage}
-            >
-                {#if errorMessage}
-                    {errorMessage}
-                {:else if submitting}
+            <button type="submit" class="p-2" disabled={submitting}>
+                {#if submitting}
                     <p class="flex items-center justify-center gap-4">
                         Post <Spinner />
                     </p>
@@ -201,6 +204,10 @@
                     Post
                 {/if}
             </button>
+            {#if errorMessage}
+                <span class="text-red-500">{errorMessage}</span>
+            {/if}
+            <span></span>
         </form>
     </details>
     <div class="my-5">
