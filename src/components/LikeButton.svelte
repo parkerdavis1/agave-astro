@@ -4,13 +4,15 @@
 
     export let url: string;
     export let initCount: number;
+    export let size: string = '3rem';
+    export let oneLike: boolean = false;
 
     const apiPath = `/api/likes?path=${url}`;
 
     let likeButton: HTMLElement;
     let liked = false;
     let bounce: boolean;
-    let count = initCount;
+    let count = initCount || 0;
     let previousCount: number;
 
     onMount(async () => {
@@ -47,17 +49,21 @@
     }
 
     async function click() {
-        incrementDBLikes(); // increment likes on DB
-        bounce = false; // reset animation
-        count = (await count) + 1; // update DOM optimistically
-        previousCount = await count;
-        setLocalLiked(true); // set liked color in local storage and update DOM
-        bounce = true;
-        setTimeout(() => {
-            bounce = false;
-        }, 200);
-        playSound();
-        refreshCount(); // if DB count is higher than local count, update visible count to that number
+        // console.log('!liked', !liked);
+        // console.log('!oneLike', !oneLike);
+        if (!liked || !oneLike) {
+            incrementDBLikes(); // increment likes on DB
+            bounce = false; // reset animation
+            count = (await count) + 1; // update DOM optimistically
+            previousCount = await count;
+            setLocalLiked(true); // set liked color in local storage and update DOM
+            bounce = true;
+            setTimeout(() => {
+                bounce = false;
+            }, 200);
+            playSound();
+            refreshCount(); // if DB count is higher than local count, update visible count to that number
+        }
     }
 
     // AUDIO
@@ -134,6 +140,7 @@
         on:click={click}
         bind:this={likeButton}
         disabled={bounce}
+        style="--size:{size}"
     >
         <!-- Quail Color Outline -->
         <svg
@@ -415,7 +422,9 @@
     {#await count}
         <div>{previousCount || ''}</div>
     {:then count}
-        <div in:fade>{count}</div>
+        {#if count > 0}
+            <div in:fade>{count}</div>
+        {/if}
     {/await}
 </div>
 

@@ -28,9 +28,11 @@ draft: false
 
 # Part 2 - implementing comments
 
-Having a static site makes dynamic content like user submitted comments a bit more complicated. I've looked into ready-made solutions in the past, but they are largely pretty bad. Things like [Disqus](https://disqus.com/) harvest data from every visitor and add a ton of bloat. [Utterances](https://utteranc.es/) seems pretty slick, basically hacking Github Issues but limits you to comments from people with Github accounts.
+Having a static site makes dynamic content like user submitted comments a bit more complicated. I've looked into ready-made solutions in the past, but they are largely pretty bad.
 
-I could roll my own. It has never felt worth setting up a long-running database for a comment section that, lets face it, probably won't see much use. SQLite has been having a moment lately in the web application context and it makes a lot of sense for this use case. Because SQLite is just a file on a disk, when it's not in use it has extremely low-to-no money/energy/compute costs.
+I could roll my own but it has never felt worth setting up a long-running database for a comment section that, lets face it, probably won't see much use.
+
+SQLite has been having a moment lately in the web application context and it makes a lot of sense for this use case. Because SQLite is just a file on a disk, when it's not in use it has extremely low-to-no money/energy/compute costs.
 
 So with cheap and simple-to-setup SQLite/LibSQL databases available all over the place like [AstroDB](https://astro.build/db/), [Val.town](https://www.val.town/), [Turso](https://turso.tech/) (_they're all Turso_), I figured, why not?
 
@@ -43,7 +45,7 @@ Aside from taking name and message inputs, storing them, and displaying them, I 
 
 ## Email Notifications (Val.town)
 
-[Val.town](https://www.val.town/about) is a social code platform with stellar vibes. The team behind it seem like stand up folks and it has a small active community. It is so easy to create quick backend projects with features that would otherwise be a pain to setup like email, databases, CRON jobs, HTTP handlers, etc.
+[Val.town](https://www.val.town/about) is a social code platform with good vibes. It is so easy to create quick backend projects with features that would otherwise be a pain to setup like email, databases, CRON jobs, HTTP handlers, etc.
 
 When I want to trigger an email to myself, say, when someone leaves a comment, I just hit one of my Val's endpoints with a POST request.
 
@@ -113,6 +115,8 @@ const formData = await request.formData();
 const data = Object.fromEntries(formData.entries());
 ```
 
+It feels strange to encode your body data with something called URLSearchParams, but hey, it works!
+
 #### GET
 
 You can also use GET. GET is the default form method after all. A form GET request will pass all the data in the URL as query params, therefore not suitable for sensitive or large amounts of data. That being said, GET would probably be fine for this use case.
@@ -135,9 +139,9 @@ const data = Object.fromEntries(url.searchParams.entries());
 const { author, body, path } = data;
 ```
 
-So POST vs GET, which one is better for this use case? They both work. POST though, probably. Or maybe the normal javascript functionality could hit the POST handler, and the GET handler could handle the progressive enhancement case as a backup...but then it's not DRY... but the repeating chunks could be abstracted out into their own functions. Let's just go with POSTing URL-encoded form data for now.
+So POST vs GET, which one is better for this use case? They both work. Both encode your data as query strings, but with POST it is sent in the body rather than tacked onto the URL with GET. Let's just go with POSTing URL-encoded form data.
 
-After that we carry on to validate the data, check it exists, coerce it into the correct types.
+After that we carry on with validating the data, checking that it exists, coercing it into the correct types.
 
 And then there is error handling...phew...
 

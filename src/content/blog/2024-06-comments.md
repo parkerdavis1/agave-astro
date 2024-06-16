@@ -1,6 +1,6 @@
 ---
-title: The comment section is open
-description: I added a comments section to this blog. Show me your ASCII art.
+title: The comment section is open, share an ASCII
+description: I added a comments section to this blog.
 date: 2024-06-16T00:00:00
 tags:
     - ascii

@@ -1,6 +1,8 @@
 <script>
     import { fade } from 'svelte/transition';
     import { onMount } from 'svelte';
+    import LikeButton from './LikeButton.svelte';
+
     export let comment;
 
     // const fontColor = comment.fontColor;
@@ -77,16 +79,20 @@
             >
                 {comment.body}
             </p>
-
-            <div class="flex gap-4 text-xs mt-2">
-                <form on:submit={handleReport}>
-                    {#if reported}
-                        <button disabled>Reported</button>
-                    {:else}
-                        <button>Report</button>
-                    {/if}
-                </form>
-                <button on:click={handleHide}>Hide</button>
+            <div class="flex justify-between items-center">
+                <div class="flex gap-4 text-xs mt-2">
+                    <form on:submit={handleReport}>
+                        {#if reported}
+                            <button disabled>Reported</button>
+                        {:else}
+                            <button>Report</button>
+                        {/if}
+                    </form>
+                    <button on:click={handleHide}>Hide</button>
+                </div>
+                <div>
+                    <LikeButton url={comment.id} size="1.5rem" oneLike={true} />
+                </div>
             </div>
         </div>
     {/if}
