@@ -8,11 +8,13 @@ tags:
 draft: true
 ---
 
-There's a comment section now. Leave me a heartfelt message or [draw me an ascii](https://asciiflow.com).
+⇣ [Look down there](#comments-section). There's a comment section.
+
+Leave a heartfelt message or draw an ascii.
 
 ## ASCII
 
-I've been enjoying asking ChatGPT to draw me ASCII art lately.
+I've been enjoying asking ChatGPT to draw me ASCII art recently.
 
 Here's a Western Kingbird:
 
@@ -32,7 +34,7 @@ Here's a Western Kingbird:
     /  \
 ```
 
-Leopard:
+A leopard:
 
 ```
   ,_         _,
@@ -62,7 +64,7 @@ Leopard:
 
 ```
 
-...and a real doozy of a Gambel's Quail:
+...and a Gambel's Quail:
 
 ```
   ,=.
@@ -84,11 +86,13 @@ Leopard:
 
 This one really does it for me. It appears to be a plump quail-like bird but sans-beak and fused with a monolith. I love it.
 
-Most of the time ChatGPT is just an all-time bullshitter, which is also the case here, but these inspire a feeling of admiration & pity. It's trying, look how cute and weird it is!
+Most of the time ChatGPT and its ilk are just all-time bullshitters, which is sort of still the case here, but in these ASCII drawings I find a weird mix of admiration & pity. This ASCII art doesn't have GPTs typical sophomoric confidence – but it's doing its best!
 
-You can read about more technical details in the [next post](/blog/2024-06-comments-2).
+## Comments
 
-So what ASCIIs do you have for me?
+You can read more about the technical details of how I implemented comments in the [next post](/blog/2024-06-comments-2), if you dig that.
+
+But while you're here, what [ASCIIs](https://asciiflow.com) do you have for me?
 
 ```
                                   ooooooooo

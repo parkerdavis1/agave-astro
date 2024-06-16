@@ -13,7 +13,7 @@
     const POST_COMMENT_ENDPOINT = '/api/comments/postComment';
 
     let comments = initComments;
-    let activeForm = false;
+    let activeForm = true;
     let commentsHeading;
     let submitting = false;
     let errorMessage;
@@ -160,7 +160,9 @@
 </script>
 
 <section>
-    <h2 class="py-4" bind:this={commentsHeading}>Comments</h2>
+    <h2 class="py-4" id="comments-section" bind:this={commentsHeading}>
+        Comments
+    </h2>
 
     <details class="cursor-pointer" bind:open={activeForm}>
         <summary on:click={scrollIntoView}>Leave a comment</summary>
@@ -265,6 +267,7 @@
         textarea,
         select {
             background: #202b38;
+            border: none;
         }
     }
 </style>
