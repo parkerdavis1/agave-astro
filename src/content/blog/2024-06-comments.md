@@ -1,16 +1,16 @@
 ---
 title: The comment section is open
 description: I added a comments section to this blog. Show me your ASCII art.
-date: 2024-06-15
+date: 2024-06-16T00:00:00
 tags:
     - ascii
     - chatgpt
-draft: true
+draft: false
 ---
 
 ⇣ [Look down there](#comments-section). There's a comment section.
 
-Leave a heartfelt message or draw an ascii.
+Leave a heartfelt message or draw an ascii if you'd like.
 
 ## ASCII
 
@@ -86,7 +86,7 @@ A leopard:
 
 This one really does it for me. It appears to be a plump quail-like bird but sans-beak and fused with a monolith. I love it.
 
-Most of the time ChatGPT and its ilk are just all-time bullshitters, which is sort of still the case here, but in these ASCII drawings I find a weird mix of admiration & pity. This ASCII art doesn't have GPTs typical sophomoric confidence – but it's doing its best!
+Most of the time ChatGPT and its ilk are all-time bullshitters, which is sort of still the case here, but in these ASCII drawings I find a weird mix of admiration & pity. This ASCII art feels different than GPT's typical sophomoric confidence. Good job lil bud.
 
 ## Comments
 
