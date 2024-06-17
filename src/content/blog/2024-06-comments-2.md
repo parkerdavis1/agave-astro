@@ -1,7 +1,7 @@
 ---
 title: 'Comments 2: the nitty gritty'
 description: How I added a comments section to an Astro site.
-date: 2024-06-17T00:00:01
+date: 2024-06-17T00:13:01
 tags:
     - astro
     - ssr
@@ -95,7 +95,7 @@ const result = await fetch(POST_COMMENT_ENDPOINT, {
 });
 ```
 
-Ok... `x-www-form-urlencoded`. How does one encode a javascript object into that? Its a catchy name for URL query parameter style data so the easiest way I found was passing it in a `URLSearchParams()` constructor.
+Ok... `x-www-form-urlencoded`. How does one encode a javascript object into that? It's a catchy name for URL query parameter style data so the easiest way I found was passing it in a `URLSearchParams()` constructor.
 
 ```js {7}
 // Client
