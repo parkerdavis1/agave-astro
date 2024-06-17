@@ -1,5 +1,5 @@
 ---
-title: CCAM Site
+title: Center for Concrete and Abstract Machines
 description: Custom site for Chicago Arts non-profit.
 techtags:
     - html
@@ -8,13 +8,16 @@ githubUrl:
 liveUrl: https://ccam.world
 featured: false
 date: 2024-06-05
-draft: true
+draft: false
 tags:
     - html
     - css
     - javascript
     - astro
     - p5
+    - web-components
+    - svelte
+    - preact
 ---
 import RelatedPosts from '@components/RelatedPosts.astro'
 
@@ -28,18 +31,18 @@ import RelatedPosts from '@components/RelatedPosts.astro'
 
 ## Overview
 
-I was brought on to consult on the site rebuild for CCAM but ended up building the entire site. 
+I was brought on to consult on the site rebuild for CCAM but ended up building the entire site. [Ioan Buțiu](https://www.ioan.website/) did a great job on the initial design.
 
-## Cool Stuff
+## Noteworthy stuff that I will write about soon
 
-- Gallery template script
-- Rewrote CCAM sketch to vanilla JS
+- Gallery metadata template node script
+- Intersection observer and lazy loading p5 library -> rewriting CCAM sketch in vanilla JS
 - First time using container queries
-- Intersection observer on loading p5 library
-- 301 redirects
-- Using HTMZ to load galleries and load lightbox script
-- Slow mode for slower devices
+- First time setting up 301 redirects
+- Using [HTMZ](/blog/htmz) technique to load galleries; emitting custom DOM events to load lightbox script
+- Slow mode for slower devices / prefers-reduced-motion
+- Surprisingly tricky dashed CSS Grid spacers
 
-## Posts related to CCAM
+## Posts tagged with "CCAM"
 
 <RelatedPosts tag="CCAM" />

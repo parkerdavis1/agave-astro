@@ -26,6 +26,7 @@
 
     --text-color: hsl(var(--text-color-values));
     --text-color-faded: hsl(var(--text-color-values) / 0.5);
+    --text-color-2xfaded: hsl(var(--text-color-values) / 0.3);
     --text-color-link: hsl(var(--text-color-link-values));
     --background-color: hsl(var(--background-color-values));
 
@@ -122,6 +123,12 @@ a {
 
 img {
     font-style: italic;
+    /* background: linear-gradient(
+        135deg,
+        var(--background-color),
+        var(--text-color-link)
+    ); */
+    border: 1px var(--text-color-faded) solid;
 }
 
 blockquote {
@@ -201,4 +208,9 @@ article li li {
         background: white;
         color: black;
     }
+}
+
+hr {
+    border-color: var(--text-color-faded);
+    margin-inline: 2rem;
 }

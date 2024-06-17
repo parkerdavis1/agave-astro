@@ -3,16 +3,20 @@
     import CommentCard from './CommentCard.svelte';
     import Spinner from './Spinner.svelte';
     import { fly } from 'svelte/transition';
+    import { actions } from 'astro:actions';
 
     export let url;
     export let initComments;
 
+    console.log(encodeURIComponent(url));
+
+    const POST_COMMENT_ENDPOINT = '/api/comments/postComment';
+
     let comments = initComments;
-    let activeForm = false;
+    let activeForm = true;
     let commentsHeading;
     let submitting = false;
     let errorMessage;
-    let textArea;
 
     async function getComments() {
         const data = await fetch(
@@ -38,48 +42,113 @@
         errorMessage = '';
     }
 
-    // Submit comment
-    async function postComment(e) {
+    // USE ASTRO ACTION
+    async function postCommentAction(e) {
         e.preventDefault();
+        try {
+            const timeoutId = setTimeout(() => {
+                errorMessage = 'Error. Try again later.';
+                throw new Error('Server timed out');
+            }, 20000);
 
-        const timeoutId = setTimeout(() => {
-            errorMessage = 'Error. Try again later.';
-            throw new Error('Server timed out');
-        }, 20000);
+            submitting = true;
+            // capture form data to pass to action
+            const formData = new FormData(e.target);
 
-        submitting = true;
-        // capture form data to pass to action
-        const formData = new FormData(e.target);
-        const comment = {
-            author: formData.get('author'),
-            body: formData.get('body'),
-            path: formData.get('path'),
-            fontColor: formData.get('fontColor'),
-            fontType: formData.get('fontType'),
-        };
+            // const comment = {
+            //     author: formData.get('author'),
+            //     body: formData.get('body'),
+            //     path: formData.get('path'),
+            // };
 
-        console.log('comment', comment);
+            // update name store
+            // localStorage.setItem('author', comment.author);
+            localStorage.setItem('author', formData.get('author'));
 
-        // update name store
-        localStorage.setItem('author', comment.author);
+            // post comment
+            const result = await actions.postComment(formData);
 
-        // post comment
-        const result = await fetch(`/api/comments/postComment`, {
-            method: 'POST',
-            body: JSON.stringify(comment),
-        });
-        if (!result.ok) {
-            console.error('Error posting comment', result);
+            console.log('result', result);
+            if (!result.ok) {
+                console.error('Error posting comment', result);
+            }
+
+            clearInterval(timeoutId);
+            // reload comments
+            comments = await getComments();
+
+            // reset state
+            resetForm();
+        } catch (e) {
+            console.error('Error posting comment', e);
         }
-
-        clearInterval(timeoutId);
-        // reload comments
-        comments = await getComments();
-
-        // reset state
-        resetForm();
     }
 
+    // USE API ENDPOINT
+    async function postCommentAPI(e) {
+        e.preventDefault();
+        try {
+            const timeoutId = setTimeout(() => {
+                errorMessage = 'Error. Try again later.';
+                throw new Error('Server timed out');
+            }, 20000);
+
+            submitting = true;
+            // capture form data to pass to action
+            const formData = new FormData(e.target);
+
+            const comment = {
+                author: formData.get('author'),
+                body: formData.get('body'),
+                path: formData.get('path'),
+            };
+
+            // update name store
+            localStorage.setItem('author', formData.get('author'));
+
+            // POST COMMENT
+            // GET request to endpoint (progressive enhancement)
+            // const query = new URLSearchParams(comment);
+            // const newUrl = `${POST_COMMENT_ENDPOINT}?${query}`;
+            // console.log('newUrl', newUrl);
+            // const result = await fetch(newUrl);
+
+            // Form encoded POST request to endpoint (progressive enhancement)
+            const result = await fetch(POST_COMMENT_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(comment),
+            });
+
+            // JSON endpoint
+            // const result = await fetch(POST_COMMENT_ENDPOINT, {
+            //     method: 'POST',
+            //     body: JSON.stringify(formData),
+            // });
+
+            // Error handling
+            if (!result.ok) {
+                console.error('Error posting comment', result);
+                const { message, errorField } = await result.json();
+                errorMessage = message;
+                submitting = false;
+                activeForm = false;
+                clearInterval(timeoutId);
+                return;
+            }
+
+            clearInterval(timeoutId);
+            // reload comments
+            comments = await getComments();
+
+            // reset state
+            resetForm();
+        } catch (e) {
+            console.error('Error posting comment', e);
+        }
+    }
     function scrollIntoView() {
         setTimeout(() => {
             commentsHeading.scrollIntoView({
@@ -91,14 +160,17 @@
 </script>
 
 <section>
-    <h2 class="py-4" bind:this={commentsHeading}>Comments</h2>
+    <h2 class="py-4" id="comments-section" bind:this={commentsHeading}>
+        Comments
+    </h2>
 
     <details class="cursor-pointer" bind:open={activeForm}>
         <summary on:click={scrollIntoView}>Leave a comment</summary>
         <form
-            action=""
+            action={POST_COMMENT_ENDPOINT}
+            method="POST"
             class="py-5 flex flex-col gap-2"
-            on:submit={postComment}
+            on:submit={postCommentAPI}
         >
             <label for="author" class="flex flex-col"
                 >Name
@@ -119,51 +191,14 @@
                     id="body"
                     class="font-mono"
                     bind:value={body}
-                    bind:this={textArea}
                     required
                 ></textarea>
             </label>
             <input type="text" hidden name="path" value={url} />
-            <!-- <pre>Font color: {fontColor}</pre> -->
-            <!-- <pre>Font type: {fontType}</pre> -->
+            <!-- value={encodeURIComponent(url)} -->
 
-            <!-- <details>
-                <summary>Options</summary>
-                <div class="flex gap-4 items-center pb-6">
-                    <label for="fontColor" class="flex gap-2 items-center"
-                        >Font Color
-
-                        <input
-                            type="color"
-                            name="fontColor"
-                            id="fontColor"
-                            bind:value={fontColor}
-                        />
-                    </label>
-
-                    <label for="font" class="flex gap-2 items-center"
-                        >Font Type
-                        <select
-                            name="fontType"
-                            id="fontType"
-                            bind:value={fontType}
-                        >
-                            <option value="sans">Sans Serif</option>
-                            <option value="serif">Serif</option>
-                            <option value="mono">Mono</option>
-                        </select>
-                    </label>
-                </div>
-            </details> -->
-
-            <button
-                type="submit"
-                class="p-2"
-                disabled={submitting || errorMessage}
-            >
-                {#if errorMessage}
-                    {errorMessage}
-                {:else if submitting}
+            <button type="submit" class="p-2" disabled={submitting}>
+                {#if submitting}
                     <p class="flex items-center justify-center gap-4">
                         Post <Spinner />
                     </p>
@@ -171,13 +206,16 @@
                     Post
                 {/if}
             </button>
+            {#if errorMessage}
+                <span class="text-red-500">{errorMessage}</span>
+            {/if}
+            <span></span>
         </form>
     </details>
     <div class="my-5">
         {#if comments}
             {#each comments as comment (comment.id)}
                 <div in:fly={{ x: -200, duration: 200 }}>
-                    <!-- <div in:scale> -->
                     <CommentCard {comment} />
                 </div>
             {/each}
@@ -186,10 +224,6 @@
 </section>
 
 <style>
-    .faded {
-        color: var(--text-color-faded);
-        font-size: 0.75em;
-    }
     button {
         background: #d0cfcf;
         padding: 0.5rem;
@@ -216,7 +250,8 @@
 
     input:focus,
     textarea:focus,
-    select {
+    select:focus,
+    button:focus {
         outline: solid #0096bfab 2px;
     }
 
@@ -232,6 +267,7 @@
         textarea,
         select {
             background: #202b38;
+            border: none;
         }
     }
 </style>
