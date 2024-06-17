@@ -1,14 +1,21 @@
 ---
+import { db, Comments, eq } from 'astro:db';
+
 export const prerender = false;
 
 const searchParams = new URL(Astro.request.url).searchParams;
-const commentId = searchParams.get('commentId');
+const commentId = searchParams.get('commentId') as string;
+const comment = await db
+    .select()
+    .from(Comments)
+    .where(eq(Comments.id, commentId));
 const secret = searchParams.get('secret');
 ---
 
-<div class="container">
+<div class="container mx-auto">
     <div class="flex gap-8 flex-col">
-        <p>Comment: {commentId}</p>
+        <p>Comment:</p>
+        <pre>{JSON.stringify(comment, null, 2)}</pre>
         <form action=`/api/comments/deleteComment` method="POST">
             <input type="hidden" name="commentId" value={commentId} />
             <input type="hidden" name="secret" value={secret} />
@@ -35,11 +42,11 @@ const secret = searchParams.get('secret');
         padding: 0.5rem 1rem;
     }
     .container {
-        width: 100%;
-        height: 100svh;
-        display: grid;
-        justify-content: center;
-        align-items: center;
+        /* width: 100%; */
+        /* height: 100svh; */
+        /* display: grid; */
+        /* justify-content: center; */
+        /* align-items: center; */
         /* place-items: center; */
     }
 </style>
