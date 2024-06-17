@@ -62,7 +62,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 
     // if in production, poke val.town to send an email notification
     if (import.meta.env.PROD) {
-        fetch('https://parkerdavis-newcomment.web.val.run', {
+        fetch('https://parkerdavis-newcommentnotification.web.val.run', {
             method: 'POST',
             body: JSON.stringify(postedComment),
         });
@@ -113,7 +113,7 @@ export const GET: APIRoute = async ({ request, redirect }) => {
 
     // if in production, poke val.town to send an email notification
     if (import.meta.env.PROD) {
-        fetch('https://parkerdavis-newcomment.web.val.run', {
+        fetch('https://parkerdavis-newcommentnotification.web.val.run', {
             method: 'POST',
             body: JSON.stringify(postedComment),
         });

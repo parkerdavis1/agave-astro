@@ -28,10 +28,13 @@ export const POST: APIRoute = async ({ request }) => {
 
     // trigger notification email (in production)
     if (import.meta.env.PROD) {
-        await fetch('https://parkerdavis-reportcomment.web.val.run', {
-            method: 'POST',
-            body: JSON.stringify(comment),
-        });
+        await fetch(
+            'https://parkerdavis-reportcommentnotification.web.val.run',
+            {
+                method: 'POST',
+                body: JSON.stringify(comment),
+            }
+        );
     }
 
     return new Response(JSON.stringify(comment), { status: 200 });
