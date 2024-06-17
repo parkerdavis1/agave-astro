@@ -30,11 +30,11 @@ draft: false
 
 Having a static site makes dynamic content like user submitted comments a bit more complicated. I've looked into ready-made solutions in the past, but they are largely pretty bad.
 
-I could roll my own but it has never felt worth setting up a long-running database for a comment section that, lets face it, probably won't see much use.
+For rolling my own, it has never felt worth setting up a long-running database for a comment section that, lets face it, probably won't see much use.
 
-SQLite has been having a moment lately in the web application context and it makes a lot of sense for this use case. Because SQLite is just a file on a disk, when it's not in use it has extremely low-to-no money/energy/compute costs.
+SQLite has been having a moment lately in the web application space and it makes a lot of sense for this use case. Because SQLite is just a file on a disk, when it's not in use it has extremely low-to-no money/energy/compute costs.
 
-So with cheap and simple-to-setup SQLite/LibSQL databases available all over the place like [AstroDB](https://astro.build/db/), [Val.town](https://www.val.town/), [Turso](https://turso.tech/) (_they're all Turso_), I figured, why not?
+So with cheap and simple-to-setup SQLite/LibSQL databases available like [Astro DB](https://astro.build/db/), [Val Town](https://www.val.town/), [Turso](https://turso.tech/) (_they're all Turso_), I figured, why not?
 
 ## Moderation
 
@@ -42,6 +42,7 @@ Aside from taking name and message inputs, storing them, and displaying them, I 
 
 -   Anyone can hide comments for themselves.
 -   Anyone can report comments, which makes them hidden by default for everyone. I also get an email notification where I can review the comment and click a link to delete the comment if needed.
+-   You better believe you can click on a quail for comments too!
 
 ## Email Notifications (Val.town)
 
@@ -52,11 +53,11 @@ When I want to trigger an email to myself, say, when someone leaves a comment, I
 -   [Val handling comment notifications](https://www.val.town/v/parkerdavis/newCommentNotification)
 -   [Val handling report notifications](https://www.val.town/v/parkerdavis/reportCommentNotification)
 
-Pretty simple.
+Simple stuff.
 
 ## Astro Server Actions
 
-For the bulk of the backend code I tried out the new experimental [Astro server actions](https://astro.build/blog/astro-480/#experimental-astro-actions), which were quite nice for cutting down on form processing boilerplate. It worked great on my local dev server but I couldn't get it to work in production. Something about using AstroDB and Actions together in a serverless environment isn't quite there. For the time being, writing API endpoints within a single Astro repo is still pretty nice.
+For the bulk of the backend code I tried out the new experimental [Astro server actions](https://astro.build/blog/astro-480/#experimental-astro-actions), which were quite nice for cutting down on form processing boilerplate. It worked great on my local dev server but I couldn't get it to work in production. Something about using Astro DB and Actions together in a serverless environment wasn't quite jiving. For the time being, writing API endpoints within a single Astro repo is still pretty nice.
 
 ## Progressive Enhancement
 
@@ -115,7 +116,7 @@ const formData = await request.formData();
 const data = Object.fromEntries(formData.entries());
 ```
 
-It feels strange to encode your body data with something called URLSearchParams, but hey, it works!
+<!-- It feels strange to encode your body data with something called URLSearchParams, but hey, it works! -->
 
 #### GET
 
@@ -139,10 +140,10 @@ const data = Object.fromEntries(url.searchParams.entries());
 const { author, body, path } = data;
 ```
 
-So POST vs GET, which one is better for this use case? They both work. Both encode your data as query strings, but with POST it is sent in the body rather than tacked onto the URL with GET. Let's just go with POSTing URL-encoded form data.
+So POST vs GET, which one is better for this use case? Both encode your data as query strings, but with POST it is sent in the body rather than tacked onto the URL with GET. They both work but let's go with POSTing URL-encoded form data.
 
-After that we carry on with validating the data, checking that it exists, coercing it into the correct types.
+Then we carry on with validating the data, checking that it exists, coercing it into the correct types.
 
-And then there is error handling...phew...
+And then there is error handling...phew.
 
-Does anybody know of an Astro/framework-agnostic equivalent to [Sveltekit Superforms](https://superforms.rocks/)? Maybe worth checking out [simple-form](https://simple-stack.dev/form/)? Let me know in the comments.
+Does anybody know of an Astro/framework-agnostic equivalent to [Sveltekit Superforms](https://superforms.rocks/)? Maybe [simple-form](https://simple-stack.dev/form/)? Let me know in the comments.

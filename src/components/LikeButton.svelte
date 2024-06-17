@@ -1,136 +1,135 @@
 <script lang="ts">
-    import { fade } from 'svelte/transition';
-    import { onMount } from 'svelte';
+    import { fade } from 'svelte/transition'
+    import { onMount } from 'svelte'
 
-    export let url: string;
-    export let initCount: number;
-    export let size: string = '3rem';
-    export let oneLike: boolean = false;
+    export let url: string
+    export let initCount: number
+    export let size: string = '3rem'
 
-    const apiPath = `/api/likes?path=${url}`;
+    const apiPath = `/api/likes?path=${url}`
 
-    let likeButton: HTMLElement;
-    let liked = false;
-    let bounce: boolean;
-    let count = initCount || 0;
-    let previousCount: number;
+    let likeButton: HTMLElement
+    let liked = false
+    let bounce: boolean
+    let count = initCount || 0
+    let previousCount: number
 
     onMount(async () => {
-        liked = getLocalLiked();
-        count = await getLikes();
-    });
+        liked = getLocalLiked()
+        count = await getLikes()
+    })
 
     async function getLikes() {
-        const res = await fetch(apiPath);
-        return await res.json();
+        const res = await fetch(apiPath)
+        return await res.json()
     }
 
     function setLocalLiked(bool: boolean) {
-        localStorage.setItem(url, String(bool));
-        liked = bool;
+        localStorage.setItem(url, String(bool))
+        liked = bool
     }
 
     function getLocalLiked() {
-        const liked = localStorage?.getItem(url) ?? false;
-        return Boolean(liked);
+        const liked = localStorage?.getItem(url) ?? false
+        return Boolean(liked)
     }
 
     async function incrementDBLikes() {
         await fetch(apiPath, {
             method: 'POST',
-        });
+        })
     }
 
     async function refreshCount() {
-        const dbCount = await getLikes();
+        const dbCount = await getLikes()
         if (dbCount > count) {
-            count = dbCount;
+            count = dbCount
         }
+    }
+
+    function bounceQuail() {
+        bounce = true
+        setTimeout(() => {
+            bounce = false
+        }, 200)
+        playSound()
     }
 
     async function click() {
-        // console.log('!liked', !liked);
-        // console.log('!oneLike', !oneLike);
-        if (!liked || !oneLike) {
-            incrementDBLikes(); // increment likes on DB
-            bounce = false; // reset animation
-            count = (await count) + 1; // update DOM optimistically
-            previousCount = await count;
-            setLocalLiked(true); // set liked color in local storage and update DOM
-            bounce = true;
-            setTimeout(() => {
-                bounce = false;
-            }, 200);
-            playSound();
-            refreshCount(); // if DB count is higher than local count, update visible count to that number
-        }
+        incrementDBLikes() // increment likes on DB
+        // bounce = false; // reset animation
+        previousCount = count
+        count = count + 1 // update DOM optimistically
+        setLocalLiked(true) // set liked color in local storage and update DOM
+        bounceQuail()
+        refreshCount() // if DB count is higher than local count, update visible count to that number
     }
 
     // AUDIO
-    let audioCtx: AudioContext;
+    let audioCtx: AudioContext
     function randomNumber(min: number, max: number) {
-        return min + Math.floor(Math.random() * max);
+        return min + Math.floor(Math.random() * max)
     }
 
     function playSound() {
         if (!audioCtx) {
-            audioCtx = new AudioContext();
+            audioCtx = new AudioContext()
         }
 
-        let gain = 0.1;
-        let oscType = 'sawtooth' as OscillatorType;
-        let length = 0.35;
+        let gain = 0.1
+        let oscType = 'sawtooth' as OscillatorType
+        let length = 0.35
         // 350,980,840
 
         let freqs = {
             start: 350,
             mid: 980 + randomNumber(0, 100),
             end: 840,
-        };
+        }
 
         const osc = new OscillatorNode(audioCtx, {
             type: oscType,
-        });
-        osc.frequency.setValueAtTime(freqs.start, audioCtx.currentTime);
+        })
+        osc.frequency.setValueAtTime(freqs.start, audioCtx.currentTime)
         osc.frequency.linearRampToValueAtTime(
             freqs.mid,
             audioCtx.currentTime + length / 2
-        );
+        )
         osc.frequency.linearRampToValueAtTime(
             freqs.end,
             audioCtx.currentTime + length
-        );
+        )
 
-        const gainNode = new GainNode(audioCtx);
-        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        const gainNode = new GainNode(audioCtx)
+        gainNode.gain.setValueAtTime(0, audioCtx.currentTime)
         gainNode.gain.linearRampToValueAtTime(
             gain,
             audioCtx.currentTime + length / 2
-        );
-        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + length);
+        )
+        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + length)
 
         const filterNode = new BiquadFilterNode(audioCtx, {
             frequency: 1600,
             type: 'bandpass',
             Q: 1,
-        });
+        })
 
         filterNode.frequency.setValueAtTime(
             freqs.start * 2,
             audioCtx.currentTime
-        );
+        )
         filterNode.frequency.linearRampToValueAtTime(
             freqs.mid * 2,
             audioCtx.currentTime + length / 2
-        );
+        )
         filterNode.frequency.linearRampToValueAtTime(
             freqs.end * 2,
             audioCtx.currentTime + length
-        );
+        )
 
-        osc.connect(gainNode).connect(filterNode).connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + length);
+        osc.connect(gainNode).connect(filterNode).connect(audioCtx.destination)
+        osc.start()
+        osc.stop(audioCtx.currentTime + length)
     }
 </script>
 
