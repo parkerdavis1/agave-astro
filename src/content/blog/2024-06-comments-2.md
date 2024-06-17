@@ -1,7 +1,7 @@
 ---
 title: 'Comments 2: the nitty gritty'
 description: How I added a comments section to an Astro site.
-date: 2024-06-16T00:00:01
+date: 2024-06-17T00:00:01
 tags:
     - astro
     - ssr
