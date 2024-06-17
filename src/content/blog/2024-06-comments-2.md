@@ -36,19 +36,19 @@ SQLite has been having a moment lately in the web application space and it makes
 
 So with cheap and simple-to-setup SQLite/LibSQL databases available like [Astro DB](https://astro.build/db/), [Val Town](https://www.val.town/), [Turso](https://turso.tech/) (_they're all Turso_), I figured, why not?
 
-## Moderation
+## Features / Moderation
 
 Aside from taking name and message inputs, storing them, and displaying them, I added a few enhancements to make moderation quick and simple.
 
 -   Anyone can hide comments for themselves.
 -   Anyone can report comments, which makes them hidden by default for everyone. I also get an email notification where I can review the comment and click a link to delete the comment if needed.
--   You better believe you can click on a quail for comments too!
+-   Not moderation related but you better believe you can [click on a quail](/blog/2024-05-27-quail) for comments too!
 
 ## Email Notifications (Val.town)
 
-[Val.town](https://www.val.town/about) is a social code platform with good vibes. It is so easy to create quick backend projects with features that would otherwise be a pain to setup like email, databases, CRON jobs, HTTP handlers, etc.
+When I want to trigger an email to myself, say, when someone leaves a comment, I just hit a Val endpoint with a POST request.
 
-When I want to trigger an email to myself, say, when someone leaves a comment, I just hit one of my Val's endpoints with a POST request.
+[Val.town](https://www.val.town/about) is a social code platform with good vibes. It is so easy to create quick backend projects with features that would otherwise be a pain to setup like email, databases, CRON jobs, HTTP handlers, etc.
 
 -   [Val handling comment notifications](https://www.val.town/v/parkerdavis/newCommentNotification)
 -   [Val handling report notifications](https://www.val.town/v/parkerdavis/reportCommentNotification)
@@ -57,7 +57,7 @@ Simple stuff.
 
 ## Astro Server Actions
 
-For the bulk of the backend code I tried out the new experimental [Astro server actions](https://astro.build/blog/astro-480/#experimental-astro-actions), which were quite nice for cutting down on form processing boilerplate. It worked great on my local dev server but I couldn't get it to work in production. Something about using Astro DB and Actions together in a serverless environment wasn't quite jiving. For the time being, writing API endpoints within a single Astro repo is still pretty nice.
+For the bulk of the backend code I tried out the new experimental [Astro server actions](https://astro.build/blog/astro-480/#experimental-astro-actions), which were quite nice for cutting down on form processing boilerplate. It worked great on my local dev server but I couldn't get it to work in production. Something about using Astro DB and Actions together in a serverless environment wasn't quite clicking. For the time being, writing API endpoints within a single Astro repo is still pretty nice.
 
 ## Progressive Enhancement
 
@@ -95,7 +95,7 @@ const result = await fetch(POST_COMMENT_ENDPOINT, {
 });
 ```
 
-Ok... `x-www-form-urlencoded`. How does one encode a javascript object into that? The easiest way I found was passing it in a `URLSearchParams()` constructor.
+Ok... `x-www-form-urlencoded`. How does one encode a javascript object into that? Its a catchy name for URL query parameter style data so the easiest way I found was passing it in a `URLSearchParams()` constructor.
 
 ```js {7}
 // Client
@@ -140,7 +140,7 @@ const data = Object.fromEntries(url.searchParams.entries());
 const { author, body, path } = data;
 ```
 
-So POST vs GET, which one is better for this use case? Both encode your data as query strings, but with POST it is sent in the body rather than tacked onto the URL with GET. They both work but let's go with POSTing URL-encoded form data.
+So POST vs GET, which one is better for this use case? Both encode your data as query strings, but with POST it is sent in the body rather than tacked onto the URL with GET. They both work, but let's go with POSTing URL-encoded form data.
 
 Then we carry on with validating the data, checking that it exists, coercing it into the correct types.
 

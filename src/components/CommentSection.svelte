@@ -108,19 +108,19 @@
 
             // POST COMMENT
             // GET request to endpoint (progressive enhancement)
-            const query = new URLSearchParams(comment);
-            const newUrl = `${POST_COMMENT_ENDPOINT}?${query}`;
-            console.log('newUrl', newUrl);
-            const result = await fetch(newUrl);
+            // const query = new URLSearchParams(comment);
+            // const newUrl = `${POST_COMMENT_ENDPOINT}?${query}`;
+            // console.log('newUrl', newUrl);
+            // const result = await fetch(newUrl);
 
             // Form encoded POST request to endpoint (progressive enhancement)
-            // const result = await fetch(POST_COMMENT_ENDPOINT, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded',
-            //     },
-            //     body: new URLSearchParams(comment),
-            // });
+            const result = await fetch(POST_COMMENT_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(comment),
+            });
 
             // JSON endpoint
             // const result = await fetch(POST_COMMENT_ENDPOINT, {

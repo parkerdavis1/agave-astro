@@ -10,7 +10,7 @@ draft: false
 
 ⇣ [Look down there](#comments-section). There's a comment section now.
 
-Leave a heartfelt message, ask a question, draw an ascii, click on a quail. You do you.
+Leave a heartfelt message, ask a question, draw an ascii, [click on a quail](/blog/2024-05-27-quail). Go nuts.
 
 ## ASCII
 
@@ -92,7 +92,7 @@ This one really does it for me. It appears to be a plump quail-like bird but san
 
 You can read more about the technical details of how I implemented comments in the [next post](/blog/2024-06-comments-2), if you can dig that.
 
-But while you're here, what ASCIIs do you have for me? ([This](https://asciiflow.com) could help.)
+But while you're here, what ASCIIs do you have to share? ([Try this out](https://asciiflow.com))
 
 ```
                                   ooooooooo
