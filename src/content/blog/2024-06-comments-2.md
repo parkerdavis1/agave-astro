@@ -1,7 +1,7 @@
 ---
 title: 'Comments 2: the nitty gritty'
 description: How I added a comments section to an Astro site.
-date: 2024-06-17T00:00:01
+date: 2024-06-17T00:13:01
 tags:
     - astro
     - ssr
@@ -57,7 +57,7 @@ Simple stuff.
 
 ## Astro Server Actions
 
-For the bulk of the backend code I tried out the new experimental [Astro server actions](https://astro.build/blog/astro-480/#experimental-astro-actions), which were quite nice for cutting down on form processing boilerplate. It worked great on my local dev server but I couldn't get it to work in production. Something about using Astro DB and Actions together in a serverless environment wasn't quite clicking. For the time being, writing API endpoints within a single Astro repo is still pretty nice.
+For the bulk of the backend code I tried out the new experimental [Astro server actions](https://astro.build/blog/astro-480/#experimental-astro-actions), which were quite nice for cutting down on form processing boilerplate. It worked great on my local dev server but I couldn't get it to work in production. Something about using Astro DB and Actions together in a serverless environment wasn't quite clicking. For the time being, writing API endpoints within a [single Astro repo](https://github.com/parkerdavis1/agave-astro/tree/staging/src/pages/api/comments) is still pretty nice.
 
 ## Progressive Enhancement
 
@@ -95,7 +95,7 @@ const result = await fetch(POST_COMMENT_ENDPOINT, {
 });
 ```
 
-Ok... `x-www-form-urlencoded`. How does one encode a javascript object into that? Its a catchy name for URL query parameter style data so the easiest way I found was passing it in a `URLSearchParams()` constructor.
+Ok... `x-www-form-urlencoded`. How does one encode a javascript object into that? It's a catchy name for URL query parameter style data so the easiest way I found was passing it in a `URLSearchParams()` constructor.
 
 ```js {7}
 // Client
