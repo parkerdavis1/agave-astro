@@ -1,17 +1,26 @@
 ---
 import { getCollection } from 'astro:content';
-const { tag } = Astro.props;
-const relatedPosts = (await getCollection('blog')).filter((post) =>
-    post.data.tags?.includes(tag)
+import getCombinedPosts from '@utils/getCombinedPosts';
+import PostListing from './PostListing.astro';
+
+interface Link {
+    url: string;
+    title: string;
+}
+
+const { tag, bmsTitles } = Astro.props;
+// const relatedPosts = (
+//     await getCollection('blog', (post) =>
+//         post.data.tags?.map((t) => t?.toLowerCase()).includes(tag)
+//     )
+// ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const combinedPosts = (await getCombinedPosts()).filter(
+    (post) =>
+        post.data.tags
+            ?.map((t: string) => t?.toLowerCase())
+            .includes(tag.toLowerCase()) || bmsTitles?.includes(post.data.title)
 );
 ---
 
-<ul>
-    {
-        relatedPosts.map((post) => (
-            <li>
-                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-            </li>
-        ))
-    }
-</ul>
+{combinedPosts.map((post) => <PostListing post={post} />)}

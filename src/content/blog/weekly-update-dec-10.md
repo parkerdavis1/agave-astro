@@ -12,8 +12,8 @@ tags:
     - new-feature
     - consulting
     - RainCrow
-    - EVS
-    - CCAM
+    - evs
+    - ccam
 draft: false
 ---
 
