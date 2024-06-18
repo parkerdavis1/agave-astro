@@ -16,6 +16,7 @@ liveUrl: https://raincrow.app/
 featured: true
 date: 2023-11-16
 ---
+import RelatedPosts from '@components/RelatedPosts.astro'
 
 ## Links
 
@@ -42,3 +43,7 @@ If the user wants to gather weather data before a checklist is submitted, they c
 It does require more input from the user, but I tried to make the input as painless as possible. The locate button automatically inputs your current GPS coordinates. The date and start time automatically pre-fill the current date and the time rounded down to the nearest hour. The duration accepts minutes, mimicking data fields on eBird.
 
 ![RainCrow eBird Weather pre-submit screenshot](./pre-submit.png)
+
+## Posts tagged with "RainCrow"
+
+<RelatedPosts tag="raincrow"  bmsTitles={['Slow Doves (and updates)', 'RainCrow']} />

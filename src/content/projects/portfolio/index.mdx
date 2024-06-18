@@ -23,6 +23,7 @@ featured: false
 draft: false
 date: 2023-11-19
 ---
+import RelatedPosts from '@components/RelatedPosts.astro'
 
 ## Links
 
@@ -38,3 +39,7 @@ After rebuilding this site with a blog using Eleventy, I used Astro to build the
 
 <p><a href={frontmatter.v1}>Version 1</a></p>
 <p><a href={frontmatter.v2}>Version 2</a></p>
+
+## Posts tagged with "portfolio"
+
+<RelatedPosts tag="portfolio" />

@@ -11,6 +11,7 @@ tags:
     - progressive-enhancement
     - svelte
     - deno
+    - portfolio
 draft: false
 ---
 
@@ -26,7 +27,7 @@ draft: false
 
 [Part 1 - ASCII art](/blog/2024-06-comments)
 
-# Part 2 - implementing comments
+## SQLite
 
 Having a static site makes dynamic content like user submitted comments a bit more complicated. I've looked into ready-made solutions in the past, but they are largely pretty bad.
 
