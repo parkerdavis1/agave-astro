@@ -27,7 +27,7 @@ export const POST: APIRoute = async ({ request }) => {
     console.log('comment', comment);
 
     // trigger notification email (in production)
-    if (import.meta.env.PROD) {
+    if (import.meta.env.PROD || import.meta.env.SEND_EMAILS_IN_DEV === 'TRUE') {
         await fetch(
             'https://parkerdavis-reportcommentnotification.web.val.run',
             {

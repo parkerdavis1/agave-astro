@@ -38,7 +38,10 @@ export const server = {
             });
 
             // if in production, poke val.town to send an email notification
-            if (import.meta.env.PROD) {
+            if (
+                import.meta.env.PROD ||
+                import.meta.env.SEND_EMAILS_IN_DEV === 'TRUE'
+            ) {
                 fetch('https://parkerdavis-newcomment.web.val.run', {
                     method: 'POST',
                     body: JSON.stringify(input),
