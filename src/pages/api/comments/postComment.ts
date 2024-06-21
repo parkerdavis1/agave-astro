@@ -49,22 +49,23 @@ export const POST: APIRoute = async ({ request, redirect }) => {
         );
     }
     // insert comment in DB
-    const [postedComment] = await db
-        .insert(Comments)
-        .values({
-            ...data,
-            path: decodeURIComponent(String(path)),
-            id: uuid(),
-        })
-        .returning();
+    // commented out for type error
+    // const [postedComment] = await db
+    //     .insert(Comments)
+    //     .values({
+    //         ...data,
+    //         path: decodeURIComponent(String(path)),
+    //         id: uuid(),
+    //     })
+    //     .returning();
 
-    // if in production, poke val.town to send an email notification
-    if (import.meta.env.PROD || import.meta.env.SEND_EMAILS_IN_DEV === 'TRUE') {
-        fetch('https://parkerdavis-newcommentnotification.web.val.run', {
-            method: 'POST',
-            body: JSON.stringify(postedComment),
-        });
-    }
+    // // if in production, poke val.town to send an email notification
+    // if (import.meta.env.PROD || import.meta.env.SEND_EMAILS_IN_DEV === 'TRUE') {
+    //     fetch('https://parkerdavis-newcommentnotification.web.val.run', {
+    //         method: 'POST',
+    //         body: JSON.stringify(postedComment),
+    //     });
+    // }
 
     // return new Response('OK', { status: 200 });
     return redirect(decodeURIComponent(String(path)), 301);

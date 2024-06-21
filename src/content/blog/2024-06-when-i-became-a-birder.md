@@ -1,7 +1,7 @@
 ---
 title: When I Became a Birder, Almost Everything Else Fell Into Place
 description: An short excellent essay by Ed Yong
-date: 2024-06-21T06:00:00
+date: 2024-06-21T10:00:00
 tags:
     - birds
     - birding
