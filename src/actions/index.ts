@@ -53,21 +53,21 @@ export const server = {
     }),
 
     // ported to API route ✅
-    getComments: defineAction({
-        handler: async (path) => {
-            if (import.meta.env.DEV) {
-                //simulate slow DB network in Dev mode
-                await delayDB();
-            }
-            return await db
-                .select()
-                .from(Comments)
-                .where(
-                    and(eq(Comments.path, path), eq(Comments.deleted, false))
-                )
-                .orderBy(desc(Comments.date));
-        },
-    }),
+    // getComments: defineAction({
+    //     handler: async (path) => {
+    //         if (import.meta.env.DEV) {
+    //             //simulate slow DB network in Dev mode
+    //             await delayDB();
+    //         }
+    //         return await db
+    //             .select()
+    //             .from(Comments)
+    //             .where(
+    //                 and(eq(Comments.path, path), eq(Comments.deleted, false))
+    //             )
+    //             .orderBy(desc(Comments.date));
+    //     },
+    // }),
 
     // ported to API route ✅
     reportComment: defineAction({
