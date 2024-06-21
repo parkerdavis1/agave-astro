@@ -170,7 +170,7 @@
             action={POST_COMMENT_ENDPOINT}
             method="POST"
             class="py-5 flex flex-col gap-2"
-            on:submit={postCommentAPI}
+            on:submit={postCommentAction}
         >
             <label for="author" class="flex flex-col"
                 >Name

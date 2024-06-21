@@ -29,8 +29,6 @@ export const server = {
             //     body: purify.sanitize(input.body),
             // };
 
-            console.log('INPUT FROM ACTION', input);
-
             // insert comment in DB
             await db.insert(Comments).values({
                 ...input,
@@ -38,7 +36,10 @@ export const server = {
             });
 
             // if in production, poke val.town to send an email notification
-            if (import.meta.env.PROD) {
+            if (
+                import.meta.env.PROD ||
+                import.meta.env.SEND_EMAILS_IN_DEV === 'TRUE'
+            ) {
                 fetch('https://parkerdavis-newcomment.web.val.run', {
                     method: 'POST',
                     body: JSON.stringify(input),
@@ -50,21 +51,21 @@ export const server = {
     }),
 
     // ported to API route ✅
-    getComments: defineAction({
-        handler: async (path) => {
-            if (import.meta.env.DEV) {
-                //simulate slow DB network in Dev mode
-                await delayDB();
-            }
-            return await db
-                .select()
-                .from(Comments)
-                .where(
-                    and(eq(Comments.path, path), eq(Comments.deleted, false))
-                )
-                .orderBy(desc(Comments.date));
-        },
-    }),
+    // getComments: defineAction({
+    //     handler: async (path) => {
+    //         if (import.meta.env.DEV) {
+    //             //simulate slow DB network in Dev mode
+    //             await delayDB();
+    //         }
+    //         return await db
+    //             .select()
+    //             .from(Comments)
+    //             .where(
+    //                 and(eq(Comments.path, path), eq(Comments.deleted, false))
+    //             )
+    //             .orderBy(desc(Comments.date));
+    //     },
+    // }),
 
     // ported to API route ✅
     reportComment: defineAction({
