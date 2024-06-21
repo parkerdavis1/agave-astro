@@ -29,8 +29,6 @@ export const server = {
             //     body: purify.sanitize(input.body),
             // };
 
-            console.log('INPUT FROM ACTION', input);
-
             // insert comment in DB
             await db.insert(Comments).values({
                 ...input,
