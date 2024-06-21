@@ -6,7 +6,7 @@
         "dev": "astro dev",
         "start": "astro dev",
         "build": "astro check && astro build",
-        "noIndex": "astro build && echo 'User-agent: *\nDisallow: /' > dist/robots.txt",
+        "noIndex": "astro build --remote && echo 'User-agent: *\nDisallow: /' > dist/robots.txt",
         "preview": "astro preview",
         "astro": "astro",
         "test": "vitest"
