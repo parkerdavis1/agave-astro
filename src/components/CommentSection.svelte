@@ -13,7 +13,7 @@
     const POST_COMMENT_ENDPOINT = '/api/comments/postComment';
 
     let comments = initComments;
-    let activeForm = true;
+    let activeForm = false;
     let commentsHeading;
     let submitting = false;
     let errorMessage;

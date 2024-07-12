@@ -15,7 +15,7 @@ draft: false
 
 I built a web scraper earlier this week. It uses [Sveltekit](https://kit.svelte.dev/) for the front/back end and [SQLite](https://www.sqlite.org/) for the database. [Puppeteer](https://pptr.dev/) is used to programmatically traverse the sites and extract the desired information. I can then edit the metadata, make notes about each job, and most importantly, check a checkbox to hide the job once I am done with it.
 
-{% animatedImage "./jobscraper3.gif", "Job Scraper Demo" %}
+![Job Scraper Demo](./jobscraper3.gif)
 
 Each job board gets its own script file which handles the unique scraping logic for each site. I copy over the basic script for each job board then change the various `querySelector()` arguments for finding the job listing containers, titles, and link URLs.
 
@@ -121,7 +121,7 @@ try {
 }
 ```
 
-The next obvious optimization would be to take the best of both of these approaches and wrap each script in a write*to_database function so the data is saved immediately as it becomes available. Then each script runs in parallel \_and* the data is immediately saved. This also allows the extracted data to be saved even if one of the other scripts throws an error. Maybe I'll go do that right now...
+The next obvious optimization would be to take the best of both of these approaches and wrap each script in a write_to_database function so the data is saved immediately as it becomes available. Then each script runs in parallel _and_ the data is immediately saved. This also allows the extracted data to be saved even if one of the other scripts throws an error. Maybe I'll go do that right now...
 
 ...and here we go:
 

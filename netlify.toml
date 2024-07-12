@@ -4,3 +4,9 @@ publish = "dist"
 
 [dev]
 command = "pnpm run build --remote"
+
+[context.deploy-preview]
+command = "npm run noIndex"
+
+[context.branch-deploy]
+command = "npm run noIndex"
