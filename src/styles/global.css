@@ -22,7 +22,7 @@
     --step-4: 2.074rem;
     --step-5: 2.488rem;
 
-    --body-width: 45rem;
+    --body-width: 40rem;
 
     --text-color: hsl(var(--text-color-values));
     --text-color-faded: hsl(var(--text-color-values) / 0.5);
@@ -43,7 +43,7 @@
 
 html,
 body {
-    font-size: 15px;
+    font-size: 16px;
     padding: 0;
     margin: 0 auto;
     font-family: var(--font-family);
