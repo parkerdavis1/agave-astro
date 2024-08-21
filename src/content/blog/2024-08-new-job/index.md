@@ -16,7 +16,11 @@ When I thought about Lee and Cindy, who managed the database and mobile data col
 
 I thought the environmental sector, but really any sector, could use more folks like them who could make technology better serve its needs. -->
 
-Before then, I thought coding and computer science related jobs were out of reach. I put programming in the same category as classical violinist, where if you didn't start young, mastery would be elusive. In spite of that, and buoyed by the unprecedented demand for developers during the pandemic, I started learning web development. I figured no matter what career path I go down, knowing how to build a functional website would be a handy skill.
+<!-- Before then, I thought coding and computer science related jobs were out of reach.  -->
+<!-- I put programming in the same category as classical violinist, where if you didn't start young, mastery would be elusive. -->
+<!-- What could I contribute starting in my mid-30s? -->
+
+For most of my life, I thought software engineering jobs were not a viable option for me – that was the realm of whiz kid hackers and indoor folks. In spite of my misconceptions, and buoyed by the unprecedented demand for developers early in the pandemic, I started to learn web development. I figured no matter what career path I go down, knowing how to build a functional website would be a handy skill.
 
 I started simple, took free courses on Codecademy, moved on to more advanced courses, and kept building more and more on top of what I had learned: HTML, CSS, Javascript, everything built on top, and everything supporting it from below. Somewhat to my surprise – I really enjoyed it! It tapped into the part of myself that loved building contraptions with K’nex as a kid. All of the unexpected roadblocks and challenges working on projects became interesting puzzles to be solved.
 
@@ -24,10 +28,10 @@ By the time I felt I had learned enough to be hirable, finding a job proved to b
 
 Three years later though, the hard work of learning a new skill has paid off. I'm excited to announce that I've started a new job as the Heritage Data Management System Systems Manager with the Arizona Game and Fish Department. With system in the title twice, you know it's got to be good.
 
-It is a really fascinating role that is part software development, part data management, part biology, all in service of conservation in Arizona. The HDMS program processes field data not only from all of the AZGFD programs but also everyone in Arizona doing field studies that require a Scientific Activity License. It makes the data more easily available within and to a certain extent outside of the department to help guide conservation strategies and future studies.  Looking through the license tables I see many familiar names of folks I've worked with over the past 9 years. It is highly likely some of the data I've collected over the years has made its way to the HDMS database.
+It is a really fascinating role that is part software development, part biology, part data management, all in service of conservation in Arizona. The HDMS program processes field data not only from all of the AZGFD programs but also everyone in Arizona doing field studies that require a Scientific Activity License. It makes the data more easily available to help guide conservation strategies and future studies. Looking through the license tables I see many familiar names of folks I've worked with over the past 9 years. It is highly likely some of the data I've collected over the years has made its way to the HDMS database.
 
 What is most exciting about the position is, as systems manager, it is my job to improve workflows. If a process causes frustration or confusion, I get to fix that, and where I see the opportunity I get to create brand new tools. It requires attention to detail, know-how and most of all, creativity.
 
 The HDMS team has great folks and I'm excited to continue digging in.
 
-My office window species list currently sits at 8, full of potential.
+My office window species list currently sits at 10, full of potential.
