@@ -16,12 +16,12 @@ export async function getStaticPaths() {
     );
 
     return uniqueTags.map((tag) => {
-        const filteredBlog = blogPosts.filter((post) =>
-            post.data.tags?.includes(tag)
-        );
-        const filteredProjects = projects.filter((project) =>
-            project.data.tags?.includes(tag)
-        );
+        const filteredBlog = blogPosts
+            .filter((post) => post.data.tags?.includes(tag))
+            .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+        const filteredProjects = projects
+            .filter((project) => project.data.tags?.includes(tag))
+            .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
         return {
             params: { tag: tag },
