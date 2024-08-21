@@ -1,7 +1,7 @@
 ---
 title: I got a new job!
 description: Some reflections on my career transition.
-date: 2024-08-20
+date: 2024-08-21
 tags:
     - career
     - updates
