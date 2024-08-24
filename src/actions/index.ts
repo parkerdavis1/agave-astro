@@ -40,10 +40,13 @@ export const server = {
                 import.meta.env.PROD ||
                 import.meta.env.SEND_EMAILS_IN_DEV === 'TRUE'
             ) {
-                fetch('https://parkerdavis-newcomment.web.val.run', {
-                    method: 'POST',
-                    body: JSON.stringify(input),
-                });
+                fetch(
+                    'https://parkerdavis-newcommentnotification.web.val.run',
+                    {
+                        method: 'POST',
+                        body: JSON.stringify(input),
+                    }
+                );
             }
             return { ok: true, status: 200, message: 'OK FROM SERVER ACTION' };
             // return new Response('OK FROM SERVER ACTION', { status: 200 });
