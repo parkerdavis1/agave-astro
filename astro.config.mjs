@@ -18,14 +18,10 @@ export default defineConfig({
         svelte(),
         db(),
     ],
-    output: 'hybrid',
     adapter: netlify(),
     vite: {
         optimizeDeps: {
             exclude: ['astro:db'],
         },
-    },
-    experimental: {
-        actions: true,
     },
 });
