@@ -1,4 +1,7 @@
 {
     "editor.formatOnSave": true,
-    "workbench.colorTheme": "GitHub Dark"
+    "workbench.colorTheme": "GitHub Dark",
+    "[mdx]": {
+        "editor.wordWrap": "on"
+    }
 }
