@@ -30,7 +30,9 @@ const initCount = likes.count;
         <TOC headings={headings} />
         <main>
             <article class="flow">
-                <h1>{post.data.title}</h1>
+                <h1>
+                    {post.data.title}
+                </h1>
                 <div class="mb-8">
                     <DisplayDate date={post.data.date} format="MMMM DD, YYYY" />
                     <DisplayTags tags={post.data.tags} />
