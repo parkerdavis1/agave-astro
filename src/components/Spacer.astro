@@ -1,0 +1,37 @@
+---
+const { className } = Astro.props;
+---
+
+<!-- <div></div>
+
+<style>
+    hr,
+    div {
+        margin-block: 2em;
+    }
+</style> -->
+<hr class={className} />
+
+<style>
+    hr {
+        border: none;
+        border-top: 1px dashed var(--text-color);
+        color: var(--text-color);
+        overflow: visible;
+        text-align: center;
+        height: 5px;
+        margin-block: 4em;
+        /* width: 50%; */
+        width: 14em;
+        max-width: 100%;
+        margin-inline: auto;
+    }
+
+    hr::after {
+        background: var(--background-color);
+        content: '§';
+        padding: 0 4px;
+        position: relative;
+        top: -14px;
+    }
+</style>

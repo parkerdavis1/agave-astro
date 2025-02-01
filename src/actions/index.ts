@@ -1,8 +1,9 @@
-export const prerender = false;
-import { defineAction, z } from 'astro:actions';
-import { db, Comments, desc, eq, and } from 'astro:db';
-import { v4 as uuid } from 'uuid';
-import { delayDB } from '@utils/delayDB';
+export const prerender = false
+import { defineAction} from 'astro:actions'
+import { z } from 'astro:schema'
+import { db, Comments, desc, eq, and } from 'astro:db'
+import { v4 as uuid } from 'uuid'
+import { delayDB } from '@utils/delayDB'
 // import DOMPurify from 'dompurify';
 // import { JSDOM } from 'jsdom';
 // const window = new JSDOM('').window;
@@ -10,16 +11,18 @@ import { delayDB } from '@utils/delayDB';
 
 // EXPERIMENTAL, DOESN'T WORK ON NETLIFY YET
 
+const postCommentInput = z.object({
+    path: z.string(),
+    author: z.string(),
+    body: z.string(),
+})
+
 export const server = {
     // ported to API route ✅
     postComment: defineAction({
         accept: 'form',
-        input: z.object({
-            path: z.string(),
-            author: z.string(),
-            body: z.string(),
-        }),
-        handler: async (input) => {
+        input: postCommentInput,
+        handler: async (input: z.infer<typeof postCommentInput>) => {
             if (import.meta.env.DEV) {
                 //simulate slow DB network in Dev mode
                 await delayDB();
@@ -73,7 +76,7 @@ export const server = {
     // ported to API route ✅
     reportComment: defineAction({
         input: z.string(),
-        handler: async (id) => {
+        handler: async (id: string) => {
             if (import.meta.env.DEV) {
                 //simulate slow DB network in Dev mode
                 await delayDB();
