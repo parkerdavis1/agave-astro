@@ -1,6 +1,7 @@
 import getCombinedPosts from '@utils/getCombinedPosts';
 import { metadata } from 'src/metadata';
 import { filterDrafts } from '@utils/filterDrafts';
+import { setDateTime } from '@utils/setDateTime';
 
 function formatPostMetadataForJsonFeed(post) {
     const url = post.bms
@@ -11,7 +12,7 @@ function formatPostMetadataForJsonFeed(post) {
         url: url,
         title: post.data.title,
         content_text: post.data.description,
-        date_published: new Date(post.data.date),
+        date_published: setDateTime(post.data.date),
     };
     return formattedObject;
 }
