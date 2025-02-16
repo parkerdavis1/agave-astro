@@ -3,7 +3,18 @@ const year = new Date().getFullYear();
 ---
 
 <footer>
-    <span>&copy; Parker Davis {year}</span>
+    <div class="mx-auto flex gap-4 justify-center items-centermin-h-16">
+        <div class="flex gap-4 flex-wrap">
+            <a href="/rss">/rss</a>
+            <a href="/about">/about</a>
+            <a href="/projects">/projects</a>
+            <a href="/blog">/blog</a>
+            <a href="/tags">/tags</a>
+        </div>
+    </div>
+    <div class="pt-8">
+        <span>© Parker Davis {year}</span>
+    </div>
 </footer>
 
 <style>
@@ -11,5 +22,6 @@ const year = new Date().getFullYear();
         padding-top: 2rem;
         padding-inline: 1rem;
         font-size: var(--step--1);
+        text-align: center;
     }
 </style>
