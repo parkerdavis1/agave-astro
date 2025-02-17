@@ -38,10 +38,21 @@ const tagsWithCount = countAndSortTags(allTags);
                         class="no-underline hover:underline"
                         href={`/tags/${tag[0]}`}
                     >
-                        {tag[0]} – {tag[1]}
+                        <span class="tag-name">{tag[0]}</span>
+                        <span class="tag-num"> {tag[1]}</span>
                     </a>
                 </li>
             ))
         }
     </ul>
 </MainFlow>
+
+<style>
+    .tag-name {
+        color: var(--text-color);
+    }
+    .tag-num {
+        text-size: var(--step--1);
+        color: var(--text-color-faded);
+    }
+</style>
