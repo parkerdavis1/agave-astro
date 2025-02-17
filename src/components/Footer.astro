@@ -12,7 +12,7 @@ const year = new Date().getFullYear();
             <a href="/tags">/tags</a>
         </div>
     </div>
-    <div class="pt-8">
+    <div class="pt-8 copyright">
         <span>© Parker Davis {year}</span>
     </div>
 </footer>
@@ -21,7 +21,9 @@ const year = new Date().getFullYear();
     footer {
         padding-top: 2rem;
         padding-inline: 1rem;
-        font-size: var(--step--1);
         text-align: center;
+    }
+    .copyright {
+        font-size: var(--step--1);
     }
 </style>

@@ -80,4 +80,4 @@ This works and also applies variable shortening for maximum optimization but it 
 
 ## Go forth!
 
-With your new bookmarklet you can now read some emails with _ease_.
+With your new bookmarklet you can now read your emails with _ease_.
