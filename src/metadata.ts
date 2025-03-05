@@ -1,4 +1,5 @@
-const email = 'parkerdavis@duck.com';
+// These are broken out so the social links can reference the metadata
+const email = 'parker@birdsmakesound.com';
 export const emailSubject = 'Nice site!';
 
 export const metadata = {
@@ -6,7 +7,6 @@ export const metadata = {
     description: 'Arizona-based developer blog and portfolio',
     email: email,
     socialImage: '/social.png',
-    twitter: 'https://twitter.com/park_d',
     socials: [
         {
             name: 'GitHub',
