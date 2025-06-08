@@ -25,7 +25,7 @@
     async function handleReport(e) {
         e.preventDefault();
 
-        // set localstorage state
+        // set localstorage state for comment state
         localStorage.setItem(LOCAL_REPORTED_KEY, 'TRUE');
         reported = Boolean(localStorage.getItem(LOCAL_REPORTED_KEY));
         localStorage.setItem(LOCAL_HIDDEN_KEY, 'TRUE');

@@ -26,6 +26,10 @@ javascript:(()=>{const r=document.querySelectorAll(".Observation");if(r.length==
 
 ## How to use it
 
+<p>You can drag this link into your bookmarks bar in your browser: <a href='javascript:(()=>{const r=document.querySelectorAll(".Observation");if(r.length===0){alert("No eBird observations found on page!");return}if(document.querySelector("[data-species]")){alert("Already run script. If you are having issues, reload page and try again.");return}const c=r[0].parentNode;function i(t){return t.querySelector(".Observation-species .Heading-main").innerText}function u(t){let e=new Set;for(const n of t){const o=i(n);e.add(o)}return e}function p(t,e){for(const n of t){const o=document.createElement("details");o.setAttribute("data-species",n),o.setAttribute("style","margin-top: 0.5em");const s=document.createElement("summary");s.setAttribute("style","cursor: pointer; list-style:"),s.innerText=n,o.appendChild(s),e.appendChild(o)}}function d(t){for(let e of t){const n=i(e),o=document.querySelector(`[data-species="${n}"]`),s=e.previousElementSibling;o.appendChild(s),o.appendChild(e)}}function l(t){for(species of t){const e=document.querySelectorAll(`[data-species="${species}"] .Observation`).length.toString(),n=document.querySelector(`[data-species="${species}"] summary`);n.innerText=`${n.innerText} (${e})`}}const a=u(r);p(a,c),d(r),l(a)})();'>eBird Compress</a></p>
+
+~ or ~ 
+
 1. Create a random bookmark (this blog post for instance)
 2. Open your bookmark manager
 3. Edit the bookmark you just created, rename it to whatever you want (maybe "eBird Compress"), and replace the URL with the code above
