@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 @view-transition {
     navigation: auto;
@@ -102,6 +100,7 @@ h1,
 h2,
 h3 {
     line-height: 1.1;
+    text-wrap: pretty;
     text-wrap: balance;
 }
 h1 {
@@ -127,6 +126,10 @@ h6 {
 
 a {
     text-decoration: underline;
+}
+
+a.no-underline {
+    text-decoration: none;
 }
 
 img {

@@ -50,6 +50,14 @@ const nav = [
         align-items: end;
         margin-block: 4rem;
     }
+
+    header a {
+        text-decoration: none;
+        & :hover {
+            text-decoration: underline;
+        }
+    }
+
     .icon {
         grid-area: icon;
         align-self: start;
@@ -64,12 +72,15 @@ const nav = [
         grid-area: nav;
         line-height: 1.25rem;
     }
+
     .nav-item {
         border-right: 1px dotted var(--text-color);
     }
+
     .nav-item:first-of-type {
         padding-inline-start: 0;
     }
+
     .nav-item:last-of-type {
         border: none;
     }
