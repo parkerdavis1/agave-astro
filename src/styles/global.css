@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 @view-transition {
     navigation: auto;
@@ -127,6 +125,10 @@ h6 {
 
 a {
     text-decoration: underline;
+}
+
+a.no-underline {
+    text-decoration: none;
 }
 
 img {
