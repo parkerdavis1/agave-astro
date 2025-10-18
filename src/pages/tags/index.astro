@@ -6,8 +6,14 @@ const blogPosts = await getCollection('blog');
 const projects = await getCollection('projects');
 
 const allTags = [
-    ...blogPosts.map((blog) => blog.data.tags).flat(),
-    ...projects.map((project) => project.data.tags).flat(),
+    ...blogPosts
+        .map((blog) => blog.data.tags)
+        .flat()
+        .map((t) => t.toLowerCase()),
+    ...projects
+        .map((project) => project.data.tags)
+        .flat()
+        .map((t) => t.toLowerCase()),
 ] as string[];
 
 interface StringCount {
