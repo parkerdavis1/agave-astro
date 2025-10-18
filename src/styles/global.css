@@ -194,6 +194,11 @@ article li li {
     code {
         background: #ffffff22;
     }
+
+    .button {
+        background: white;
+        color: black;
+    }
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -214,14 +219,13 @@ article li li {
     padding: 0.25rem 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-    .button {
-        background: white;
-        color: black;
-    }
-}
-
 hr {
     border-color: var(--text-color-faded);
     margin-inline: 2rem;
+}
+
+th,
+td {
+    text-align: left;
+    padding-inline-end: 1rem;
 }
