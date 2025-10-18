@@ -116,5 +116,3 @@ Here are the stats of RainCrow visitors from across the globe since December 202
 | 🇦🇪  | United Arab Emirates      | 3     | 0%      |
 | 🇩🇿  | Algeria                   | 3     | 0%      |
 | 🇬🇵  | Guadeloupe                | 3     | 0%      |
-
-Check it out for yourself at [raincrow.app](https://raincrow.app)!
