@@ -8,7 +8,7 @@ tags:
 draft: false
 ---
 
-Thank you to Tatiana Pássaro for translating [RainCrow](https://raincrow.app) into Portuguese. She apparently did it for her father, an avid birdwatcher in Brazil who enjoys using RainCrow. The new translation has been live since January 2025 _but I am just now getting around to writing it up_.
+Thank you to Tatiana Pássaro for translating [RainCrow](https://raincrow.app) into Portuguese. She apparently did it for her father, an avid birdwatcher in Brazil who enjoys using RainCrow. The new translation has been live since January 2025 but I am just now getting around to writing it up.
 
 RainCrow now has 4 official languages built into the application (English, Spanish, French, and Portuguese). That means if I make changes to the text, I have to do so in four languages now. 😅
 
