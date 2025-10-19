@@ -13,23 +13,23 @@ export async function getStaticPaths() {
             ...blogPosts
                 .map((blog) => blog.data.tags)
                 .flat()
-                .map((t) => t.toLowerCase()),
+                .map((t) => t?.toLowerCase()),
             ...projects
                 .map((project) => project.data.tags)
                 .flat()
-                .map((t) => t.toLowerCase()),
+                .map((t) => t?.toLowerCase()),
         ])
     );
 
     return uniqueTags.map((tag) => {
         const filteredBlog = blogPosts
             .filter((post) =>
-                post.data.tags?.map((t) => t.toLowerCase()).includes(tag)
+                post.data.tags?.map((t) => t?.toLowerCase()).includes(tag)
             )
             .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
         const filteredProjects = projects
             .filter((project) =>
-                project.data.tags?.map((t) => t.toLowerCase()).includes(tag)
+                project.data.tags?.map((t) => t?.toLowerCase()).includes(tag)
             )
             .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 

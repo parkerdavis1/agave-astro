@@ -9,11 +9,11 @@ const allTags = [
     ...blogPosts
         .map((blog) => blog.data.tags)
         .flat()
-        .map((t) => t.toLowerCase()),
+        .map((t) => t?.toLowerCase()),
     ...projects
         .map((project) => project.data.tags)
         .flat()
-        .map((t) => t.toLowerCase()),
+        .map((t) => t?.toLowerCase()),
 ] as string[];
 
 interface StringCount {
