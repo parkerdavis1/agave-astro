@@ -1,14 +1,14 @@
 ---
 title: RainCrow Português
 description: RainCrow continues its trot across the globe
-date: 2025-10-18
+date: 2025-10-19
 tags:
     - raincrow
     - i18n
 draft: false
 ---
 
-Thank you to Tatiana Pássaro for translating [RainCrow](https://raincrow.app) into Portuguese. She says she did it for her father, an avid birdwatcher in Brazil who enjoys using RainCrow. The new translation has been live since January 2025 but I am just now getting around to writing it up.
+Thank you to Tatiana Pássaro for translating [RainCrow](https://raincrow.app) into Portuguese. She told me she did it for her father, an avid birdwatcher in Brazil who enjoys using RainCrow. The new translation has been live since January 2025 but I am just now getting around to writing it up.
 
 RainCrow now has 4 official languages built into the application (English, Spanish, French, and Portuguese). That means if I make changes to the text, I have to do so in four languages now. 😅
 

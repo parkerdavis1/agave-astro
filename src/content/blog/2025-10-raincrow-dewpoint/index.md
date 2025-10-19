@@ -5,7 +5,7 @@ date: 2025-10-19
 tags:
     - raincrow
     - weather
-draft: true
+draft: false
 ---
 
 From [weather.gov](https://www.weather.gov/arx/why_dewpoint_vs_humidity):
@@ -20,8 +20,12 @@ So if you want a real judge of just how "dry" or "humid" it will feel outside, l
 
 </blockquote>
 
-Al from North Carolina requested that I add dew point to RainCrow, as it is generally a better indicator of how humid it feels. I made those changes [yesterday](https://github.com/parkerdavis1/raincrow/commit/5e1fcb9a5a0ef8f37c955e6358ad2066301d49c3).
+Al from North Carolina emailed me a while back requesting that I add dew point to RainCrow, as it is generally a better indicator of how humid it feels. I made those changes [yesterday](https://github.com/parkerdavis1/raincrow/commit/5e1fcb9a5a0ef8f37c955e6358ad2066301d49c3).
+
+<div class="w-2/3 mx-auto">
 
 ![RainCrow screenshot showing dew point](./raincrow_dew_screen_crop.png)
+
+</div>
 
 Check it out at [raincrow.app](https://raincrow.app)
