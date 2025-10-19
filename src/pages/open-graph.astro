@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import SocialCard from '@components/SocialCard.svelte';
+import Icon from 'src/components/Icon.astro';
+// import 'src/styles/global.css';
+
+const posts = await getCollection('blog');
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <SocialCard posts={posts} client:only="svelte">
+            <Icon icon="btsp" />
+        </SocialCard>
+    </body>
+</html>
+
+<style is:global>
+    :root {
+        --font-family: -apple-system, system-ui, sans-serif;
+        --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT,
+            Andale Mono, Lucida Console, Lucida Sans Typewriter,
+            DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono,
+            Nimbus Mono L, Courier New, Courier, monospace;
+
+        /* Minor Third */
+        --step--3: 0.579rem;
+        --step--2: 0.694rem;
+        --step--1: 0.833rem;
+        --step-0: 1rem;
+        --step-1: 1.2rem;
+        --step-2: 1.44rem;
+        --step-3: 1.728rem;
+        --step-4: 2.074rem;
+        --step-5: 2.488rem;
+    }
+
+    html {
+        font-family: var(--font-family);
+        /* margin: 0; */
+    }
+
+    h1,
+    h2,
+    h3 {
+        line-height: 1.1;
+        text-wrap: pretty;
+        text-wrap: balance;
+    }
+    h1 {
+        font-size: var(--step-4);
+        font-weight: 600;
+    }
+    h2 {
+        font-size: var(--step-3);
+        font-weight: 600;
+    }
+
+    * {
+        margin: 0;
+        /* border: 1px red solid; */
+    }
+    svg {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+</style>

@@ -25,7 +25,7 @@ const [likes] = await db
 const initCount = likes.count;
 ---
 
-<Base title={post.data.title}>
+<Base title={post.data.title} slug={post.slug}>
     <div class="toc-container">
         <TOC headings={headings} />
         <main>
