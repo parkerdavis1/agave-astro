@@ -4,7 +4,7 @@ import fs from 'fs';
 import { join } from 'path';
 import puppeteer from 'puppeteer';
 
-const CARD_WIDTH = 600;
+const CARD_WIDTH = 800;
 const CARD_HEIGHT = 400;
 
 const CONTENT_FOLDER = 'src/content/blog';

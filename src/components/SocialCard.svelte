@@ -9,7 +9,7 @@
     }
 </script>
 
-<div class="p-8 card relative">
+<div class="p-16 card relative">
     <div class="text-zinc-800 z-10 relative text-box">
         <h1 class="text-2xl text-bold">{post.data.title}</h1>
         <h2>Parker Davis</h2>
@@ -35,6 +35,6 @@
 
     .card {
         height: 400px;
-        width: 600px;
+        width: 800px;
     }
 </style>
