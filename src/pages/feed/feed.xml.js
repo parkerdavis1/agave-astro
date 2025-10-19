@@ -25,5 +25,6 @@ export async function GET(context) {
         description: metadata.description,
         site: context.site,
         items,
+        stylesheet: '/rss/styles.xsl',
     });
 }
