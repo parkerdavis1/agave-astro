@@ -17,7 +17,7 @@ export async function GET(context: APIContext) {
         return {
             title: post.data.title,
             // set date time to noon in AZ time
-            pubDate: setDateTime(post.data.date, 12),
+            pubDate: new Date(setDateTime(post.data.date)),
             link,
             description: post.data.description,
         };
@@ -45,7 +45,7 @@ export async function GET(context: APIContext) {
     return rss({
         title: metadata.title,
         description: metadata.description,
-        site: context.site,
+        site: context.site || context.url.origin,
         items,
         stylesheet: "/rss/styles.xsl",
     });
