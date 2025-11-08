@@ -1,0 +1,52 @@
+export const prerender = false;
+
+import rss from "@astrojs/rss";
+import { filterDrafts } from "@utils/filterDrafts";
+import getCombinedPosts from "@utils/getCombinedPosts";
+import { metadata } from "src/metadata.ts";
+import { setDateTime } from "@utils/setDateTime";
+import type { APIContext } from "astro";
+
+export async function GET(context: APIContext) {
+    const posts = (await getCombinedPosts()).filter(filterDrafts);
+    const items = posts.map((post) => {
+        let link = post.bms
+            ? post.data.slug
+            : `${context.site}blog/${post.slug}`;
+
+        return {
+            title: post.data.title,
+            // set date time to noon in AZ time
+            pubDate: setDateTime(post.data.date, 12),
+            link,
+            description: post.data.description,
+        };
+    });
+
+    // forward headers
+    const userAgent = context.request.headers.get("user-agent") || "";
+    const xff = context.request.headers.get("x-forwarded-for") || "";
+
+    // send to Plausible
+    fetch("https://plausible.parkerdavis.dev/api/event", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "User-Agent": userAgent,
+            "X-Forwarded-For": xff,
+        },
+        body: JSON.stringify({
+            domain: new URL(context.request.url).origin,
+            name: "pageview",
+            url: context.request.url,
+        }),
+    }).catch((e) => console.warn("plausible failed", e));
+
+    return rss({
+        title: metadata.title,
+        description: metadata.description,
+        site: context.site,
+        items,
+        stylesheet: "/rss/styles.xsl",
+    });
+}
