@@ -28,8 +28,6 @@
         "astro-expressive-code": "^0.41.3",
         "canvas-confetti": "^1.9.3",
         "dayjs": "^1.11.18",
-        "dompurify": "^3.3.0",
-        "jsdom": "^27.0.1",
         "lucia": "^3.2.2",
         "lucia-adapter-astrodb": "^0.2.0",
         "sharp": "^0.34.4",
@@ -43,8 +41,6 @@
     "devDependencies": {
         "@shikijs/transformers": "^3.13.0",
         "@tailwindcss/typography": "^0.5.19",
-        "@types/dompurify": "^3.2.0",
-        "@types/jsdom": "^27.0.0",
         "@types/uuid": "^11.0.0",
         "puppeteer": "^24.25.0"
     }
