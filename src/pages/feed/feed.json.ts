@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import getCombinedPosts from "@utils/getCombinedPosts";
 import { metadata } from "src/metadata";
 import { filterDrafts } from "@utils/filterDrafts";
