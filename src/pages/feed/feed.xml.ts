@@ -1,6 +1,6 @@
 export const prerender = false;
 
-import rss from "@astrojs/rss";
+import rss, { getRssString } from "@astrojs/rss";
 import { filterDrafts } from "@utils/filterDrafts";
 import getCombinedPosts from "@utils/getCombinedPosts";
 import { metadata } from "src/metadata.ts";
@@ -42,11 +42,18 @@ export async function GET(context: APIContext) {
         }),
     }).catch((e) => console.warn("plausible failed", e));
 
-    return rss({
+    const rssText = await getRssString({
         title: metadata.title,
         description: metadata.description,
         site: context.site || context.url.origin,
         items,
         stylesheet: "/rss/styles.xsl",
+    });
+
+    return new Response(rssText, {
+        headers: {
+            "Content-Type": "application/xml",
+            "Cache-Control": "no-cache",
+        },
     });
 }

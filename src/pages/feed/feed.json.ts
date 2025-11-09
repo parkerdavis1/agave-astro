@@ -73,6 +73,7 @@ export async function GET(context: APIContext) {
         {
             headers: {
                 "Content-Type": "application/json",
+                "Cache-Control": "no-cache",
             },
         },
     );
