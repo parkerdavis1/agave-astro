@@ -12,7 +12,14 @@ const posts = await getCollection('blog');
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>open graph</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body>
         <SocialCard posts={posts} client:only="svelte">
@@ -24,10 +31,12 @@ const posts = await getCollection('blog');
 <style is:global>
     :root {
         --font-family: -apple-system, system-ui, sans-serif;
-        --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT,
-            Andale Mono, Lucida Console, Lucida Sans Typewriter,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono,
-            Nimbus Mono L, Courier New, Courier, monospace;
+        --font-family: 'Crimson Pro', Times, serif;
+        --font-family-monospace:
+            Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
+            Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
+            Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L,
+            Courier New, Courier, monospace;
 
         /* Minor Third */
         --step--3: 0.579rem;
@@ -54,8 +63,8 @@ const posts = await getCollection('blog');
         text-wrap: balance;
     }
     h1 {
-        font-size: var(--step-4);
-        font-weight: 600;
+        font-size: var(--step-5);
+        font-weight: 800;
     }
     h2 {
         font-size: var(--step-3);

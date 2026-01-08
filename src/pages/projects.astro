@@ -1,9 +1,9 @@
 ---
-import ProjectListing from "@components/ProjectListing.astro";
-import MainFlow from "@layouts/MainFlow.astro";
-import { getCollection } from "astro:content";
+import ProjectListing from '@components/ProjectListing.astro';
+import MainFlow from '@layouts/MainFlow.astro';
+import { getCollection } from 'astro:content';
 
-const projects = await getCollection("projects");
+const projects = await getCollection('projects');
 const featured = projects.filter((project) => project.data.featured);
 const other = projects.filter((project) => !project.data.featured);
 ---
