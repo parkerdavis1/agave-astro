@@ -1,8 +1,8 @@
 ---
-import type { MarkdownHeading } from 'astro';
+import type { MarkdownHeading } from "astro";
 
-import { generateToc } from 'src/utils/generateToc.ts';
-import TOCHeading from './TOCHeading.astro';
+import { generateToc } from "src/utils/generateToc.ts";
+import TOCHeading from "./TOCHeading.astro";
 
 interface Props {
     headings: Array<MarkdownHeading>;
@@ -30,12 +30,13 @@ const toc = generateToc(headings);
 
 <style>
     aside {
+        /*font-family: var(--font-sans);*/
         display: none;
         position: sticky;
         top: 5rem;
         order: 2;
         min-width: 10rem;
-        font-size: var(--step--2);
+        font-size: var(--step-0);
     }
 
     @media (min-width: 66rem) {

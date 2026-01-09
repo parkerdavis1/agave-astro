@@ -1,14 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
-import ProjectListing from '@components/ProjectListing.astro';
-const projects = await getCollection('projects');
+import { getCollection } from "astro:content";
+import ProjectListing from "@components/ProjectListing.astro";
+const projects = await getCollection("projects");
 const featuredProjects = projects.filter(({ data }) => data.featured);
 const moreProjects = projects.length - featuredProjects.length;
 ---
 
 <section class="flow">
     <h2>Featured Projects</h2>
-    <ul class="flex flex-col gap-4">
+    <ul class="flex flex-col gap-6">
         {
             featuredProjects.map((project) => (
                 <ProjectListing project={project} />
@@ -17,7 +17,7 @@ const moreProjects = projects.length - featuredProjects.length;
     </ul>
     <p>
         <a href="/projects"
-            >View {moreProjects} more project{moreProjects > 1 ? 's' : null}</a
+            >View {moreProjects} more project{moreProjects > 1 ? "s" : null}</a
         >
     </p>
 </section>
