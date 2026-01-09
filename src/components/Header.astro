@@ -1,18 +1,20 @@
 ---
-import { metadata } from 'src/metadata.ts';
-import Icon from './Icon.astro';
+import { metadata } from "src/metadata.ts";
+import Icon from "./Icon.astro";
 
 const nav = [
-    { text: 'About', url: '/about' },
-    { text: 'Projects', url: '/projects' },
-    { text: 'Blog', url: '/blog' },
+    { text: "About", url: "/about" },
+    { text: "Projects", url: "/projects" },
+    { text: "Blog", url: "/blog" },
 ];
 ---
 
 <header>
-    <a href="/" class="home-link text-2xl font-bold mr-8 no-underline"
-        >{metadata.title}</a
-    >
+    <h1>
+        <a href="/" class="home-link font-bold mr-8 no-underline"
+            >{metadata.title}</a
+        >
+    </h1>
 
     <div class="icon" style="max-width: 6rem">
         <Icon icon="btsp" />
@@ -20,10 +22,10 @@ const nav = [
 
     <nav>
         <h2 class="visually-hidden">Top level navigation menu</h2>
-        <ul class="flex flex-wrap items-end gap-4">
+        <ul class="flex flex-wrap items-end gap-2">
             {
                 nav.map((link) => (
-                    <li class="nav-item inline-block pr-4">
+                    <li class="nav-item inline-block pr-2">
                         <a href={link.url} class="no-underline">
                             {link.text}
                         </a>
@@ -39,22 +41,23 @@ const nav = [
         --icon-width: clamp(3rem, 20vw, 5rem);
         --icon-height: 80px;
     }
+
     header {
         display: grid;
         grid-template-rows: auto auto;
         grid-template-columns: var(--icon-width) 1fr;
         grid-template-areas:
-            'icon title'
-            'icon nav';
+            "icon title"
+            "icon nav";
         column-gap: 1rem;
         align-items: end;
         margin-block: 4rem;
-    }
-
-    header a {
-        text-decoration: none;
-        & :hover {
-            text-decoration: underline;
+        margin-top: 3rem;
+        a {
+            text-decoration: none;
+            & :hover {
+                text-decoration: underline;
+            }
         }
     }
 
@@ -66,6 +69,9 @@ const nav = [
 
     .home-link {
         grid-area: title;
+        font-size: var(--step-3);
+        letter-spacing: 0px;
+        /*font-weight: 400;*/
     }
 
     nav {

@@ -1,9 +1,9 @@
 ---
-import ProjectListing from "@components/ProjectListing.astro";
-import MainFlow from "@layouts/MainFlow.astro";
-import { getCollection } from "astro:content";
+import ProjectListing from '@components/ProjectListing.astro';
+import MainFlow from '@layouts/MainFlow.astro';
+import { getCollection } from 'astro:content';
 
-const projects = await getCollection("projects");
+const projects = await getCollection('projects');
 const featured = projects.filter((project) => project.data.featured);
 const other = projects.filter((project) => !project.data.featured);
 ---
@@ -11,7 +11,7 @@ const other = projects.filter((project) => !project.data.featured);
 <MainFlow title="Projects">
     <h1>Projects</h1>
     <h2>Featured</h2>
-    <ul class="flex flex-col gap-4">
+    <ul class="flex flex-col gap-6">
         {
             featured.map((project) => (
                 <ProjectListing project={project} showTag={true} />
@@ -19,7 +19,7 @@ const other = projects.filter((project) => !project.data.featured);
         }
     </ul>
     <h2>Other</h2>
-    <ul class="flex flex-col gap-4">
+    <ul class="flex flex-col gap-6">
         {
             other.map((project) => (
                 <ProjectListing project={project} showTag={true} />

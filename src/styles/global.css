@@ -1,4 +1,18 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@font-face {
+    font-display: swap;
+    font-family: "Crimson Pro";
+    font-style: normal;
+    src: url("/fonts/CrimsonPro.woff2") format("woff2");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Crimson Pro";
+    font-style: italic;
+    src: url("/fonts/CrimsonPro-italic.woff2") format("woff2");
+}
 
 @view-transition {
     navigation: auto;
@@ -12,10 +26,11 @@
     color-scheme: light dark;
 
     --font-family: -apple-system, system-ui, sans-serif;
-    --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT,
-        Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
-        Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
-        Courier, monospace;
+    --font-family-monospace:
+        Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+        Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+        Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+    --font-family-serif: "Crimson Pro", Times, serif;
 
     /* Minor Third */
     --step--3: 0.579rem;
@@ -29,6 +44,7 @@
     --step-5: 2.488rem;
 
     --body-width: 40rem;
+    --body-width: 55ch;
 
     --text-color: hsl(var(--text-color-values));
     --text-color-faded: hsl(var(--text-color-values) / 0.5);
@@ -36,27 +52,32 @@
     --text-color-link: hsl(var(--text-color-link-values));
     --background-color: hsl(var(--background-color-values));
 
-    --text-color-values: 0 0% 20%;
+    --text-color-values: 0 0% 25%;
     --text-color-link-values: 10.63, 45.28%, 41.57%;
     --background-color-values: 0, 0%, 96.08%;
 
     @media (prefers-color-scheme: dark) {
         --text-color-values: 0 2.63% 85.1%;
+        --text-color-values: 0 2.63% 80%;
         --text-color-link-values: 209.49, 55.14%, 79.02%;
         --background-color-values: 210, 34.38%, 12.55%;
     }
 }
 
-html,
-body {
+html {
     font-size: 16px;
+}
+body {
+    font-size: 20px;
     padding: 0;
     margin: 0 auto;
-    font-family: var(--font-family);
+    font-family: var(--font-family-serif);
+    font-weight: 400;
     color: var(--text-color);
     background-color: var(--background-color);
-    line-height: 1.6;
+    line-height: 1.25;
 }
+
 html {
     overflow-y: scroll;
     scroll-behavior: smooth;
@@ -99,9 +120,10 @@ section {
 h1,
 h2,
 h3 {
-    line-height: 1.1;
+    line-height: 0.9;
     text-wrap: pretty;
     text-wrap: balance;
+    letter-spacing: -1px;
 }
 h1 {
     font-size: var(--step-4);
@@ -153,6 +175,7 @@ cite {
 
 code {
     background: #00000011;
+    font-size: var(--step--1);
 }
 
 article a {
@@ -182,7 +205,7 @@ article li {
     list-style: disc;
 }
 article li li {
-    list-style-type: '- ';
+    list-style-type: "- ";
 }
 
 .small-image {
