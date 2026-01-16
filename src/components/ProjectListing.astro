@@ -3,9 +3,11 @@ const { project, showTag } = Astro.props;
 ---
 
 <li>
-    <a href={`/projects/${project.slug}`}>
-        {project.data.title}
-    </a>
+    <p class="font-medium">
+        <a href={`/projects/${project.slug}`}>
+            {project.data.title}
+        </a>
+    </p>
     {
         showTag && (
             <div class="tags-list">
