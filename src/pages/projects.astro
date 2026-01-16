@@ -1,29 +1,31 @@
 ---
-import ProjectListing from '@components/ProjectListing.astro';
-import MainFlow from '@layouts/MainFlow.astro';
-import { getCollection } from 'astro:content';
+import ProjectListing from "@components/ProjectListing.astro";
+import MainFlow from "@layouts/MainFlow.astro";
+import { getCollection, getEntry } from "astro:content";
 
-const projects = await getCollection('projects');
-const featured = projects.filter((project) => project.data.featured);
+const projects = await getCollection("projects");
 const other = projects.filter((project) => !project.data.featured);
+
+const ccam = await getEntry("projects", "ccam");
+const raincrow = await getEntry("projects", "raincrow");
+const rba = await getEntry("projects", "rba");
+const portfolio = await getEntry("projects", "portfolio");
+const harmonicClouds = await getEntry("projects", "harmonic-clouds");
+const evs = await getEntry("projects", "evs");
 ---
 
 <MainFlow title="Projects">
     <h1>Projects</h1>
     <h2>Featured</h2>
     <ul class="flex flex-col gap-6">
-        {
-            featured.map((project) => (
-                <ProjectListing project={project} showTag={true} />
-            ))
-        }
+        <ProjectListing project={raincrow} showTag={true} />
+        <ProjectListing project={rba} showTag={true} />
+        <ProjectListing project={ccam} showTag={true} />
     </ul>
     <h2>Other</h2>
     <ul class="flex flex-col gap-6">
-        {
-            other.map((project) => (
-                <ProjectListing project={project} showTag={true} />
-            ))
-        }
+        <ProjectListing project={evs} showTag={true} />
+        <ProjectListing project={harmonicClouds} showTag={true} />
+        <ProjectListing project={portfolio} showTag={true} />
     </ul>
 </MainFlow>
