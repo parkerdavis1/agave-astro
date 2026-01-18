@@ -156,6 +156,10 @@ a.no-underline {
     text-decoration: none;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 img {
     font-style: italic;
     /* background: linear-gradient(
