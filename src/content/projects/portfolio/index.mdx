@@ -2,19 +2,19 @@
 title: This Portfolio Site
 description: Minimal static site with sitemap, rss feed, robots.txt, favicons, manifest, image optimization, and more.
 techtags:
-  - Astro
-  - MDX
-  - TailwindCSS
-  - HTML
-  - CSS
-  - Javascript
+    - Astro
+    - MDX
+    - TailwindCSS
+    - HTML
+    - CSS
+    - Javascript
 tags:
-  - astro
-  - mdx
-  - tailwindcss
-  - html
-  - css
-  - javascript
+    - astro
+    - mdx
+    - tailwindcss
+    - html
+    - css
+    - javascript
 githubUrl: https://github.com/parkerdavis1/agave-astro
 liveUrl: https://parkerdavis.dev/
 v1: https://v1.parkerdavis.dev
@@ -23,22 +23,25 @@ featured: false
 draft: false
 date: 2023-11-19
 ---
-import RelatedPosts from '@components/RelatedPosts.astro'
+
+import RelatedPosts from '@components/RelatedPosts.astro';
 
 ## Links
 
 <ProjectLinks githubUrl={frontmatter.githubUrl} liveUrl={frontmatter.liveUrl} />
 
-After rebuilding this site with a blog using Eleventy, I used Astro to build the [CCAM](https://ccam.world) site and really enjoyed its ergonomics, so I ported this site over to Astro too. 
+After rebuilding this site with a blog using Eleventy, I used Astro to build the [CCAM](https://ccam.world) site and really enjoyed its ergonomics, so I ported this site over to Astro too.
 
-[Birds Make Sound](https://birdsmakesound.com) posts are now shown alongside posts here. 
-
-
+[Birds Make Sound](https://birdsmakesound.com) posts are now shown alongside posts here.
 
 ## Previous portfolio versions
 
-<p><a href={frontmatter.v1}>Version 1</a></p>
-<p><a href={frontmatter.v2}>Version 2</a></p>
+<p>
+    <a href={frontmatter.v1}>Version 1</a>
+</p>
+<p>
+    <a href={frontmatter.v2}>Version 2</a>
+</p>
 
 ## Posts tagged with "portfolio"
 

@@ -8,7 +8,7 @@ export function getContrastingColor(color: string): string {
         const bigint = parseInt(hexClean, 16);
         if (hexClean.length === 3) {
             return [(bigint >> 8) & 0xf, (bigint >> 4) & 0xf, bigint & 0xf].map(
-                (v) => v * 17
+                (v) => v * 17,
             );
         } else if (hexClean.length === 6) {
             return [(bigint >> 16) & 0xff, (bigint >> 8) & 0xff, bigint & 0xff];

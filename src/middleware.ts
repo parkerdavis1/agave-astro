@@ -29,7 +29,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         context.cookies.set(
             sessionCookie.name,
             sessionCookie.value,
-            sessionCookie.attributes
+            sessionCookie.attributes,
         );
     }
 
@@ -38,7 +38,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         context.cookies.set(
             sessionCookie.name,
             sessionCookie.value,
-            sessionCookie.attributes
+            sessionCookie.attributes,
         );
     }
 

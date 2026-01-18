@@ -52,7 +52,7 @@ Let's take a look at the expanded "hacker" version where the script and iframe a
         setTimeout(() =>
             document
                 .querySelector(frame.contentWindow.location.hash || null)
-                ?.replaceWith(...frame.contentDocument.body.children)
+                ?.replaceWith(...frame.contentDocument.body.children),
         );
     }
 </script>

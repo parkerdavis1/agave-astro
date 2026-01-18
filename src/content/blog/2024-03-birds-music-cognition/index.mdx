@@ -12,6 +12,7 @@ tags:
     - science
 draft: false
 ---
+
 import one from './01.wav';
 import three from './03.wav';
 import six from './06.wav';
@@ -40,8 +41,8 @@ Here is one of the musical sequences the starlings were trained on where the not
 Here is a test sequence with the same relative changes in pitch and timbre but transposed down four semitones:
 
 <div class="flex items-center gap-4">
-<audio src={three} controls></audio>
-<span>❌</span>
+    <audio src={three} controls></audio>
+    <span>❌</span>
 </div>
 
 When tested with variations like these that preserve melody and timbre but are transposed up or down, the starlings performed poorly on the tests.
@@ -59,13 +60,14 @@ Whatever the timbre might be, we hear all of these overtones as related, so much
 When the researchers changed the timbre but preserved the fundamental frequencies of the melody (same melody, different instrument), starlings were again unable to recognize the melodies and performed poorly on the tests.
 
 Original trained sequence:
+
 <audio src={one} controls></audio>
 
 Same pitches, different timbre (all piano):
 
 <div class="flex items-center gap-4">
-<audio src={six} controls></audio>
-<span>❌</span>
+    <audio src={six} controls></audio>
+    <span>❌</span>
 </div>
 
 This is unexpected... to our ears these sequences are very similar. The base frequencies must not be the primary cognitive anchor for the birds. Again from the "Significance" section:
@@ -78,18 +80,28 @@ Hmm!
 
 Here we go. Spectral shape. I think the easiest way to think about spectral shape is by looking at a spectrogram.
 
-<iframe src="https://macaulaylibrary.org/asset/125582211/embed" height="383" width="100%" frameborder="0" allowfullscreen></iframe>
+<iframe
+    src="https://macaulaylibrary.org/asset/125582211/embed"
+    height="383"
+    width="100%"
+    frameborder="0"
+    allowfullscreen
+></iframe>
 
 Visually you can see that each sound has a particular shape. You can interpret the shapes in relation to how we hear it: the thin dark horizontal lines are more "tone-like" and the rougher blurry looking sounds are more "noisy", etc.
 
 Here is what it sounds like with more of the spectral shape preserved and the tonal frequencies obscured using a filtering tool called a noise vocoder:
 
 Original trained sequence:
+
 <audio src={one} controls></audio>
 
 Noise vocoded sequence with periodic frequencies removed:
 
-<div class="flex items-center gap-4"><audio src={nine} controls></audio><span>✅</span></div>
+<div class="flex items-center gap-4">
+    <audio src={nine} controls></audio>
+    <span>✅</span>
+</div>
 
 As the starling hears it, this apparently sounds the most similar! They performed well on these tests.
 
@@ -125,4 +137,10 @@ Birds are one of the more sonically participatory groups of animals, a large par
 
 How does the starling hear the world?
 
-<iframe src="https://macaulaylibrary.org/asset/192982631/embed" height="383" width="100%" frameborder="0" allowfullscreen></iframe>
+<iframe
+    src="https://macaulaylibrary.org/asset/192982631/embed"
+    height="383"
+    width="100%"
+    frameborder="0"
+    allowfullscreen
+></iframe>

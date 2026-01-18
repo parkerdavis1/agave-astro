@@ -1,17 +1,17 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
     font-display: swap;
-    font-family: "Crimson Pro";
+    font-family: 'Crimson Pro';
     font-style: normal;
-    src: url("/fonts/CrimsonPro.woff2") format("woff2");
+    src: url('/fonts/CrimsonPro.woff2') format('woff2');
 }
 
 @font-face {
     font-display: swap;
-    font-family: "Crimson Pro";
+    font-family: 'Crimson Pro';
     font-style: italic;
-    src: url("/fonts/CrimsonPro-italic.woff2") format("woff2");
+    src: url('/fonts/CrimsonPro-italic.woff2') format('woff2');
 }
 
 @view-transition {
@@ -30,7 +30,7 @@
         Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
         Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
         Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
-    --font-family-serif: "Crimson Pro", Times, serif;
+    --font-family-serif: 'Crimson Pro', Times, serif;
 
     /* Minor Third */
     --step--3: 0.579rem;
@@ -44,7 +44,7 @@
     --step-5: 2.488rem;
 
     --body-width: 40rem;
-    --body-width: 55ch;
+    --body-width: 60ch;
 
     --text-color: hsl(var(--text-color-values));
     --text-color-faded: hsl(var(--text-color-values) / 0.5);
@@ -67,15 +67,17 @@
 html {
     font-size: 16px;
 }
+
 body {
     font-size: 20px;
     padding: 0;
     margin: 0 auto;
     font-family: var(--font-family-serif);
-    font-weight: 400;
+    font-weight: 300;
     color: var(--text-color);
     background-color: var(--background-color);
-    line-height: 1.25;
+    /*line-height: 1.25;*/
+    line-height: 1.4;
 }
 
 html {
@@ -154,6 +156,10 @@ a.no-underline {
     text-decoration: none;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 img {
     font-style: italic;
     /* background: linear-gradient(
@@ -205,7 +211,7 @@ article li {
     list-style: disc;
 }
 article li li {
-    list-style-type: "- ";
+    list-style-type: '- ';
 }
 
 .small-image {

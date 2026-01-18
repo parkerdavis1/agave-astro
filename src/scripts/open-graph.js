@@ -29,7 +29,7 @@ const generateSocialCards = async (limit = LIMIT) => {
             const isMarkdownFile = (path) => /\.(md|mdx)$/i.test(path);
             return path.isDirectory()
                 ? ['index.md', 'index.mdx'].some((file) =>
-                      fs.existsSync(join(contentPath, path.name, file))
+                      fs.existsSync(join(contentPath, path.name, file)),
                   )
                 : path.isFile() && isMarkdownFile(path.name);
         })
@@ -43,7 +43,7 @@ const generateSocialCards = async (limit = LIMIT) => {
     console.log(`Found ${postSlugs.length} posts to process`);
     LIMIT &&
         console.log(
-            `(Limited to ${LIMIT} posts. Remove LIMIT value to process all posts)`
+            `(Limited to ${LIMIT} posts. Remove LIMIT value to process all posts)`,
         );
 
     for (const slug of postSlugs) {

@@ -30,13 +30,13 @@ Welcome to the inaugural weekly update, which in this case will cover the last f
 
 I got this blog up and running, wrote four posts, did some birding, enjoyed the weather, and had Thanksgiving with my family.
 
--   [My plans for this blog](/blog/blog-plans/)
+- [My plans for this blog](/blog/blog-plans/)
 
--   [eBird Compress, my first bookmarklet](/blog/ebird-bookmarklet/)
+- [eBird Compress, my first bookmarklet](/blog/ebird-bookmarklet/)
 
--   [Responsive dark/light mode with 1 line of CSS](/blog/one-line-light-dark-mode/)
+- [Responsive dark/light mode with 1 line of CSS](/blog/one-line-light-dark-mode/)
 
--   [I added a scrolling turkey to my links page and you can too](/blog/scrolling-turkey/)
+- [I added a scrolling turkey to my links page and you can too](/blog/scrolling-turkey/)
 
 ## This week
 

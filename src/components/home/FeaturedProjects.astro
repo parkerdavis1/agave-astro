@@ -1,19 +1,20 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import ProjectListing from "@components/ProjectListing.astro";
 const projects = await getCollection("projects");
 const featuredProjects = projects.filter(({ data }) => data.featured);
 const moreProjects = projects.length - featuredProjects.length;
+const ccam = await getEntry("projects", "ccam");
+const raincrow = await getEntry("projects", "raincrow");
+const rba = await getEntry("projects", "rba");
 ---
 
 <section class="flow">
     <h2>Featured Projects</h2>
     <ul class="flex flex-col gap-6">
-        {
-            featuredProjects.map((project) => (
-                <ProjectListing project={project} />
-            ))
-        }
+        <ProjectListing project={raincrow} showTag={true} />
+        <ProjectListing project={rba} showTag={true} />
+        <ProjectListing project={ccam} showTag={true} />
     </ul>
     <p>
         <a href="/projects"

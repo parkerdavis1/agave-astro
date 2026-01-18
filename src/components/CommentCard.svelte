@@ -75,7 +75,7 @@
                 })}</time
             >
             <p
-                class={`my-4 break-words whitespace-pre-wrap p-4 rounded font-mono`}
+                class={`my-4 break-words whitespace-pre-wrap p-4 rounded font-mono text-sm`}
             >
                 {comment.body}
             </p>

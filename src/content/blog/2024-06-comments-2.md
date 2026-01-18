@@ -41,9 +41,9 @@ So with cheap and simple-to-setup SQLite/LibSQL databases available like [Astro 
 
 Aside from taking name and message inputs, storing them, and displaying them, I added a few enhancements to make moderation quick and simple.
 
--   Anyone can hide comments for themselves.
--   Anyone can report comments, which makes them hidden by default for everyone. I also get an email notification where I can review the comment and click a link to delete the comment if needed.
--   Not moderation related but you better believe you can [click on a quail](/blog/2024-05-27-quail) for comments too!
+- Anyone can hide comments for themselves.
+- Anyone can report comments, which makes them hidden by default for everyone. I also get an email notification where I can review the comment and click a link to delete the comment if needed.
+- Not moderation related but you better believe you can [click on a quail](/blog/2024-05-27-quail) for comments too!
 
 ## Email Notifications (Val.town)
 
@@ -51,8 +51,8 @@ When I want to trigger an email to myself, say, when someone leaves a comment, I
 
 [Val.town](https://www.val.town/about) is a social code platform with good vibes. It is so easy to create quick backend projects with features that would otherwise be a pain to setup like email, databases, CRON jobs, HTTP handlers, etc.
 
--   [Val handling comment notifications](https://www.val.town/v/parkerdavis/newCommentNotification)
--   [Val handling report notifications](https://www.val.town/v/parkerdavis/reportCommentNotification)
+- [Val handling comment notifications](https://www.val.town/v/parkerdavis/newCommentNotification)
+- [Val handling report notifications](https://www.val.town/v/parkerdavis/reportCommentNotification)
 
 Simple stuff.
 

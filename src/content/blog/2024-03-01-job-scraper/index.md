@@ -35,7 +35,7 @@ export const getConservationJBJobs = async () => {
             'https://www.conservationjobboard.com/search/kw=%22application%20developer%22',
             {
                 waitUntil: 'domcontentloaded',
-            }
+            },
         );
         await page.waitForNetworkIdle();
         await page.waitForSelector('.listing__job');
@@ -43,7 +43,7 @@ export const getConservationJBJobs = async () => {
             const jobRows = document.querySelectorAll('.listing__job');
             const jobsArray = Array.from(jobRows).map((job) => {
                 const title = job.querySelector(
-                    '.listing__job__title'
+                    '.listing__job__title',
                 ).innerText;
                 const link = job.querySelector('.listing__job__title a').href;
                 return {
@@ -121,7 +121,7 @@ try {
 }
 ```
 
-The next obvious optimization would be to take the best of both of these approaches and wrap each script in a write_to_database function so the data is saved immediately as it becomes available. Then each script runs in parallel _and_ the data is immediately saved. This also allows the extracted data to be saved even if one of the other scripts throws an error. Maybe I'll go do that right now...
+The next obvious optimization would be to take the best of both of these approaches and wrap each script in a write*to_database function so the data is saved immediately as it becomes available. Then each script runs in parallel \_and* the data is immediately saved. This also allows the extracted data to be saved even if one of the other scripts throws an error. Maybe I'll go do that right now...
 
 ...and here we go:
 
@@ -154,7 +154,7 @@ export const actions = {
         const dbJobs = await db.post.findMany();
         const dbJobUrls = dbJobs.map((job) => job.url);
         const wrappedJobGetters = arrayOfJobGetters.map((getter) =>
-            getJobAndWriteToDatabase(getter, dbJobUrls, locals.user.id)
+            getJobAndWriteToDatabase(getter, dbJobUrls, locals.user.id),
         );
         await Promise.all(wrappedJobGetters);
         await db.updatedLast.update({
