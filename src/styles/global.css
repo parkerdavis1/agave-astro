@@ -44,7 +44,7 @@
     --step-5: 2.488rem;
 
     --body-width: 40rem;
-    --body-width: 55ch;
+    --body-width: 60ch;
 
     --text-color: hsl(var(--text-color-values));
     --text-color-faded: hsl(var(--text-color-values) / 0.5);
