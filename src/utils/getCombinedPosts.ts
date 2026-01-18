@@ -38,11 +38,11 @@ export default async function getCombinedPosts() {
     }));
 
     const filteredBMS = formattedBMS.filter(
-        ({ data }: Bmsdata) => !allTitles.includes(data.title)
+        ({ data }: Bmsdata) => !allTitles.includes(data.title),
     );
 
     const combinedPosts = [...allPosts, ...filteredBMS].sort(
-        (a, b) => b.data.date.getTime() - a.data.date.getTime()
+        (a, b) => b.data.date.getTime() - a.data.date.getTime(),
     );
     return combinedPosts;
 }

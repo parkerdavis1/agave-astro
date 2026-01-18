@@ -1,8 +1,8 @@
 ignoredBuiltDependencies:
-  - '@parcel/watcher'
+    - '@parcel/watcher'
 
 onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - esbuild
-  - puppeteer
-  - sharp
+    - '@tailwindcss/oxide'
+    - esbuild
+    - puppeteer
+    - sharp

@@ -1,16 +1,16 @@
 <script>
-    import { onMount } from 'svelte';
-    import CommentCard from './CommentCard.svelte';
-    import Spinner from './Spinner.svelte';
-    import { fly } from 'svelte/transition';
-    import { actions } from 'astro:actions';
+    import { onMount } from "svelte";
+    import CommentCard from "./CommentCard.svelte";
+    import Spinner from "./Spinner.svelte";
+    import { fly } from "svelte/transition";
+    import { actions } from "astro:actions";
 
     export let url;
     export let initComments;
 
     console.log(encodeURIComponent(url));
 
-    const POST_COMMENT_ENDPOINT = '/api/comments/postComment';
+    const POST_COMMENT_ENDPOINT = "/api/comments/postComment";
 
     let comments = initComments;
     let activeForm = false;
@@ -20,7 +20,7 @@
 
     async function getComments() {
         const data = await fetch(
-            `/api/comments/getComments?path=${encodeURIComponent(url)}`
+            `/api/comments/getComments?path=${encodeURIComponent(url)}`,
         );
         return await data.json();
     }
@@ -28,18 +28,18 @@
     // Load comments on initialization
     onMount(async () => {
         comments = await getComments();
-        author = localStorage.getItem('author') || '';
+        author = localStorage.getItem("author") || "";
     });
 
     // form values
-    let author = '';
-    let body = '';
+    let author = "";
+    let body = "";
 
     function resetForm() {
-        body = '';
+        body = "";
         activeForm = false;
         submitting = false;
-        errorMessage = '';
+        errorMessage = "";
     }
 
     // USE ASTRO ACTION
@@ -47,8 +47,8 @@
         e.preventDefault();
         try {
             const timeoutId = setTimeout(() => {
-                errorMessage = 'Error. Try again later.';
-                throw new Error('Server timed out');
+                errorMessage = "Error. Try again later.";
+                throw new Error("Server timed out");
             }, 20000);
 
             submitting = true;
@@ -63,14 +63,14 @@
 
             // update name store
             // localStorage.setItem('author', comment.author);
-            localStorage.setItem('author', formData.get('author'));
+            localStorage.setItem("author", formData.get("author"));
 
             // post comment
             const result = await actions.postComment(formData);
 
-            console.log('result', result);
+            console.log("result", result);
             if (!result.ok) {
-                console.error('Error posting comment', result);
+                console.error("Error posting comment", result);
             }
 
             clearInterval(timeoutId);
@@ -80,7 +80,7 @@
             // reset state
             resetForm();
         } catch (e) {
-            console.error('Error posting comment', e);
+            console.error("Error posting comment", e);
         }
     }
 
@@ -89,8 +89,8 @@
         e.preventDefault();
         try {
             const timeoutId = setTimeout(() => {
-                errorMessage = 'Error. Try again later.';
-                throw new Error('Server timed out');
+                errorMessage = "Error. Try again later.";
+                throw new Error("Server timed out");
             }, 20000);
 
             submitting = true;
@@ -98,13 +98,13 @@
             const formData = new FormData(e.target);
 
             const comment = {
-                author: formData.get('author'),
-                body: formData.get('body'),
-                path: formData.get('path'),
+                author: formData.get("author"),
+                body: formData.get("body"),
+                path: formData.get("path"),
             };
 
             // update name store
-            localStorage.setItem('author', formData.get('author'));
+            localStorage.setItem("author", formData.get("author"));
 
             // POST COMMENT
             // GET request to endpoint (progressive enhancement)
@@ -115,9 +115,9 @@
 
             // Form encoded POST request to endpoint (progressive enhancement)
             const result = await fetch(POST_COMMENT_ENDPOINT, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: new URLSearchParams(comment),
             });
@@ -130,7 +130,7 @@
 
             // Error handling
             if (!result.ok) {
-                console.error('Error posting comment', result);
+                console.error("Error posting comment", result);
                 const { message, errorField } = await result.json();
                 errorMessage = message;
                 submitting = false;
@@ -146,14 +146,14 @@
             // reset state
             resetForm();
         } catch (e) {
-            console.error('Error posting comment', e);
+            console.error("Error posting comment", e);
         }
     }
     function scrollIntoView() {
         setTimeout(() => {
             commentsHeading.scrollIntoView({
-                block: 'start',
-                inline: 'nearest',
+                block: "start",
+                inline: "nearest",
             });
         }, 100);
     }
@@ -189,7 +189,7 @@
                 <textarea
                     name="body"
                     id="body"
-                    class="font-mono"
+                    class="font-mono text-sm"
                     bind:value={body}
                     required
                 ></textarea>
@@ -234,7 +234,7 @@
         background: #9b9b9b;
     }
 
-    input[type='color'] {
+    input[type="color"] {
         min-height: 40px;
         min-width: 40px;
     }

@@ -1,17 +1,17 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
     font-display: swap;
-    font-family: "Crimson Pro";
+    font-family: 'Crimson Pro';
     font-style: normal;
-    src: url("/fonts/CrimsonPro.woff2") format("woff2");
+    src: url('/fonts/CrimsonPro.woff2') format('woff2');
 }
 
 @font-face {
     font-display: swap;
-    font-family: "Crimson Pro";
+    font-family: 'Crimson Pro';
     font-style: italic;
-    src: url("/fonts/CrimsonPro-italic.woff2") format("woff2");
+    src: url('/fonts/CrimsonPro-italic.woff2') format('woff2');
 }
 
 @view-transition {
@@ -30,7 +30,7 @@
         Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
         Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
         Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
-    --font-family-serif: "Crimson Pro", Times, serif;
+    --font-family-serif: 'Crimson Pro', Times, serif;
 
     /* Minor Third */
     --step--3: 0.579rem;
@@ -206,7 +206,7 @@ article li {
     list-style: disc;
 }
 article li li {
-    list-style-type: "- ";
+    list-style-type: '- ';
 }
 
 .small-image {

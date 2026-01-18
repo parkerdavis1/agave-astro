@@ -1,9 +1,9 @@
-import rss, { getRssString } from "@astrojs/rss";
-import { filterDrafts } from "@utils/filterDrafts";
-import getCombinedPosts from "@utils/getCombinedPosts";
-import { metadata } from "src/metadata.ts";
-import { setDateTime } from "@utils/setDateTime";
-import type { APIContext } from "astro";
+import rss, { getRssString } from '@astrojs/rss';
+import { filterDrafts } from '@utils/filterDrafts';
+import getCombinedPosts from '@utils/getCombinedPosts';
+import { metadata } from 'src/metadata.ts';
+import { setDateTime } from '@utils/setDateTime';
+import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
     const posts = (await getCombinedPosts()).filter(filterDrafts);
@@ -26,6 +26,6 @@ export async function GET(context: APIContext) {
         description: metadata.description,
         site: context.site || context.url.origin,
         items,
-        stylesheet: "/rss/styles.xsl",
+        stylesheet: '/rss/styles.xsl',
     });
 }

@@ -26,6 +26,6 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(
         'Successfully deleted comment ' + JSON.stringify(comment),
-        { status: 200 }
+        { status: 200 },
     );
 };

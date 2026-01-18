@@ -34,7 +34,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
             }),
             {
                 status: 400,
-            }
+            },
         );
     }
     if (String(body).length > 500 || String(author).length > 100) {
@@ -45,7 +45,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
             }),
             {
                 status: 400,
-            }
+            },
         );
     }
     // insert comment in DB

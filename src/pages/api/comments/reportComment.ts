@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
             {
                 method: 'POST',
                 body: JSON.stringify(comment),
-            }
+            },
         );
     }
 
