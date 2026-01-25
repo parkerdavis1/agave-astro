@@ -1,6 +1,8 @@
 ---
 import { metadata } from "src/metadata.ts";
 import Icon from "./Icon.astro";
+import ThemeSwitcher from "./ThemeSwitcher.svelte";
+import ThemeSwitcher2 from './ThemeSwitcher.astro';
 
 const nav = [
     { text: "About", url: "/about" },
@@ -32,8 +34,12 @@ const nav = [
                     </li>
                 ))
             }
+            <!-- <li> -->
+            <!-- </li> -->
         </ul>
     </nav>
+                <ThemeSwitcher2 />
+    <!-- <ThemeSwitcher client:load /> -->
 </header>
 
 <style>
@@ -45,10 +51,10 @@ const nav = [
     header {
         display: grid;
         grid-template-rows: auto auto;
-        grid-template-columns: var(--icon-width) 1fr;
+        grid-template-columns: var(--icon-width) 1fr auto;
         grid-template-areas:
-            "icon title"
-            "icon nav";
+            "icon title theme"
+            "icon nav theme";
         column-gap: 1rem;
         align-items: end;
         margin-block: 4rem;

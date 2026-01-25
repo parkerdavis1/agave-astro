@@ -52,16 +52,26 @@
     --text-color-link: hsl(var(--text-color-link-values));
     --background-color: hsl(var(--background-color-values));
 
+    /* Light theme (default) */
     --text-color-values: 0 0% 25%;
     --text-color-link-values: 10.63, 45.28%, 41.57%;
     --background-color-values: 0, 0%, 96.08%;
+}
 
-    @media (prefers-color-scheme: dark) {
-        --text-color-values: 0 2.63% 85.1%;
-        --text-color-values: 0 2.63% 80%;
-        --text-color-link-values: 209.49, 55.14%, 79.02%;
-        --background-color-values: 210, 34.38%, 12.55%;
-    }
+/* Dark theme - explicit data attribute */
+[data-theme='dark'] {
+    color-scheme: dark;
+    --text-color-values: 0 2.63% 80%;
+    --text-color-link-values: 209.49, 55.14%, 79.02%;
+    --background-color-values: 210, 34.38%, 12.55%;
+}
+
+/* Light theme - explicit data attribute (for completeness) */
+[data-theme='light'] {
+    color-scheme: light;
+    --text-color-values: 0 0% 25%;
+    --text-color-link-values: 10.63, 45.28%, 41.57%;
+    --background-color-values: 0, 0%, 96.08%;
 }
 
 html {
@@ -220,15 +230,13 @@ article li li {
     margin-inline: auto;
 }
 
-@media (prefers-color-scheme: dark) {
-    code {
-        background: #ffffff22;
-    }
+[data-theme='dark'] code {
+    background: #ffffff22;
+}
 
-    .button {
-        background: white;
-        color: black;
-    }
+[data-theme='dark'] .button {
+    background: white;
+    color: black;
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
