@@ -184,7 +184,8 @@ code {
     font-size: var(--step--1);
 }
 
-article a {
+article a,
+a {
     color: var(--text-color-link);
 }
 
