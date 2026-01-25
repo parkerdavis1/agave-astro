@@ -18,15 +18,18 @@
 
     lightButton.addEventListener('click', () => {
         document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
     });
 
     darkButton.addEventListener('click', () => {
         document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
     });
 
     autoButton.addEventListener('click', () => {
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        localStorage.setItem('theme', 'auto');
     });
 </script>
 
@@ -37,10 +40,6 @@
 
     #theme-button {
         anchor-name: --theme-button;
-        /*position: fixed;*/
-        /*padding: 1rem;*/
-        /*top: 0;*/
-        /*right: 0;*/
         grid-area: theme;
         align-self: start;
     }
@@ -56,3 +55,7 @@
 
     }
 </style>
+
+<!-- TODO: anchor positioning does not work on older iOS devices still, add polyfill if there is one -->
+<!-- TODO: make theme button not visible if javascript is not available -->
+<!-- TODO: auto does not respect system preferences dynamically -->
