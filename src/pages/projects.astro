@@ -16,16 +16,16 @@ const evs = await getEntry("projects", "evs");
 
 <MainFlow title="Projects">
     <h1>Projects</h1>
-    <h2>Featured</h2>
-    <ul class="flex flex-col gap-6">
+    <!-- <h2>Featured</h2> -->
+    <ul class="flex flex-col gap-8">
         <ProjectListing project={raincrow} showTag={true} />
         <ProjectListing project={rba} showTag={true} />
         <ProjectListing project={ccam} showTag={true} />
-    </ul>
-    <h2>Other</h2>
-    <ul class="flex flex-col gap-6">
         <ProjectListing project={evs} showTag={true} />
         <ProjectListing project={harmonicClouds} showTag={true} />
         <ProjectListing project={portfolio} showTag={true} />
+    </ul>
+    <!-- <h2>Other</h2> -->
+    <ul class="flex flex-col gap-6">
     </ul>
 </MainFlow>
