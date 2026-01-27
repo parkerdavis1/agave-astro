@@ -27,8 +27,8 @@
     });
 
     autoButton.addEventListener('click', () => {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        // Remove data-theme attribute to use default media query behavior
+        document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('theme', 'auto');
     });
 </script>
@@ -60,6 +60,6 @@
     }
 </style>
 
-<!-- TODO: anchor positioning does not work on older iOS devices still, add polyfill if there is one -->
-<!-- TODO: make theme button not visible if javascript is not available -->
 <!-- TODO: auto does not respect system preferences dynamically -->
+<!-- TODO: make theme button not visible if javascript is not available -->
+<!-- TODO: code blocks are not respecting dark mode styles -->

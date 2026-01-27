@@ -19,12 +19,15 @@ const description = propsDescription ? propsDescription : metadata.description;
         <!-- Theme initialization script - runs before any CSS to prevent FOUC -->
         <script is:inline>
             (function() {
-                const theme = localStorage.getItem('theme') || 'auto';
-                if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                const theme = localStorage.getItem('theme');
+                // Only set data-theme for explicit choices
+                // If theme is 'auto' or not set, leave data-theme unset to use default media queries
+                if (theme === 'dark') {
                     document.documentElement.setAttribute('data-theme', 'dark');
-                } else {
+                } else if (theme === 'light') {
                     document.documentElement.setAttribute('data-theme', 'light');
                 }
+                // For 'auto' or no preference: don't set data-theme, let CSS media queries handle it
             })();
         </script>
         <link
