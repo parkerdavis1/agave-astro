@@ -3,7 +3,7 @@
 </button>
 
 <div popover id='theme-popover'>
-    <div class="flex flex-col p-4">
+    <div class="flex flex-col items-end p-4">
 
     <button id="theme-light" popovertarget="theme-popover" popovertargetaction="hide">Light</button>
     <button id="theme-dark" popovertarget="theme-popover" popovertargetaction="hide">Dark</button>
@@ -42,15 +42,19 @@
         anchor-name: --theme-button;
         grid-area: theme;
         align-self: start;
+        padding: 1rem;
     }
 
     #theme-popover {
         position: fixed;
         position-anchor: --theme-button;
-        position-area: bottom;
-        /*top: -1rem;*/
 
-        background: var(--background-color);
+        /* Use anchor() function instead of position-area for better polyfill compatibility */
+        top: anchor(--theme-button bottom);
+        left: anchor(--theme-button right);
+        translate: -100% -1.5rem;
+
+        background: transparent;
         color: var(--text-color);
 
     }

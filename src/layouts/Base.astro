@@ -27,10 +27,6 @@ const description = propsDescription ? propsDescription : metadata.description;
                 }
             })();
         </script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="generator" content={Astro.generator} />
-
         <link
             rel="preload"
             href="/fonts/CrimsonPro.woff2"
@@ -38,6 +34,10 @@ const description = propsDescription ? propsDescription : metadata.description;
             type="font/woff2"
             crossorigin="anonymous"
         />
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
 
         <link rel="canonical" href={Astro.site?.origin + Astro.url.pathname} />
         <link rel="sitemap" href="/sitemap-index.xml" />
@@ -100,6 +100,11 @@ const description = propsDescription ? propsDescription : metadata.description;
                     image.style.opacity = "1";
                 }
             });
+        </script>
+        <script type="module">
+          if (!("anchorName" in document.documentElement.style)) {
+            import("https://unpkg.com/@oddbird/css-anchor-positioning");
+          }
         </script>
     </body>
 </html>
