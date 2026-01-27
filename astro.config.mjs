@@ -10,7 +10,15 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://parkerdavis.dev',
-    integrations: [sitemap(), expressiveCode(), mdx(), svelte(), db()],
+    integrations: [
+        sitemap(),
+        expressiveCode({
+            themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
+        }),
+        mdx(),
+        svelte(),
+        db(),
+    ],
     adapter: netlify(),
     vite: {
         optimizeDeps: {
