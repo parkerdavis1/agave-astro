@@ -203,27 +203,6 @@ code {
     font-size: var(--step--1);
 }
 
-/* Dark mode code styling */
-@media (prefers-color-scheme: dark) {
-    :root code {
-        background: #ffffff22;
-    }
-
-    :root .button {
-        background: white;
-        color: black;
-    }
-}
-
-[data-theme='dark'] code {
-    background: #ffffff22;
-}
-
-[data-theme='dark'] .button {
-    background: white;
-    color: black;
-}
-
 article a,
 a {
     color: var(--text-color-link);

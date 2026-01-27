@@ -431,6 +431,7 @@
     button {
         --size: 3rem;
         /* --size: 4rem; */
+        cursor: pointer;
     }
     svg {
         height: var(--size);
