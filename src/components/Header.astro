@@ -1,8 +1,7 @@
 ---
 import { metadata } from "src/metadata.ts";
 import Icon from "./Icon.astro";
-import ThemeSwitcher from "./ThemeSwitcher.svelte";
-import ThemeSwitcher2 from './ThemeSwitcher.astro';
+import ThemeSwitcher from './ThemeSwitcher.astro';
 
 const nav = [
     { text: "About", url: "/about" },
@@ -38,8 +37,7 @@ const nav = [
             <!-- </li> -->
         </ul>
     </nav>
-                <ThemeSwitcher2 />
-    <!-- <ThemeSwitcher client:load /> -->
+    <ThemeSwitcher />
 </header>
 
 <style>
