@@ -1,7 +1,7 @@
 ---
 import dayjs from '@utils/dayjs';
 const { post } = Astro.props;
-const readableDate = dayjs(post.data.date).utc().format('DD MMM YYYY');
+const readableDate = dayjs(post.data.date).utc().format('YYYY-MM-DD');
 let link = post.bms ? post.data.slug : `/blog/${post.slug}`;
 ---
 
@@ -36,7 +36,7 @@ let link = post.bms ? post.data.slug : `/blog/${post.slug}`;
     time {
         grid-column: time;
         font-size: var(--step--1);
-        min-width: 8em;
+        min-width: 6em;
     }
 
     .title {
