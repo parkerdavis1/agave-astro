@@ -42,7 +42,8 @@ const nav = [
 
 <style>
     :root {
-        --icon-width: clamp(3rem, 20vw, 5rem);
+        /*--icon-width: clamp(3rem, 20vw, 5rem);*/
+        --icon-width: 5rem;
         --icon-height: 80px;
     }
 
@@ -83,6 +84,8 @@ const nav = [
     nav {
         grid-area: nav;
         line-height: 1.25rem;
+        position: relative;
+        bottom: -3px;
     }
 
     .nav-item {
