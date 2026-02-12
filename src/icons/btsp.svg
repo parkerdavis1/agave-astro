@@ -2,11 +2,13 @@
 <style>
     .agave-leaf {
         fill: #d5d5d5;
-        transition: fill 0.3s ease;
+        transition: fill 1s ease;
     }
 
     svg:hover .agave-leaf {
         fill: #c1ffcb;
+        fill: #aff3d0;
+        transition: none;
     }
 
     .btsp-icon path {
