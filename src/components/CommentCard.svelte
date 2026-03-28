@@ -100,13 +100,7 @@
 
 <style>
     .comment-container {
-        background: #fff;
         padding: 1rem;
         margin-block: 0.5rem;
-    }
-    @media (prefers-color-scheme: dark) {
-        .comment-container {
-            background: #202b38;
-        }
     }
 </style>

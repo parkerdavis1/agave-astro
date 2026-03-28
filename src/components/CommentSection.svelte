@@ -197,7 +197,7 @@
             <input type="text" hidden name="path" value={url} />
             <!-- value={encodeURIComponent(url)} -->
 
-            <button type="submit" class="p-2" disabled={submitting}>
+            <button type="submit" class="p-2 button" disabled={submitting}>
                 {#if submitting}
                     <p class="flex items-center justify-center gap-4">
                         Post <Spinner />
@@ -222,52 +222,3 @@
         {/if}
     </div>
 </section>
-
-<style>
-    button {
-        background: #d0cfcf;
-        padding: 0.5rem;
-        border-radius: 6px;
-    }
-
-    button:hover {
-        background: #9b9b9b;
-    }
-
-    input[type="color"] {
-        min-height: 40px;
-        min-width: 40px;
-    }
-
-    input,
-    textarea,
-    select {
-        padding: 0.5rem;
-        border-radius: 6px;
-        background: #fff;
-        border: 1px solid #aaa;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus,
-    button:focus {
-        outline: solid #0096bfab 2px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        button {
-            background: #0c151c;
-        }
-        button:hover {
-            background: #040a0f;
-        }
-
-        input,
-        textarea,
-        select {
-            background: #202b38;
-            border: none;
-        }
-    }
-</style>
