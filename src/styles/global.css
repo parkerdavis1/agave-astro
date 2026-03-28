@@ -53,11 +53,20 @@
     --text-color-2xfaded: hsl(var(--text-color-values) / 0.3);
     --text-color-link: hsl(var(--text-color-link-values));
     --background-color: hsl(var(--background-color-values));
+    --input-background-color: white;
+    --button-background-color: var(--button-gray);
+    --button-hover-background: var(--button-hover-gray);
 
     /* Light theme (default) */
     --text-color-values: 0 0% 25%;
     --text-color-link-values: 10.63, 45.28%, 41.57%;
     --background-color-values: 0, 0%, 96.08%;
+
+    --light-dark-blue: #202b38;
+    --darker-blue: #0c151c;
+    --darkerer-blue: #040a0f;
+    --button-gray: #d0cfcf;
+    --button-hover-gray: #9b9b9b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,6 +75,9 @@
         --text-color-values: 0 2.63% 80%;
         --text-color-link-values: 209.49, 55.14%, 79.02%;
         --background-color-values: 210, 34.38%, 12.55%;
+        --input-background-color: var(--light-dark-blue);
+        --button-background-color: var(--darker-blue);
+        --button-hover-background: var(--darkerer-blue);
     }
 }
 
@@ -74,6 +86,9 @@
     --text-color-values: 0 2.63% 80%;
     --text-color-link-values: 209.49, 55.14%, 79.02%;
     --background-color-values: 210, 34.38%, 12.55%;
+    --input-background-color: var(--light-dark-blue);
+    --button-background-color: var(--darker-blue);
+    --button-hover-background: var(--darkerer-blue);
 }
 
 [data-theme='light'] {
@@ -81,6 +96,9 @@
     --text-color-values: 0 0% 25%;
     --text-color-link-values: 10.63, 45.28%, 41.57%;
     --background-color-values: 0, 0%, 96.08%;
+    --input-background-color: white;
+    --button-background-color: var(--button-gray);
+    --button-hover-background: var(--button-hover-gray);
 }
 
 html {
@@ -243,8 +261,21 @@ article li li {
 }
 
 .button {
-    background: black;
-    color: white;
+    background: var(--button-background-color);
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.button:hover {
+    background: var(--button-hover-background);
+}
+
+input,
+textarea {
+    background: var(--input-background-color);
+    border: 1px solid var(--text-color-faded);
     border-radius: 0.25rem;
     padding: 0.25rem 0.5rem;
 }
