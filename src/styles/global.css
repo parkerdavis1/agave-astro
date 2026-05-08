@@ -79,6 +79,10 @@
         --button-background-color: var(--darker-blue);
         --button-hover-background: var(--darkerer-blue);
     }
+
+    body {
+        font-weight: 400;
+    }
 }
 
 [data-theme='dark'] {
@@ -89,6 +93,9 @@
     --input-background-color: var(--light-dark-blue);
     --button-background-color: var(--darker-blue);
     --button-hover-background: var(--darkerer-blue);
+    body {
+        font-weight: 400;
+    }
 }
 
 [data-theme='light'] {
@@ -99,10 +106,15 @@
     --input-background-color: white;
     --button-background-color: var(--button-gray);
     --button-hover-background: var(--button-hover-gray);
+    body {
+        font-weight: 300;
+    }
 }
 
 html {
     font-size: 16px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -110,18 +122,10 @@ body {
     padding: 0;
     margin: 0 auto;
     font-family: var(--font-family-serif);
-    font-weight: 300;
     color: var(--text-color);
     background-color: var(--background-color);
     /*line-height: 1.25;*/
     line-height: 1.4;
-}
-
-html {
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-}
-body {
     max-width: var(--body-width);
     display: flex;
     flex-direction: column;
