@@ -12,20 +12,25 @@ const rba = await getEntry("projects", "rba");
 const portfolio = await getEntry("projects", "portfolio");
 const harmonicClouds = await getEntry("projects", "harmonic-clouds");
 const evs = await getEntry("projects", "evs");
+const ebirdCompress = await getEntry("projects", "ebird-compress");
+const birdsMakeSound = await getEntry("projects", "birds-make-sound");
+
 ---
 
 <MainFlow title="Projects">
     <h1>Projects</h1>
-    <!-- <h2>Featured</h2> -->
+    <h2>Birding</h2>
     <ul class="flex flex-col gap-8">
-        <ProjectListing project={raincrow} showTag={true} />
-        <ProjectListing project={rba} showTag={true} />
-        <ProjectListing project={ccam} showTag={true} />
-        <ProjectListing project={evs} showTag={true} />
-        <ProjectListing project={harmonicClouds} showTag={true} />
-        <ProjectListing project={portfolio} showTag={true} />
+        <ProjectListing project={raincrow} showTag={false} />
+        <ProjectListing project={rba} showTag={false} />
+        <ProjectListing project={ebirdCompress} showTag={false} />
+        <ProjectListing project={birdsMakeSound} showTag={false} />
     </ul>
-    <!-- <h2>Other</h2> -->
+    <h2>Other</h2>
     <ul class="flex flex-col gap-6">
+        <ProjectListing project={ccam} showTag={false} />
+        <ProjectListing project={harmonicClouds} showTag={false} />
+        <ProjectListing project={evs} showTag={false} />
+        <ProjectListing project={portfolio} showTag={false} />
     </ul>
 </MainFlow>
