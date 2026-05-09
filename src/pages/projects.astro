@@ -13,6 +13,8 @@ const portfolio = await getEntry("projects", "portfolio");
 const harmonicClouds = await getEntry("projects", "harmonic-clouds");
 const evs = await getEntry("projects", "evs");
 const ebirdCompress = await getEntry("projects", "ebird-compress");
+const birdsMakeSound = await getEntry("projects", "birds-make-sound");
+
 ---
 
 <MainFlow title="Projects">
@@ -22,6 +24,7 @@ const ebirdCompress = await getEntry("projects", "ebird-compress");
         <ProjectListing project={raincrow} showTag={false} />
         <ProjectListing project={rba} showTag={false} />
         <ProjectListing project={ebirdCompress} showTag={false} />
+        <ProjectListing project={birdsMakeSound} showTag={false} />
     </ul>
     <h2>Other</h2>
     <ul class="flex flex-col gap-6">

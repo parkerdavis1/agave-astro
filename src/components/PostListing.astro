@@ -43,14 +43,11 @@ let link = post.bms ? post.data.slug : `/blog/${post.slug}`;
         grid-column: title;
     }
 
-    .bms {
-        font-size: var(--step--1);
-        color: #646ead;
-    }
-
     .bms-container {
         grid-column: bms;
         margin-left: 1rem;
+        font-size: var(--step--1);
+        color: var(--bms-color);
     }
 
     @media (max-width: 640px) {
@@ -67,12 +64,6 @@ let link = post.bms ? post.data.slug : `/blog/${post.slug}`;
         time {
             grid-row: 2 / 3;
             min-width: 0;
-        }
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .bms {
-            color: hsla(267, 100%, 86%, 1);
         }
     }
 </style>

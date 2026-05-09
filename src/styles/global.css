@@ -56,6 +56,7 @@
     --input-background-color: white;
     --button-background-color: var(--button-gray);
     --button-hover-background: var(--button-hover-gray);
+    --bms-color: #646ead;
 
     /* Light theme (default) */
     --text-color-values: 0 0% 25%;
@@ -78,6 +79,7 @@
         --input-background-color: var(--light-dark-blue);
         --button-background-color: var(--darker-blue);
         --button-hover-background: var(--darkerer-blue);
+        --bms-color: hsla(267, 100%, 86%, 1);
     }
 
     body {
@@ -93,6 +95,7 @@
     --input-background-color: var(--light-dark-blue);
     --button-background-color: var(--darker-blue);
     --button-hover-background: var(--darkerer-blue);
+    --bms-color: hsla(267, 100%, 86%, 1);
     body {
         font-weight: 400;
     }
@@ -106,6 +109,7 @@
     --input-background-color: white;
     --button-background-color: var(--button-gray);
     --button-hover-background: var(--button-hover-gray);
+    --bms-color: #646ead;
     body {
         font-weight: 300;
     }
