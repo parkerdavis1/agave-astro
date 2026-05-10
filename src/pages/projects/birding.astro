@@ -1,34 +1,26 @@
 ---
 import ProjectListing from "@components/ProjectListing.astro";
 import MainFlow from "@layouts/MainFlow.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getEntry } from "astro:content";
 
-const ccam = await getEntry("projects", "ccam");
 const raincrow = await getEntry("projects", "raincrow");
 const rba = await getEntry("projects", "rba");
-const portfolio = await getEntry("projects", "portfolio");
-const harmonicClouds = await getEntry("projects", "harmonic-clouds");
-const evs = await getEntry("projects", "evs");
 const ebirdCompress = await getEntry("projects", "ebird-compress");
 const birdsMakeSound = await getEntry("projects", "birds-make-sound");
 
 ---
 
 <MainFlow title="Projects">
-    <h1>Projects</h1>
-    <p>
-        <em>
-            <a href="/projects/birding">Click to see birding projects only 🦆</a>
-        </em>
-    </p>
+    <h1>Birding-related Projects</h1>
     <ul class="flex flex-col gap-8">
         <ProjectListing project={raincrow} />
         <ProjectListing project={rba} />
         <ProjectListing project={ebirdCompress} />
-        <ProjectListing project={ccam} />
-        <ProjectListing project={harmonicClouds} />
-        <ProjectListing project={evs} />
         <ProjectListing project={birdsMakeSound} />
-        <ProjectListing project={portfolio} />
     </ul>
+    <p>
+        <!-- <em> -->
+            <a href="/projects/">Back to all projects</a>
+        <!-- </em> -->
+    </p>
 </MainFlow>
