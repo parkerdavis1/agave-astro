@@ -207,6 +207,35 @@ a:hover {
     text-decoration-thickness: 2px;
 }
 
+/* External links only */
+a[href^='http']:not([href*='parkerdavis.dev']):not(:has(img, svg)) {
+    &::after {
+        content: '';
+        display: inline-block;
+        width: 0.75em;
+        height: 0.75em;
+        margin-left: 0.1em;
+        margin-bottom: 0.1em;
+        vertical-align: text-bottom;
+
+        background-color: var(--text-color-link);
+
+        -webkit-mask-image: url('/public/icons/external-link.svg');
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+
+        mask-image: url('/public/icons/external-link.svg');
+        mask-repeat: no-repeat;
+        mask-size: contain;
+
+        opacity: 0.75;
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
+}
+
 img {
     font-style: italic;
     border: 1px var(--text-color-faded) solid;
