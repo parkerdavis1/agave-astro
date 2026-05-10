@@ -11,6 +11,7 @@ const harmonicClouds = await getEntry("projects", "harmonic-clouds");
 const evs = await getEntry("projects", "evs");
 const ebirdCompress = await getEntry("projects", "ebird-compress");
 const birdsMakeSound = await getEntry("projects", "birds-make-sound");
+const happyPlants = await getEntry("projects", "happy-plants");
 
 ---
 
@@ -23,6 +24,7 @@ const birdsMakeSound = await getEntry("projects", "birds-make-sound");
     </p>
     <ul class="flex flex-col gap-8">
         <ProjectListing project={raincrow} />
+        <ProjectListing project={happyPlants} />
         <ProjectListing project={rba} />
         <ProjectListing project={ebirdCompress} />
         <ProjectListing project={ccam} />
