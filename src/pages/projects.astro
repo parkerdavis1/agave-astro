@@ -17,9 +17,6 @@ const happyPlants = await getEntry("projects", "happy-plants");
 
 <MainFlow title="Projects">
     <h1>Projects</h1>
-    <p>
-            <a href="/projects/birding">Click to see birding projects only 🦆</a>
-    </p>
     <ul class="flex flex-col gap-8">
         <ProjectListing project={raincrow} />
         <ProjectListing project={happyPlants} />
