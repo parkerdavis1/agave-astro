@@ -1,5 +1,5 @@
 ---
-const { project, showTag = false } = Astro.props;
+const { project, showTag = false, birdingProject = false } = Astro.props;
 ---
 
 <li>
@@ -7,6 +7,10 @@ const { project, showTag = false } = Astro.props;
         <a href={`/projects/${project.slug}`}>
             {project.data.title}
         </a>
+        {birdingProject && (
+        <sup>
+            🦆
+        </sup>)}
     </p>
     {
         showTag && (
