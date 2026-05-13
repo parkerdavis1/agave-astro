@@ -11,24 +11,22 @@ const harmonicClouds = await getEntry("projects", "harmonic-clouds");
 const evs = await getEntry("projects", "evs");
 const ebirdCompress = await getEntry("projects", "ebird-compress");
 const birdsMakeSound = await getEntry("projects", "birds-make-sound");
+const happyPlants = await getEntry("projects", "happy-plants");
 
 ---
 
 <MainFlow title="Projects">
     <h1>Projects</h1>
-    <p>
-        <em>
-            <a href="/projects/birding">Click to see birding projects only 🦆</a>
-        </em>
-    </p>
+    <p>🦆 = part of <a href="/projects/birding">birding projects</a></p>
     <ul class="flex flex-col gap-8">
-        <ProjectListing project={raincrow} />
-        <ProjectListing project={rba} />
-        <ProjectListing project={ebirdCompress} />
+        <ProjectListing project={raincrow} birdingProject={true} />
+        <ProjectListing project={happyPlants} />
+        <ProjectListing project={rba} birdingProject={true}/>
+        <ProjectListing project={ebirdCompress} birdingProject={true}/>
         <ProjectListing project={ccam} />
         <ProjectListing project={harmonicClouds} />
         <ProjectListing project={evs} />
-        <ProjectListing project={birdsMakeSound} />
+        <ProjectListing project={birdsMakeSound} birdingProject={true}/>
         <ProjectListing project={portfolio} />
     </ul>
 </MainFlow>
