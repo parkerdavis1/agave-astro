@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @font-face {
-    font-display: swap;
+    font-display: auto;
     font-family: 'Crimson Pro';
     font-style: normal;
     font-weight: 200 900;
@@ -9,7 +9,7 @@
 }
 
 @font-face {
-    font-display: swap;
+    font-display: auto;
     font-family: 'Crimson Pro';
     font-style: italic;
     font-weight: 200 900;
