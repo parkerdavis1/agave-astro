@@ -70,6 +70,10 @@
     --button-hover-gray: #9b9b9b;
 }
 
+body {
+    font-weight: 300;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         color-scheme: dark;
