@@ -7,14 +7,15 @@ const moreProjects = projects.length - featuredProjects.length;
 const ccam = await getEntry("projects", "ccam");
 const raincrow = await getEntry("projects", "raincrow");
 const rba = await getEntry("projects", "rba");
+const peep = await getEntry("projects", "peep");
 ---
 
 <section class="flow">
     <h2>Featured Projects</h2>
     <ul class="flex flex-col gap-6">
         <ProjectListing project={raincrow} showTag={false} />
+        <ProjectListing project={peep} showTag={false} />
         <ProjectListing project={rba} showTag={false} />
-        <ProjectListing project={ccam} showTag={false} />
     </ul>
     <p>
         <a href="/projects"

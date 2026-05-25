@@ -10,15 +10,17 @@ const raincrow = await getEntry("projects", "raincrow");
 const rba = await getEntry("projects", "rba");
 const ebirdCompress = await getEntry("projects", "ebird-compress");
 const birdsMakeSound = await getEntry("projects", "birds-make-sound");
+const peep = await getEntry("projects", "peep");
 
 ---
 
 <MainFlow title="Projects">
-    <h1>Birding-related Projects</h1>
+    <h1>Birding-related Projects 🦆</h1>
     <!-- <Picture src={MallardGlitch} alt="A glitched out dithered photo of a Mallard" layout='constrained'/> -->
     <p>All of the bird tools in one place.</p>
     <ul class="flex flex-col gap-8">
         <ProjectListing project={raincrow} />
+        <ProjectListing project={peep} />
         <ProjectListing project={rba} />
         <ProjectListing project={ebirdCompress} />
         <ProjectListing project={birdsMakeSound} />
