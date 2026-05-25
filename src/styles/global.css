@@ -72,6 +72,9 @@
 
 body {
     font-weight: 300;
+    strong {
+        font-weight: 700;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -242,7 +245,7 @@ a[href^='http']:not([href*='parkerdavis.dev']):not(:has(img, svg)) {
 
 img {
     font-style: italic;
-    border: 1px var(--text-color-faded) solid;
+    /*border: 1px var(--text-color-faded) solid;*/
 }
 
 blockquote {

@@ -12,6 +12,7 @@ const evs = await getEntry("projects", "evs");
 const ebirdCompress = await getEntry("projects", "ebird-compress");
 const birdsMakeSound = await getEntry("projects", "birds-make-sound");
 const happyPlants = await getEntry("projects", "happy-plants");
+const peep = await getEntry('projects', 'peep');
 
 ---
 
@@ -20,6 +21,7 @@ const happyPlants = await getEntry("projects", "happy-plants");
     <p>🦆 = part of <a href="/projects/birding">birding projects</a></p>
     <ul class="flex flex-col gap-8">
         <ProjectListing project={raincrow} birdingProject={true} />
+        <ProjectListing project={peep} birdingProject={true} />
         <ProjectListing project={happyPlants} />
         <ProjectListing project={rba} birdingProject={true}/>
         <ProjectListing project={ebirdCompress} birdingProject={true}/>
