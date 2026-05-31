@@ -5,6 +5,7 @@ import Icon from 'src/components/Icon.astro';
 // import 'src/styles/global.css';
 
 const posts = await getCollection('blog');
+const projects = await getCollection('projects');
 ---
 
 <!doctype html>
@@ -22,7 +23,7 @@ const posts = await getCollection('blog');
         />
     </head>
     <body>
-        <SocialCard posts={posts} client:only="svelte">
+        <SocialCard posts={posts} projects={projects} client:only="svelte">
             <Icon icon="btsp" />
         </SocialCard>
     </body>

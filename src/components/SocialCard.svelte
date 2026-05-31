@@ -1,17 +1,17 @@
 <script lang="ts">
-    const { posts } = $props();
+    const { posts, projects } = $props();
     const searchParams = new URLSearchParams(window.location.search);
     const slug = searchParams.get('slug');
-    const post = posts.find((p) => p.slug === slug);
+    const type = searchParams.get('type') || 'blog';
 
-    if (!post) {
-        throw new Error('Post not found');
-    }
+    const title = type === 'project' ?
+        projects.find((p) => p.slug === slug)?.data.title
+        : posts.find((p) => p.slug === slug)?.data.title;
 </script>
 
 <div class="p-16 card relative">
     <div class="text-zinc-800 z-10 relative text-box">
-        <h1 class="text-2xl text-bold">{post.data.title}</h1>
+        <h1 class="text-2xl text-bold">{title}</h1>
         <h2>Parker Davis</h2>
     </div>
     <div class="image">
