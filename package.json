@@ -23,12 +23,16 @@
         "@astrojs/svelte": "^9.0.0",
         "@node-rs/argon2": "^2.0.2",
         "@tailwindcss/vite": "^4.3.1",
+        "@tursodatabase/database": "^0.6.1",
         "@types/canvas-confetti": "^1.9.0",
         "astro": "^7.0.3",
         "astro-embed": "^0.13.0",
         "astro-expressive-code": "^0.44.0",
         "canvas-confetti": "^1.9.4",
         "dayjs": "^1.11.21",
+        "dotenv": "^17.4.2",
+        "drizzle-orm": "1.0.0-rc.4-5d5b77c",
+        "libsql": "^0.5.29",
         "lucia": "^3.2.2",
         "lucia-adapter-astrodb": "^0.2.0",
         "sharp": "^0.35.2",
@@ -42,7 +46,9 @@
     "devDependencies": {
         "@shikijs/transformers": "^4.3.0",
         "@tailwindcss/typography": "^0.5.20",
+        "drizzle-kit": "1.0.0-rc.4-ca0f029",
         "prettier": "^3.9.0",
-        "puppeteer": "^25.2.1"
+        "puppeteer": "^25.2.1",
+        "tsx": "^4.22.4"
     }
 }

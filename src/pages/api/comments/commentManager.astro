@@ -1,5 +1,7 @@
 ---
-import { db, Comments, eq } from 'astro:db';
+import { db } from 'src/db'
+import { Comments } from 'src/db/schema';
+import { eq } from 'drizzle-orm';
 
 export const prerender = false;
 

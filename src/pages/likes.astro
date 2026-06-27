@@ -1,6 +1,8 @@
 ---
 export const prerender = false;
-import { db, sql, count, QuailLikes } from 'astro:db';
+import { db } from 'src/db';
+import { QuailLikes } from 'src/db/schema';
+import { sql, count } from 'drizzle-orm';
 import MainFlow from '@layouts/MainFlow.astro';
 // import dayjs from '@utils/dayjs';
 

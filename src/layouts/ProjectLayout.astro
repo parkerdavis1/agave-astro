@@ -1,15 +1,17 @@
 ---
 import DisplayTags from '@components/DisplayTags.astro';
 import LikeButton from '@components/LikeButton.svelte';
-import RelatedPosts from '@components/RelatedPosts.astro';
 import TOC from '@components/TOC.astro';
 import Base from '@layouts/Base.astro';
 
 import { trimUrlPathname } from '@utils/trimUrlPathname';
-import { db, QuailLikes, eq, count } from 'astro:db';
+import { db } from 'src/db';
+import { eq, count } from 'drizzle-orm';
+import { QuailLikes } from 'src/db/schema';
+import { render } from 'astro:content';
 
 const { project } = Astro.props;
-const { headings } = await project.render();
+const { headings } = await render(project);
 
 const urlPathName = trimUrlPathname(Astro.url.pathname);
 

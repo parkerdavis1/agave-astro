@@ -2,7 +2,7 @@
 import dayjs from '@utils/dayjs';
 const { post } = Astro.props;
 const readableDate = dayjs(post.data.date).utc().format('YYYY-MM-DD');
-let link = post.bms ? post.data.slug : `/blog/${post.slug}`;
+let link = post.bms ? post.data.slug : `/blog/${post.id}`;
 ---
 
 <li>

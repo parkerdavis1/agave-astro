@@ -2,8 +2,9 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { delayDB } from '@utils/delayDB';
-import { db, Comments, desc, eq, and } from 'astro:db';
-import { getCollection } from 'astro:content';
+import { db } from 'src/db';
+import { desc, eq, and } from 'drizzle-orm';
+import { Comments } from 'src/db/schema';
 
 // export const POST: APIRoute = async ({ request }) => {
 //     if (import.meta.env.DEV) {

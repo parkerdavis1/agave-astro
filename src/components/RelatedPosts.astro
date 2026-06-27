@@ -1,12 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
 import getCombinedPosts from '@utils/getCombinedPosts';
 import PostListing from './PostListing.astro';
-
-interface Link {
-    url: string;
-    title: string;
-}
 
 const { tag, bmsTitles } = Astro.props;
 // const relatedPosts = (

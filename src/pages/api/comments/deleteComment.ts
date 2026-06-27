@@ -1,7 +1,9 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { db, Comments, eq } from 'astro:db';
+import { db } from 'src/db';
+import { Comments } from 'src/db/schema';
+import { eq } from 'drizzle-orm';
 
 export const POST: APIRoute = async ({ request }) => {
     const data = await request.formData();

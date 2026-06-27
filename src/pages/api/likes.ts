@@ -1,7 +1,9 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { QuailLikes, db, eq, count } from 'astro:db';
+import { db } from 'src/db';
+import { QuailLikes } from 'src/db/schema';
+import { eq, count } from 'drizzle-orm';
 import { delayDB } from '@utils/delayDB';
 
 export const GET: APIRoute = async ({ request }) => {

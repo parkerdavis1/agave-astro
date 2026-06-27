@@ -4,7 +4,7 @@ const { project, showTag = false, birdingProject = false } = Astro.props;
 
 <li>
     <p class="font-medium">
-        <a href={`/projects/${project.slug}`}>
+        <a href={`/projects/${project.id}`}>
             {project.data.title}
         </a>
         {birdingProject && (

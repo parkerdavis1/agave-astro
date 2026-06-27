@@ -1,11 +1,11 @@
 export const prerender = false;
-import { lucia } from 'src/auth';
+
+import { createSession, SESSION_COOKIE_NAME } from 'src/auth';
 import { verify } from '@node-rs/argon2';
-import { db, User, eq } from 'astro:db';
-
+import { db } from 'src/db';
+import { User } from 'src/db/schema';
+import { eq } from 'drizzle-orm';
 import type { APIContext } from 'astro';
-
-// const usernameSchema = z.string().min(3).max(31)
 
 export async function POST(context: APIContext): Promise<Response> {
     const formData = await context.request.formData();
@@ -17,9 +17,7 @@ export async function POST(context: APIContext): Promise<Response> {
         username.length > 31 ||
         !/^[a-z0-9_-]+$/.test(username)
     ) {
-        return new Response('Invalid username', {
-            status: 400,
-        });
+        return new Response('Invalid username', { status: 400 });
     }
 
     const password = formData.get('password');
@@ -48,18 +46,17 @@ export async function POST(context: APIContext): Promise<Response> {
     });
 
     if (!validPassword) {
-        return new Response('Incorrect username or password', {
-            status: 400,
-        });
+        return new Response('Incorrect username or password', { status: 400 });
     }
 
-    const session = await lucia.createSession(existingUser.id, {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
-    context.cookies.set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-    );
+    const session = await createSession(existingUser.id);
+    context.cookies.set(SESSION_COOKIE_NAME, session.id, {
+        httpOnly: true,
+        secure: import.meta.env.PROD,
+        sameSite: 'lax',
+        expires: session.expiresAt,
+        path: '/',
+    });
 
     return context.redirect('/likes');
 }

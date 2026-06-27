@@ -1,15 +1,6 @@
 export const prerender = false;
-
-import { db, Comments } from 'astro:db';
 import type { APIRoute } from 'astro';
 import { delayDB } from '@utils/delayDB';
-import { v4 as uuid } from 'uuid';
-
-interface Comment {
-    author: string;
-    body: string;
-    path: string;
-}
 
 export const POST: APIRoute = async ({ request, redirect }) => {
     if (import.meta.env.DEV) {

@@ -1,6 +1,7 @@
 export const prerender = false;
-
-import { db, Comments, desc, eq, and } from 'astro:db';
+import { db } from 'src/db';
+import { Comments } from 'src/db/schema';
+import { eq } from 'drizzle-orm';
 import type { APIRoute } from 'astro';
 import { delayDB } from '@utils/delayDB';
 
@@ -40,7 +41,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify(comment), { status: 200 });
 };
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async () => {
     return new Response('hello from reportComment', {
         status: 200,
     });

@@ -56,7 +56,9 @@ const generateSocialCards = async (limit = LIMIT) => {
             const outputFile = join(typeDir, `${slug}.png`);
 
             if (fs.existsSync(outputFile)) {
-                console.log(`Skipping ${type}/${slug} - social card already exists`);
+                console.log(
+                    `Skipping ${type}/${slug} - social card already exists`,
+                );
                 continue;
             }
 
@@ -84,10 +86,15 @@ const generateSocialCards = async (limit = LIMIT) => {
                     },
                 });
 
-                console.log(`Successfully generated social card for ${type}/${slug}`);
+                console.log(
+                    `Successfully generated social card for ${type}/${slug}`,
+                );
                 await page.close();
             } catch (error) {
-                console.error(`Failed to generate social card for ${type}/${slug}:`, error);
+                console.error(
+                    `Failed to generate social card for ${type}/${slug}:`,
+                    error,
+                );
             }
         }
     }

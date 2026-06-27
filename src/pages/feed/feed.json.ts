@@ -5,7 +5,6 @@ import { metadata } from 'src/metadata';
 import { filterDrafts } from '@utils/filterDrafts';
 import { setDateTime } from '@utils/setDateTime';
 import type { CollectionEntry } from 'astro:content';
-import type { APIContext } from 'astro';
 
 type BlogPost = CollectionEntry<'blog'>;
 type BMSPost = {
@@ -26,7 +25,7 @@ function isBMSPost(post: CombinedPost): post is BMSPost {
 function formatPostMetadataForJsonFeed(post: CombinedPost) {
     const url = isBMSPost(post)
         ? post.data.slug
-        : `${import.meta.env.SITE}/blog/${post.slug}`;
+        : `${import.meta.env.SITE}/blog/${post.id}`;
     const formattedObject = {
         id: url,
         url: url,
@@ -37,30 +36,11 @@ function formatPostMetadataForJsonFeed(post: CombinedPost) {
     return formattedObject;
 }
 
-export async function GET(context: APIContext) {
+export async function GET() {
     const posts = (await getCombinedPosts()).filter(filterDrafts);
     const formattedPosts = posts.map((post) =>
         formatPostMetadataForJsonFeed(post),
     );
-
-    // // forward headers
-    // const userAgent = context.request.headers.get("user-agent") || "";
-    // const xff = context.request.headers.get("x-forwarded-for") || "";
-
-    // // send to Plausible
-    // fetch("https://plausible.parkerdavis.dev/api/event", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         "User-Agent": userAgent,
-    //         "X-Forwarded-For": xff,
-    //     },
-    //     body: JSON.stringify({
-    //         domain: new URL(context.request.url).origin,
-    //         name: "pageview",
-    //         url: context.request.url,
-    //     }),
-    // }).catch((e) => console.warn("plausible failed", e));
 
     return new Response(
         JSON.stringify({

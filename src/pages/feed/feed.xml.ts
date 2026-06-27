@@ -1,4 +1,4 @@
-import rss, { getRssString } from '@astrojs/rss';
+import rss from '@astrojs/rss';
 import { filterDrafts } from '@utils/filterDrafts';
 import getCombinedPosts from '@utils/getCombinedPosts';
 import { metadata } from 'src/metadata.ts';
@@ -8,9 +8,7 @@ import type { APIContext } from 'astro';
 export async function GET(context: APIContext) {
     const posts = (await getCombinedPosts()).filter(filterDrafts);
     const items = posts.map((post) => {
-        let link = post.bms
-            ? post.data.slug
-            : `${context.site}blog/${post.slug}`;
+        let link = post.bms ? post.data.slug : `${context.site}blog/${post.id}`;
 
         return {
             title: post.data.title,

@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BlogPost from '@layouts/BlogPost.astro';
 import { filterDrafts } from '@utils/filterDrafts';
+import { render } from 'astro:content'
+
 
 export async function getStaticPaths() {
     const blogPosts = await getCollection('blog', filterDrafts);
@@ -9,7 +11,7 @@ export async function getStaticPaths() {
     return blogPosts
         .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
         .map((post, i) => ({
-            params: { post: post.slug },
+            params: { post: post.id },
             props: {
                 post,
                 prevPost: i + 1 === numberOfPosts ? null : blogPosts[i + 1],
@@ -19,7 +21,7 @@ export async function getStaticPaths() {
 }
 
 const { post, prevPost, nextPost } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <BlogPost post={post} prevPost={prevPost} nextPost={nextPost}>

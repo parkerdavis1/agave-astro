@@ -1,7 +1,7 @@
 ---
 import ProjectListing from "@components/ProjectListing.astro";
 import MainFlow from "@layouts/MainFlow.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getEntry } from "astro:content";
 
 const ccam = await getEntry("projects", "ccam");
 const raincrow = await getEntry("projects", "raincrow");

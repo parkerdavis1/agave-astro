@@ -1,7 +1,9 @@
 export const prerender = false;
 import { defineAction } from 'astro:actions';
-import { z } from 'astro:schema';
-import { db, Comments, desc, eq, and } from 'astro:db';
+import { z } from 'astro/zod';
+import { db } from 'src/db';
+import { Comments } from 'src/db/schema';
+import { eq } from 'drizzle-orm';
 import { v4 as uuid } from 'uuid';
 import { delayDB } from '@utils/delayDB';
 
