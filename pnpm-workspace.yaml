@@ -1,8 +1,17 @@
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  puppeteer: true
+  sharp: true
+
 ignoredBuiltDependencies:
-    - '@parcel/watcher'
+  - '@parcel/watcher'
+
+minimumReleaseAgeExclude:
+  - prettier@3.9.0
 
 onlyBuiltDependencies:
-    - '@tailwindcss/oxide'
-    - esbuild
-    - puppeteer
-    - sharp
+  - '@tailwindcss/oxide'
+  - esbuild
+  - puppeteer
+  - sharp
